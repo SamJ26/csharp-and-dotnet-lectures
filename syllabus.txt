@@ -1,0 +1,69 @@
+# LECTURE 1:
+
+part1 - Introduction to .NET
+part2 - Introduction to C#
+    - syntax
+    - data types
+    - operators and expresions
+    - statements
+    - namespace
+
+# LECTURE 2:
+
+part1 - Introduction to OOP
+part2 - OOP in C#
+    - class
+    - fields vs properties
+    - getters and setters
+    - computed properties
+    - const vs readonly
+    - constructor
+    - deconstructor
+    - finalizer
+    - access modifiers
+    - inheritance
+    - interfaces
+    - generics
+    - records
+    - abstract, virtual, override
+    - static + extensions
+
+# LECTURE 3:
+
+- in, out, ref, params
+- tuples
+- nullability
+- pretypovanie + dynamic
+- exceptions
+- disposable + using
+- pattern matching
+
+- delegates
+- lambda expresions
+- Func and Action
+- local functions
+- anonymous functions
+
+- iterators
+- collections
+
+# LECTURE 4:
+
+- boxing/unboxing
+
+- attributes
+
+- linq
+
+- lock
+- process
+- threading
+- tasks
+- async/await
+
+- reflexion
+
+# EXTRA - ak bude niekde plac tak sa to tam pridá:
+- implicit usings
+- top level statements
+- source generators
