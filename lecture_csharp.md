@@ -100,18 +100,18 @@ class Program
 
 # Comments
 
-### Single-line comment
+**Single-line comment**
 ```csharp
 // line comment
 ```
 
-### Multiline comment - DO NOT USE
+**Multiline comment - DO NOT USE**
 ```csharp
 /* I am
    multiline comment */
 ```
 
-### Documentation
+**Documentation**
 ```csharp
 /// <summary>
 /// This is my awesome docs for some class/method/property...
@@ -133,19 +133,6 @@ class Program
 
 ---
 
-# * Reference vs Pointer *
-
-## Pointer
-- An **address** which is an offset into the entire virtual address space of the process
-- Addresses can be **manipulated mathematically**
-
-## Reference
-- Some vague thing that lets you reference an object
-- Internal implementation depends on runtime!
-- _The CLR actually does implement managed object references as addresses to objects owned by the garbage collector, **but that is an implementation detail**!_
-
----
-
 # Value types
 
 - Variable directly **contains data**
@@ -154,16 +141,14 @@ class Program
 
 ---
 
-# Value types
-
 - **Simple types**
-    - Signed integral: _sbyte, short, int, long_
-    - Unsigned integral: _byte, ushort, uint, ulong_
-    - Unicode characters: _char_
-    - IEEE floating point: _float, double_
-    - High-precision decimal: _decimal_
-    - Boolean: _bool_
-- **Enum types**
+    - Signed integral: `sbyte`, `short`, `int`, `long`
+    - Unsigned integral: `byte`, `ushort`, `uint`, `ulong`
+    - Unicode characters: `char`
+    - IEEE floating point: `float`, `double`
+    - High-precision decimal: `decimal`
+    - Boolean: `bool`
+- **Enumeration types**
     - User-defined set of constant values
 - **Struct types**
     - User-defined types that can encapsulate data and related functionality
@@ -172,27 +157,94 @@ class Program
 
 ---
 
-# Value types - Simple types
+## Simple types
 
-TODO
+```csharp
+int decimalLiteral = 2;
+int binaryLiteral = 0b_0010;
+int hexLiteral = 0x2;
+
+Console.WriteLine(1f.GetType());  // Float   (float)
+Console.WriteLine(1d.GetType());  // Double  (double)
+Console.WriteLine(1m.GetType());  // decimal (decimal)
+Console.WriteLine(1u.GetType());  // UInt32  (uint)
+Console.WriteLine(1L.GetType());  // Int64   (long)
+Console.WriteLine(1ul.GetType()); // UInt64  (ulong)
+
+// You can find out min and max of every simple type
+double max = double.MaxValue;
+double min = double.MinValue;
+
+// Only for floating-point numbers
+double positiveInf = double.PositiveInfinity;
+double negativeInf = double.NegativeInfinity;
+double nan = double.NaN;
+```
 
 ---
 
-# Value types - Enum types
-
-TODO
+### Numerical data types casting
+* Transformation of **integral type** to **integral type**:
+  * *implicit* when *target type* can accommodate the whole range of *source type*
+  * *explicit* otherwise
+* Transformation of **decimal type** to **decimal type**:
+  * `float` can be *implicitly* casted to `double`
+  * `double` has to be casted *explicitly* to `float`
+* Transformation of **integral type** to **decimal type**:
+  * Casting is *implicit*
+* Transformation of **decimal type** to **integral type**:
+  * Casting has to be *explicit*
+    * Lost precision
+    * Truncation can occur
 
 ---
 
-# Value types - Struct types
+## Enumeration types
 
-TODO
+- Set of named constants of the underlying integral numeric type
+- Default type is `int`
+- Integral values start from 0 by default
+
+```csharp
+enum Season
+{
+    Spring,     // 0
+    Summer,     // 1
+    Autumn,     // 2
+    Winter      // 3
+}
+```
 
 ---
 
-# Value types - Nullable value types
+## Struct types
 
-TODO
+- Similar to a class type
+- Use them to design small data-centric types that provide little or no behavior
+- .NET internally uses `struct` to represent a simple types
+
+```csharp
+struct Foo
+{
+    string name;
+    void PrintName() { Console.WriteLine(name); }
+}
+```
+
+---
+
+## Nullable value types
+
+- Extensions of all other value types with a null value
+- Any nullable value type is an instance of the `System.Nullable<T>` structure
+- Because they are reference types, thus their default value is `null`
+
+```csharp
+int  ten = 10;
+int? one = 1;
+int? canBeNull = null;
+int  cannotBeNull = null;      // Compile-time error
+```
 
 ---
 
@@ -204,8 +256,6 @@ TODO
 - Require separate allocations of memory for the reference and object
 
 ---
-
-# Reference types
 
 - **Class types**
     - Ultimate base class of all other types: `object`
@@ -231,7 +281,7 @@ TODO
 
 ---
 
-# Reference type - String
+## String
 
 ```csharp
 string s0 = null;                           // s0 = null
@@ -257,7 +307,7 @@ char c = s7[0]                              // c = '1'
 
 ---
 
-# StringBuilder
+## StringBuilder
 
 - `System.Text.StringBuilder`
 - Using the `+` operator repeatedly to build up a string is inefficient
@@ -274,7 +324,7 @@ Console.WriteLine(sb.ToString());       // This is a complete sentence
 
 ---
 
-# Reference types - Array types
+## Array types
 
 - Represents fixed length data structure of homogeneous items
 - The elements are stored in a **contiguous block of memory**
@@ -307,7 +357,133 @@ int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
 
 ---
 
-# * Stack vs Heap *
+# Operators and expressions
+
+- **Expression** = returns some value after computation
+- Operator types:
+    - **unary** e.g. `++x`
+    - **binary** e.g. `x + y`
+    - **ternary** e.g. `var res = (input > 0) ? "+" : "-"`
+
+---
+
+## Arithmetic operators
+
+Supported by all **integral** and **floating-point** numeric types
+- `+` addition
+- `-` subtraction
+- `*` multiplication
+- `/` division
+- `%` reminder
+- `++` incrementation
+- `--` decrementation
+
+---
+
+## Boolean logical operators
+
+Supported by **bool** types
+- Unary operator:
+    - `!` logical negation
+- Binary operators which always evaluate both operands
+    - `&` logical AND
+    - `|` logical OR
+    - `^` logical exclusive OR
+- Binary operators which evaluate the right-hand operand only if it's necessary
+    - `&&` conditional logical AND
+    - `||` conditional logical OR
+
+---
+
+## Bitwise and shift operators
+
+Supported by **char** type and **integral** numeric types
+
+| Operator            | Meaning     | Example                       | Result        |
+| ------------------- | ----------- | ----------------------------- | ------------- |
+| `~`                 | Not         | `~0b_1111`                    | `0b_0000`     |
+| `&`                 | And         | `0b_0011 & 0b_0101`           | `0b_0001`     |
+| &#124;              | Or          | `0b_0011` &#124; `0b_0101`    | `0b_0111`     |
+| `^`                 | Xor         | `0b_0011 ^ 0b_0101`           | `0b_0110`     |
+| `<<`                | Left shift  | `0b_0011 << 2`                | `0b_1100`     |
+| `>>`                | Right shift | `0b_1100 >> 1`                | `0b_0110`     |
+
+---
+
+## Comparison and equality operators
+
+- `==` equality
+- `!=` inequality
+- `<` less than
+- `>` bigger than
+- `<=` less than or equal
+- `>=` bigger than or equal
+
+---
+
+## `sizeof` operator
+
+- Returns the number of bytes occupied by a variable of a given type
+- The argument must be a type parameter
+    ```csharp
+    Console.WriteLine(sizeof(double));      // 8 bytes
+    Console.WriteLine(sizeof(int));         // 4 bytes
+    ```
+
+## `nameof` expression
+
+- Produces the name of a variable, type, or member as the string constant
+- Evaluated at compile time and has no effect at run time
+    ```csharp
+    int a = 10;
+    Console.WriteLine(nameof(a));               // a
+    Console.WriteLine(nameof(Console.Write));   // Write
+    ```
+
+---
+
+## Default value expression
+
+```csharp
+// default operator
+Console.WriteLine(default(int));        // output: 0
+Console.WriteLine(default(object));     // output: null
+
+// default literal
+int a = default;
+int? b = default;
+
+Console.WriteLine(a);       // output: 0
+Console.WriteLine(b);       // output: null
+```
+
+
+---
+
+# Statements
+
+TODO
+
+---
+
+# Thank you for your attention :)
+
+---
+
+# Reference vs Pointer
+
+## Pointer
+- An **address** which is an offset into the entire virtual address space of the process
+- Addresses can be **manipulated mathematically**
+
+## Reference
+- Some vague thing that lets you reference an object
+- Internal implementation depends on runtime!
+- _The CLR actually does implement managed object references as addresses to objects owned by the garbage collector, **but that is an implementation detail**!_
+
+---
+
+# Stack vs Heap
 
 **Memory in .NET is managed by CLR**
 ~~Value types are stored on the stack, reference types are stored on the heap~~
