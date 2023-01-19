@@ -275,7 +275,7 @@ int  cannotBeNull = null;      // Compile-time error
 # Reference type - String
 
 - Represents sequence of characters
-- Always **IMMUTABLE**
+- Always **immutable**
 - Literal is denoted by double-quotes: `"string value"`
 - Equality operators are defined to compare the values of string objects, not references
 
@@ -442,6 +442,24 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
+## `switch` expression
+
+- Based in pattern matching
+- If none of a patterns matches an input value, the runtime throws an exception
+- Always use a discard pattern `_` to match any expression, including `null`
+
+    ```csharp
+    int? num = 0;
+    string res = num switch
+    {
+        0 => "zero",
+        1 => "one",
+        _ => "neither zero nor one"
+    };
+    ```
+
+---
+
 ## Default value expression
 
 ```csharp
@@ -457,12 +475,331 @@ Console.WriteLine(a);       // output: 0
 Console.WriteLine(b);       // output: null
 ```
 
-
 ---
 
 # Statements
 
-TODO
+- **Declaration** statements
+- **Selection** statements
+- **Jump** statements
+- **Iteration** statements
+- **Checked and unchecked** statements
+
+---
+
+## Declaration statements
+
+- Declares a new variable, and optionally, initializes it
+- An **implicitly typed** local variable is strongly typed, but the compiler determines the type
+
+    ```csharp
+    var a = 10; // Implicitly typed.
+    int b = 10; // Explicitly typed.
+    ```
+
+---
+
+## Selection statements
+
+- Used to define a program control flow
+    - `if` (`else`)
+    - `swith`
+    - ternary operator `condition ? onTrue : onFalse`
+
+---
+
+```csharp
+DisplayWeatherReport(15.0);  // Output: Cold.
+DisplayWeatherReport(24.0);  // Output: Perfect!
+
+void DisplayWeatherReport(double tempInCelsius)
+{
+    if (tempInCelsius < 20.0)
+    {
+        Console.WriteLine("Cold.");
+    }
+    else
+    {
+        Console.WriteLine("Perfect!");
+    }
+}
+```
+
+---
+
+```csharp
+Foo(0);     // Output: Value is 0
+Foo(5);     // Output: Value is bigger than 0 but smaller than 10
+Foo(11);    // Output: Value is 11 or 12
+
+void Foo(uint value)
+{
+    switch (value)
+    {
+        case 0:
+            Console.WriteLine("Value is 0");
+            break;
+        case > 0 and < 10:
+            Console.WriteLine("Value is bigger than 0 but smaller than 10");
+            break;
+        case 11:
+        case 12:
+            Console.WriteLine("Value is 11 or 12");
+            break;
+        default:
+            Console.WriteLine("Value is bigger than 12");
+            break;
+    }
+}
+```
+
+---
+
+```csharp
+var res1 = (1 > 0) ? OnTrue() : OnFalse();      // res1 = "It's true!"
+var res2 = (0 > 1) ? OnTrue() : OnFalse();      // res2 = "It's false!"
+
+string OnTrue() => "It's true!";
+string OnFalse() => "It's false!";
+```
+
+---
+
+## Iteration statements
+
+- Repeatedly execute a statement or a block of statements
+    - `for`
+    - `foreach`
+    - `do`
+    - `while`
+
+---
+
+```csharp
+for (int i = 0; i < 3; i++)
+{
+    Console.WriteLine(i);
+}
+// Output:
+// 0
+// 1
+// 2
+```
+
+---
+
+```csharp
+const string beer = "beer";
+foreach (char c in beer)
+{
+    Console.Write(c);
+}
+// Output: beer
+```
+
+---
+
+```csharp
+int n = 0;
+do
+{
+    Console.Write(n);
+    n++;
+} while (n < 5);
+// Output:
+// 01234
+```
+
+---
+
+```csharp
+int n = 0;
+while (n < 5)
+{
+    Console.Write(n);
+    n++;
+}
+// Output:
+// 01234
+```
+
+---
+
+## Jump statements
+
+- Unconditionally transfer control flow
+    - **break** - terminates the closest enclosing **iteration** or **switch** statement
+    - **continue** - starts a new iteration of the closest enclosing **iteration** statement
+    - **return** - terminates execution of the function
+    - **goto** - transfers control to a statement that is marked by a label
+
+---
+
+```csharp
+int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+foreach (int number in numbers)
+{
+    if (number == 3)
+    {
+        break;
+    }
+
+    Console.Write($"{number} ");
+}
+Console.WriteLine();
+Console.WriteLine("End of the example.");
+// Output:
+// 0 1 2 
+// End of the example.
+```
+
+---
+
+```csharp
+for (int i = 0; i < 5; i++)
+{
+    Console.Write($"Iteration {i}: ");
+    
+    if (i < 3)
+    {
+        Console.WriteLine("skip");
+        continue;
+    }
+    
+    Console.WriteLine("done");
+}
+// Output:
+// Iteration 0: skip
+// Iteration 1: skip
+// Iteration 2: skip
+// Iteration 3: done
+// Iteration 4: done
+```
+
+---
+
+```csharp
+int i = 1;
+startLoop:
+if (i <= 5)
+{
+    Console.Write(i);
+    i++;
+    goto startLoop;
+}
+// Output: 12345
+```
+
+---
+
+## Checked and unchecked statements
+
+- Specifies overflow-checking context for integral-type arithmetic operations and conversions
+- Overflow in _checked_ context => `System.OverflowException` is thrown
+- Overflow in _unchecked_ context => execution continues
+    ```csharp
+    int a = int.MinValue;
+    a--;
+    Console.WriteLine(a == int.MaxValue); // True
+    
+    int b = int.MinValue;
+    var i = checked(b--); // throw OverflowException
+    Console.WriteLine(i == int.MaxValue);
+    ```
+
+---
+
+# Namespaces
+
+- Groups classes and interfaces to named groups
+- A namespace forms an integral part of a type’s name.
+- Usage of types from a `System.Security.Cryptography` namespace:
+    ```csharp
+    System.Security.Cryptography.RSA rsa = System.Security.Cryptography.RSA.Create();
+    ```
+- Directive `using`
+    ```csharp
+    using System.Security.Cryptography;
+
+    public class Namespace
+    {
+        public void Method()
+        {
+            RSA rsa = RSA.Create(); // Don't need fully qualified name
+        }
+    }
+    ```
+
+---
+
+```csharp
+namespace Outer.Middle.Inner
+{
+    class Class1 { ... }
+    class Class2 { ... }
+}
+```
+Same as:
+```csharp
+namespace Outer
+{
+    namespace Middle
+    {
+        namespace Inner
+        {
+            class Class1 { ... }
+            class Class2 { ... }
+        }
+    }
+}
+```
+
+---
+
+## File-scoped Namespaces (C# 10)
+
+```csharp
+namespace MyNamespace
+{
+    class Class1 {}
+    class Class2 {}
+}
+```
+Same as:
+```csharp
+namespace MyNamespace;  // Applies to everything that follows in the file.
+
+class Class1 {}         // Inside MyNamespace
+class Class2 {}         // Inside MyNamespace
+```
+
+---
+
+## Global using directive (C# 10)
+
+- To apply `using` directive to all files in the project, preffix a `using` with the `global` keyword
+    ```csharp
+    global using System;
+    global using System.Collection.Generic;
+    ```
+- _Good practise_: use a separate `GlobalUsings.cs` file
+
+---
+
+## Implicit global usings (.NET 6)
+
+- You need to set _ImplicitUsings_ element to true in project file (`.csproj`)
+    ```xml
+    <ImplicitUsings>enable</ImplicitUsings>
+    ```
+- Following namespaces are automatically imported:
+    - `System`
+    - `System.Collections.Generic`
+    - `System.IO`
+    - `System.Linq`
+    - `System.Net.Http`
+    - `System.Threading`
+    - `System.Threading.Tasks`
 
 ---
 
