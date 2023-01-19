@@ -4,6 +4,13 @@ paginate: true
 theme: default
 ---
 
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
+
 # Introduction to .NET
 
 ---
@@ -43,42 +50,60 @@ theme: default
 
 ## Almost every platform
 
-TODO - patrikov slide
-
-\+ novy obrazok z https://devblogs.microsoft.com/dotnet/announcing-dotnet-7/
+![height:500 center](./images/dotnet-platform2.png)
 
 ---
 
 ## Performance
 
-TODO - patrikov slide
+TODO
 
 \+ aktualne performance testy
 \+ mozno porovnanie rychlosti .NET 6 a .NET 7
+
+https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
 ## Security
 
-TODO - patrikov slide
+- **Managed runtime** ~ _Sandbox_
+    - No direct memory access
+    - Prevents critical issues like buffer overflow, index out range etc.
+- Patches are released with runtime
 
 ---
 
 ## Open Source
 
-TODO - patrikov slide
+- [.NET Core](https://github.com/dotnet/core)
+- [.NET Runtime/CoreFX](https://github.com/dotnet/runtime)
+- [ASP.NET Core](https://github.com/dotnet/aspnetcore)
+- [.NET Standard](https://github.com/dotnet/standard)
+- [EF Core](https://github.com/dotnet/efcore)
+- [WPF](https://github.com/dotnet/wpf)
+- [Reference Source - .NET Framework (readonly)](https://github.com/microsoft/referencesource)
 
 ---
 
 ## Large ecosystem
 
-TODO - patrikov slide
+- Libraries from the **NuGet package manager**
+- Frameworks: .NET MAUI, Blazor, ASP.NET Core, Dapper, EF Core
+- Visual Studio marketplace
+- Extensive partners network
+- Large community
+- Community support, MVPs, ...
 
 ---
 
 ### .NET Foundation
 
-TODO - patrikov slide
+- Non-profit organization that maintains .NET ecosystem
+    - Licence agnostic (all projects under .NET Foundation are OSS)
+    - Languages, tooling, frameworks...
+    - Following of ECMA [334](https://www.ecma-international.org/publications-and-standards/standards/ecma-334/) and [335](https://www.ecma-international.org/publications-and-standards/standards/ecma-335/) standards
+- Independent from Microsoft
 
 ---
 
@@ -97,10 +122,6 @@ TODO - patrikov slide
 
 ---
 
-TODO: pridat obrazok od Patrika
-
----
-
 # .NET Standard
 
 - Formal specification of .NET APIs that are available on multiple .NET implementations
@@ -112,7 +133,7 @@ TODO: pridat obrazok od Patrika
 
 ---
 
-TODO: pridat obrazok od Patrika s .NET standartom
+![](./images/dotnet-standard.png)
 
 ---
 
@@ -121,7 +142,7 @@ TODO: pridat obrazok od Patrika s .NET standartom
 **STS** = Short Term Support
 **LTS** = Long Term Support - min. 3 years
 
-TODO: pridat obrazok s planom releasov
+![](./images/release-schedule.png)
 
 ---
 
