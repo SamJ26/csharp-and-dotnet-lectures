@@ -146,6 +146,10 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
+TODO - cca 5 slidov o CLR, CIL, CLI, GC atd
+
+---
+
 # Introduction to C#
 
 ---

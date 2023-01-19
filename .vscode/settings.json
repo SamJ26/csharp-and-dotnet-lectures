@@ -1,0 +1,4 @@
+{
+  "markdown.marp.themes": [],         // Custom themes
+  "markdown.marp.enableHtml": true    // Enables rendering of raw HTML in markdown file
+}
