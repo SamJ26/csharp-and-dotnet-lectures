@@ -18,7 +18,7 @@ img[alt~="center"] {
 # What is .NET?
 
 - Free, **cross-platform**, **open source** developer platform
-- Runtime
+- Runtime - has its own language (CIL)
 - Maintained by Microsoft
 - Created because of [litigation](https://www.cnet.com/tech/tech-industry/sun-microsoft-settle-java-suit/) about Java “tweaking” on Windows
 
@@ -50,7 +50,7 @@ img[alt~="center"] {
 
 ## Almost every platform
 
-![height:500 center](./images/dotnet-platform2.png)
+![height:500 center](./images/dotnet-platform.png)
 
 ---
 
@@ -107,7 +107,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-# .NET implementations
+# .NET implementations (runtimes)
 
 - **.NET 5 and later versions** (current version is **.NET 7**)
 - .NET Core
@@ -133,7 +133,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-![](./images/dotnet-standard.png)
+![center](./images/dotnet-standard.png)
 
 ---
 
@@ -146,7 +146,97 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-TODO - cca 5 slidov o CLR, CIL, CLI, GC atd
+# .NET platform
+
+- CLI
+- CTS
+- CLR
+- CIL
+- BCL
+- GC
+
+TODO - pridat nejaky obrazok na polovicu slidu
+
+---
+
+## Common Language Infrastructure (CLI)
+
+- Standard
+    - [ISO/IES 23271:2012](https://www.iso.org/standard/58046.html)
+    - [ECMA-335](https://www.ecma-international.org/publications-and-standards/standards/ecma-335/)
+- Design of platform is OS agnostic
+- Related stuff:
+    - Common Langauge Specification (CLS)
+    - Common Type System (CTS)
+    - Common Language Runtime (CLR)
+    - Common Intermediate Language (CIL)
+    - Standard libraries
+
+---
+
+## Common Type System (CTS)
+
+- Defines how types are declared, used, and managed in the CLR
+- Defines rules that languages must follow, to be able to interact with each other
+- Provides a library that contains the primitive data types
+- Supports the following five categories of types:
+    - **Classes**
+    - **Structures**
+    - **Enumerations**
+    - **Interfaces**
+    - **Delegates**
+
+---
+
+## Common Intermediate Language (CIL)
+
+- More names:
+    - Microsoft Intermediate Language
+    - Intermediate Language
+- Language of a virtual execution environment (CLR)
+- Set of platform independent instructions
+
+TODO - obrazok s ukazkou IL
+
+---
+
+## Common Language Runtime (CLR)
+
+- Essential runtime services
+- _Common_ because it can be shared by different _managed_ programming languages
+- Converts the **IL** into the **native code** of the machine
+- **Just-in-Time** vs **Ahead-of-Time** compilation
+- Benefits:
+    - Performance improvements - _JIT_
+    - Garbage Collection - memory management
+    - Structured _exception handling_
+    - _Delegates_ instead of function pointers
+
+---
+
+## Base Class Library (BCL)
+
+- Predefined set of libraries with core functionality for programmers
+- Expected with any .NET implementation
+- [Source code of the BCL](https://github.com/dotnet/runtime)
+
+---
+
+## Garbage Collector (GC)
+
+- Automatic memory management
+- Managed heap
+- Garbage collection occurs when one of the following conditions is true:
+    - The system has low physical memory
+    - An acceptable threshold on managed heap is reached
+    - `GC.Collect` method is called - **DO NOT DO THIS**
+- **GC does not collect on unmanaged resources!**
+
+---
+
+## How it all works together
+
+![height:450 center](./images/clr-execution-model.jpg)
 
 ---
 
