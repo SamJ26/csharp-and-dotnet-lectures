@@ -11,9 +11,7 @@ img[alt~="center"] {
 }
 </style>
 
-# Introduction to
-
-![bg right](../images/dotnet-logo.png)
+<h1 style="font-size: 80px; color: #512bd4">Introduction to .NET</h1>
 
 ---
 
@@ -264,7 +262,7 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-# Introduction to C#
+<h1 style="font-size: 80px; color: #512bd4">Introduction to C#</h1>
 
 ---
 
