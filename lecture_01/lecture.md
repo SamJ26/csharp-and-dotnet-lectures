@@ -11,9 +11,13 @@ img[alt~="center"] {
 }
 </style>
 
-# Introduction to .NET
+# Introduction to
+
+![bg right](../images/dotnet-logo.png)
 
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 # What is .NET?
 
@@ -23,6 +27,8 @@ img[alt~="center"] {
 - Created because of [litigation](https://www.cnet.com/tech/tech-industry/sun-microsoft-settle-java-suit/) about Java “tweaking” on Windows
 
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 # Why to choose .NET?
 
@@ -69,7 +75,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 - **Managed runtime** ~ _Sandbox_
     - No direct memory access
-    - Prevents critical issues like buffer overflow, index out range etc.
+    - Prevents critical issues like buffer overflow, index out of range etc.
 - Patches are released with runtime
 
 ---
@@ -107,6 +113,8 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+
 # .NET implementations (runtimes)
 
 - **.NET 5 and later versions** (current version is **.NET 7**)
@@ -121,6 +129,8 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 - UWP
 
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 # .NET Standard
 
@@ -137,6 +147,8 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+
 # .NET Schedule
 
 **STS** = Short Term Support
@@ -145,6 +157,8 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 ![](./images/release-schedule.png)
 
 ---
+
+![height:400  bg right](./images/dotnet-mascot.png)
 
 # .NET platform
 
@@ -155,9 +169,9 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 - BCL
 - GC
 
-TODO - pridat nejaky obrazok na polovicu slidu
-
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## Common Language Infrastructure (CLI)
 
@@ -174,6 +188,8 @@ TODO - pridat nejaky obrazok na polovicu slidu
 
 ---
 
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+
 ## Common Type System (CTS)
 
 - Defines how types are declared, used, and managed in the CLR
@@ -188,6 +204,8 @@ TODO - pridat nejaky obrazok na polovicu slidu
 
 ---
 
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+
 ## Common Intermediate Language (CIL)
 
 - More names:
@@ -199,6 +217,8 @@ TODO - pridat nejaky obrazok na polovicu slidu
 TODO - obrazok s ukazkou IL
 
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## Common Language Runtime (CLR)
 
@@ -214,6 +234,8 @@ TODO - obrazok s ukazkou IL
 
 ---
 
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+
 ## Base Class Library (BCL)
 
 - Predefined set of libraries with core functionality for programmers
@@ -221,6 +243,8 @@ TODO - obrazok s ukazkou IL
 - [Source code of the BCL](https://github.com/dotnet/runtime)
 
 ---
+
+<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## Garbage Collector (GC)
 
@@ -234,7 +258,7 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-## How it all works together
+## How does it all work together?
 
 ![height:450 center](./images/clr-execution-model.jpg)
 
