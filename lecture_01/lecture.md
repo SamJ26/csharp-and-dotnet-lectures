@@ -1,7 +1,7 @@
 ---
 marp: true
 paginate: true
-theme: default
+theme: custom-theme
 ---
 
 <style>
@@ -11,13 +11,13 @@ img[alt~="center"] {
 }
 </style>
 
-<h1 style="font-size: 80px; color: #512bd4">Introduction to .NET</h1>
+# Introduction to .NET
 
 ---
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-# What is .NET?
+## What is .NET?
 
 - Free, **cross-platform**, **open source** developer platform
 - Runtime - has its own language (CIL)
@@ -28,7 +28,7 @@ img[alt~="center"] {
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-# Why to choose .NET?
+## Why to choose .NET?
 
 - Productivity
 - Almost every platform
@@ -39,7 +39,7 @@ img[alt~="center"] {
 
 ---
 
-## Productivity
+### Productivity
 
 - To develop high quality applications faster
 - Modern language constructs
@@ -52,13 +52,13 @@ img[alt~="center"] {
 
 ---
 
-## Almost every platform
+### Almost every platform
 
 ![height:500 center](./images/dotnet-platform.png)
 
 ---
 
-## Performance
+### Performance
 
 TODO
 
@@ -69,7 +69,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-## Security
+### Security
 
 - **Managed runtime** ~ _Sandbox_
     - No direct memory access
@@ -78,7 +78,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-## Open Source
+### Open Source
 
 - [.NET Core](https://github.com/dotnet/core)
 - [.NET Runtime/CoreFX](https://github.com/dotnet/runtime)
@@ -90,7 +90,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-## Large ecosystem
+### Large ecosystem
 
 - Libraries from the **NuGet package manager**
 - Frameworks: .NET MAUI, Blazor, ASP.NET Core, Dapper, EF Core
@@ -101,7 +101,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-### .NET Foundation
+#### .NET Foundation
 
 - Non-profit organization that maintains .NET ecosystem
     - Licence agnostic (all projects under .NET Foundation are OSS)
@@ -113,7 +113,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-# .NET implementations (runtimes)
+## .NET implementations (runtimes)
 
 - **.NET 5 and later versions** (current version is **.NET 7**)
 - .NET Core
@@ -130,7 +130,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-# .NET Standard
+## .NET Standard
 
 - Formal specification of .NET APIs that are available on multiple .NET implementations
 - **Enables code sharing between different implementations**
@@ -147,7 +147,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-# .NET Schedule
+## .NET Schedule
 
 **STS** = Short Term Support
 **LTS** = Long Term Support - min. 3 years
@@ -158,7 +158,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ![height:400  bg right](./images/dotnet-mascot.png)
 
-# .NET platform
+## .NET internals
 
 - CLI
 - CTS
@@ -171,7 +171,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Common Language Infrastructure (CLI)
+### Common Language Infrastructure (CLI)
 
 - Standard
     - [ISO/IES 23271:2012](https://www.iso.org/standard/58046.html)
@@ -188,7 +188,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Common Type System (CTS)
+### Common Type System (CTS)
 
 - Defines how types are declared, used, and managed in the CLR
 - Defines rules that languages must follow, to be able to interact with each other
@@ -204,7 +204,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Common Intermediate Language (CIL)
+### Common Intermediate Language (CIL)
 
 - More names:
     - Microsoft Intermediate Language
@@ -218,7 +218,7 @@ TODO - obrazok s ukazkou IL
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Common Language Runtime (CLR)
+### Common Language Runtime (CLR)
 
 - Essential runtime services
 - _Common_ because it can be shared by different _managed_ programming languages
@@ -234,7 +234,7 @@ TODO - obrazok s ukazkou IL
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Base Class Library (BCL)
+### Base Class Library (BCL)
 
 - Predefined set of libraries with core functionality for programmers
 - Expected with any .NET implementation
@@ -244,7 +244,7 @@ TODO - obrazok s ukazkou IL
 
 <!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
-## Garbage Collector (GC)
+### Garbage Collector (GC)
 
 - Automatic memory management
 - Managed heap
@@ -256,17 +256,17 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-## How does it all work together?
+### How does it all work together
 
 ![height:450 center](./images/clr-execution-model.jpg)
 
 ---
 
-<h1 style="font-size: 80px; color: #512bd4">Introduction to C#</h1>
+# Introduction to C#
 
 ---
 
-# What is C#?
+## What is C#?
 
 - **General-purpose, multi-paradigm, type-safe programming language**
 - Created for .NET platform
@@ -278,7 +278,7 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-# HelloWorld project
+## HelloWorld project
 
 - Create new project:
 `dotnet new console -n HelloWorld --use-program-main`
@@ -289,7 +289,7 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-# HelloWorld project - `Program.cs`
+### HelloWorld project - `Program.cs`
 
 ```csharp
 namespace HelloWorld;
@@ -305,7 +305,7 @@ class Program
 
 ---
 
-# HelloWorld project - `HelloWorld.csproj`
+### HelloWorld project - `HelloWorld.csproj`
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
@@ -323,7 +323,7 @@ class Program
 
 ---
 
-# Syntax
+## Syntax
 
 - **Identifiers**
     - Names that programmers choose for entities (variables, methods...)
@@ -340,7 +340,7 @@ class Program
     ```
 ---
 
-# Syntax
+## Syntax
 
 - **Delimiters**
     - Characters used to structure the code
@@ -356,7 +356,7 @@ class Program
         ```
 ---
 
-# Comments
+## Comments
 
 **Single-line comment**
 ```csharp
@@ -377,7 +377,7 @@ class Program
 ```
 ---
 
-# Data types
+## Data types
 
 - Instruct compiler or interpreter how the programmer intends to use data
 - **Value types**
@@ -391,7 +391,7 @@ class Program
 
 ---
 
-# Value types
+### Value types
 
 - Variable directly **contains data**
 - Assignment **always copies the instance**
@@ -415,7 +415,7 @@ class Program
 
 ---
 
-## Simple types
+#### Simple types
 
 ```csharp
 int decimalLiteral = 2;
@@ -441,7 +441,7 @@ double nan = double.NaN;
 
 ---
 
-### Numerical data types casting
+##### Numerical data types casting
 * Transformation of **integral type** to **integral type**:
   * *implicit* when *target type* can accommodate the whole range of *source type*
   * *explicit* otherwise
@@ -457,56 +457,56 @@ double nan = double.NaN;
 
 ---
 
-## Enumeration types
+#### Enumeration types
 
 - Set of named constants of the underlying integral numeric type
 - Default type is `int`
 - Integral values start from 0 by default
 
-```csharp
-enum Season
-{
-    Spring,     // 0
-    Summer,     // 1
-    Autumn,     // 2
-    Winter      // 3
-}
-```
+    ```csharp
+    enum Season
+    {
+        Spring,     // 0
+        Summer,     // 1
+        Autumn,     // 2
+        Winter      // 3
+    }
+    ```
 
 ---
 
-## Struct types
+#### Struct types
 
 - Similar to a class type
 - Use them to design small data-centric types that provide little or no behavior
 - .NET internally uses `struct` to represent a simple types
 
-```csharp
-struct Foo
-{
-    string name;
-    void PrintName() { Console.WriteLine(name); }
-}
-```
+    ```csharp
+    struct Foo
+    {
+        string name;
+        void PrintName() { Console.WriteLine(name); }
+    }
+    ```
 
 ---
 
-## Nullable value types
+#### Nullable value types
 
 - Extensions of all other value types with a null value
 - Any nullable value type is an instance of the `System.Nullable<T>` structure
 - Because they are reference types, thus their default value is `null`
 
-```csharp
-int  ten = 10;
-int? one = 1;
-int? canBeNull = null;
-int  cannotBeNull = null;      // Compile-time error
-```
+    ```csharp
+    int  ten = 10;
+    int? one = 1;
+    int? canBeNull = null;
+    int  cannotBeNull = null;      // Compile-time error
+    ```
 
 ---
 
-# Reference types
+### Reference types
 
 - Variable **stores a reference** to the object (data)
 - Assignment **copies the reference**, not the object instance
@@ -530,7 +530,7 @@ int  cannotBeNull = null;      // Compile-time error
 
 ---
 
-# Reference type - String
+#### String
 
 - Represents sequence of characters
 - Always **immutable**
@@ -538,8 +538,6 @@ int  cannotBeNull = null;      // Compile-time error
 - Equality operators are defined to compare the values of string objects, not references
 
 ---
-
-## String
 
 ```csharp
 string s0 = null;                           // s0 = null
@@ -565,24 +563,24 @@ char c = s7[0]                              // c = '1'
 
 ---
 
-## StringBuilder
+#### StringBuilder
 
 - `System.Text.StringBuilder`
 - Using the `+` operator repeatedly to build up a string is inefficient
 - Represents a mutable string of characters
 
-```csharp
-StringBuilder sb = new StringBuilder();
-sb.Append("This is the beginning of a sentence, ");         
-sb.Replace("the beginning of ", "");
-sb.Insert(sb.ToString().IndexOf("a ") + 2, "complete ");
-sb.Replace(",", ".");
-Console.WriteLine(sb.ToString());       // This is a complete sentence
-```
+    ```csharp
+    StringBuilder sb = new StringBuilder();
+    sb.Append("This is the beginning of a sentence, ");         
+    sb.Replace("the beginning of ", "");
+    sb.Insert(sb.ToString().IndexOf("a ") + 2, "complete ");
+    sb.Replace(",", ".");
+    Console.WriteLine(sb.ToString());       // This is a complete sentence
+    ```
 
 ---
 
-## Array types
+#### Array types
 
 - Represents fixed length data structure of homogeneous items
 - The elements are stored in a **contiguous block of memory**
@@ -591,17 +589,17 @@ Console.WriteLine(sb.ToString());       // This is a complete sentence
 - **Multidimensional**
 - **Jagged**
 
-```csharp
-int[] array1 = new int[5];
-int[] array2 = { 1, 3, 5, 7, 9 };
+    ```csharp
+    int[] array1 = new int[5];
+    int[] array2 = { 1, 3, 5, 7, 9 };
 
-int[,] multiDimensionalArray1 = new int[2, 3];
-int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
-```
+    int[,] multiDimensionalArray1 = new int[2, 3];
+    int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
+    ```
 
 ---
 
-# Default values
+### Default values
 
 | Type                 | Default value                                                    |
 |----------------------|------------------------------------------------------------------|
@@ -615,7 +613,7 @@ int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
 
 ---
 
-# Operators and expressions
+## Operators and expressions
 
 - **Expression** = returns some value after computation
 - Operator types:
@@ -625,7 +623,7 @@ int[,] multiDimensionalArray2 = { { 1, 2, 3 }, { 4, 5, 6 } };
 
 ---
 
-## Arithmetic operators
+### Arithmetic operators
 
 Supported by all **integral** and **floating-point** numeric types
 - `+` addition
@@ -638,7 +636,7 @@ Supported by all **integral** and **floating-point** numeric types
 
 ---
 
-## Boolean logical operators
+### Boolean logical operators
 
 Supported by **bool** types
 - Unary operator:
@@ -653,7 +651,7 @@ Supported by **bool** types
 
 ---
 
-## Bitwise and shift operators
+### Bitwise and shift operators
 
 Supported by **char** type and **integral** numeric types
 
@@ -668,7 +666,7 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
-## Comparison and equality operators
+### Comparison and equality operators
 
 - `==` equality
 - `!=` inequality
@@ -679,7 +677,7 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
-## `sizeof` operator
+### `sizeof` operator
 
 - Returns the number of bytes occupied by a variable of a given type
 - The argument must be a type parameter
@@ -688,7 +686,7 @@ Supported by **char** type and **integral** numeric types
     Console.WriteLine(sizeof(int));         // 4 bytes
     ```
 
-## `nameof` expression
+### `nameof` expression
 
 - Produces the name of a variable, type, or member as the string constant
 - Evaluated at compile time and has no effect at run time
@@ -700,7 +698,7 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
-## `switch` expression
+### `switch` expression
 
 - Based in pattern matching
 - If none of a patterns matches an input value, the runtime throws an exception
@@ -718,7 +716,7 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
-## Default value expression
+### Default value expression
 
 ```csharp
 // default operator
@@ -735,7 +733,7 @@ Console.WriteLine(b);       // output: null
 
 ---
 
-# Statements
+## Statements
 
 - **Declaration** statements
 - **Selection** statements
@@ -745,7 +743,7 @@ Console.WriteLine(b);       // output: null
 
 ---
 
-## Declaration statements
+### Declaration statements
 
 - Declares a new variable, and optionally, initializes it
 - An **implicitly typed** local variable is strongly typed, but the compiler determines the type
@@ -757,7 +755,7 @@ Console.WriteLine(b);       // output: null
 
 ---
 
-## Selection statements
+### Selection statements
 
 - Used to define a program control flow
     - `if` (`else`)
@@ -765,6 +763,8 @@ Console.WriteLine(b);       // output: null
     - ternary operator `condition ? onTrue : onFalse`
 
 ---
+
+#### `if` statement example
 
 ```csharp
 DisplayWeatherReport(15.0);  // Output: Cold.
@@ -784,6 +784,8 @@ void DisplayWeatherReport(double tempInCelsius)
 ```
 
 ---
+
+#### `switch` statement example
 
 ```csharp
 Foo(0);     // Output: Value is 0
@@ -813,6 +815,8 @@ void Foo(uint value)
 
 ---
 
+#### Ternary operator example
+
 ```csharp
 var res1 = (1 > 0) ? OnTrue() : OnFalse();      // res1 = "It's true!"
 var res2 = (0 > 1) ? OnTrue() : OnFalse();      // res2 = "It's false!"
@@ -823,7 +827,7 @@ string OnFalse() => "It's false!";
 
 ---
 
-## Iteration statements
+### Iteration statements
 
 - Repeatedly execute a statement or a block of statements
     - `for`
@@ -832,6 +836,8 @@ string OnFalse() => "It's false!";
     - `while`
 
 ---
+
+#### `for` statement example
 
 ```csharp
 for (int i = 0; i < 3; i++)
@@ -846,6 +852,8 @@ for (int i = 0; i < 3; i++)
 
 ---
 
+#### `foreach` statement example
+
 ```csharp
 const string beer = "beer";
 foreach (char c in beer)
@@ -856,6 +864,8 @@ foreach (char c in beer)
 ```
 
 ---
+
+#### `do` statement example
 
 ```csharp
 int n = 0;
@@ -870,6 +880,8 @@ do
 
 ---
 
+#### `while` statement example
+
 ```csharp
 int n = 0;
 while (n < 5)
@@ -883,7 +895,7 @@ while (n < 5)
 
 ---
 
-## Jump statements
+### Jump statements
 
 - Unconditionally transfer control flow
     - **break** - terminates the closest enclosing **iteration** or **switch** statement
@@ -892,6 +904,8 @@ while (n < 5)
     - **goto** - transfers control to a statement that is marked by a label
 
 ---
+
+#### `break` statement example
 
 ```csharp
 int[] numbers = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -912,6 +926,8 @@ Console.WriteLine("End of the example.");
 ```
 
 ---
+
+#### `continue` statement example
 
 ```csharp
 for (int i = 0; i < 5; i++)
@@ -936,6 +952,8 @@ for (int i = 0; i < 5; i++)
 
 ---
 
+#### `goto` statement example
+
 ```csharp
 int i = 1;
 startLoop:
@@ -950,7 +968,7 @@ if (i <= 5)
 
 ---
 
-## Checked and unchecked statements
+### Checked and unchecked statements
 
 - Specifies overflow-checking context for integral-type arithmetic operations and conversions
 - Overflow in _checked_ context => `System.OverflowException` is thrown
@@ -967,7 +985,7 @@ if (i <= 5)
 
 ---
 
-# Namespaces
+## Namespaces
 
 - Groups classes and interfaces to named groups
 - A namespace forms an integral part of a type’s name.
@@ -1014,7 +1032,7 @@ namespace Outer
 
 ---
 
-## File-scoped Namespaces (C# 10)
+### File-scoped Namespaces (C# 10)
 
 ```csharp
 namespace MyNamespace
@@ -1033,7 +1051,7 @@ class Class2 {}         // Inside MyNamespace
 
 ---
 
-# Useful learning resources
+## Useful learning resources
 
 - **[Microsoft documentation](https://learn.microsoft.com/en-us/docs/)**
 - Books:
@@ -1048,40 +1066,40 @@ class Class2 {}         // Inside MyNamespace
 
 ---
 
-# Thank you for your attention :)
+## Thank you for your attention :)
 
 ---
 
-# Reference vs Pointer
+## Reference vs Pointer
 
-## Pointer
+**Pointer**
 - An **address** which is an offset into the entire virtual address space of the process
 - Addresses can be **manipulated mathematically**
 
-## Reference
+**Reference**
 - Some vague thing that lets you reference an object
 - Internal implementation depends on runtime!
 - _The CLR actually does implement managed object references as addresses to objects owned by the garbage collector, **but that is an implementation detail**!_
 
 ---
 
-# Stack vs Heap
+## Stack vs Heap
 
 **Memory in .NET is managed by CLR**
 ~~Value types are stored on the stack, reference types are stored on the heap~~
 
-## Stack
+**Stack**
 - LIFO data structure
 - Storage for: _local variables, parameters, return values_
 
-## Heap
+**Heap**
 - Can be viewed as a random jumble of objects
 - Managed by **Garbage Collector**
 - Storage for: _reference types, values types used in reference types, static variables_
 
 ---
 
-# Global using directive (C# 10)
+## Global using directive (C# 10)
 
 - To apply `using` directive to all files in the project, preffix a `using` with the `global` keyword
     ```csharp
@@ -1092,7 +1110,7 @@ class Class2 {}         // Inside MyNamespace
 
 ---
 
-# Implicit global usings (.NET 6)
+## Implicit global usings (.NET 6)
 
 - You need to set _ImplicitUsings_ element to true in project file (`.csproj`)
     ```xml
@@ -1109,7 +1127,7 @@ class Class2 {}         // Inside MyNamespace
 
 ---
 
-# Resources
+## Resources
 
 [Heap vs Stack](https://tooslowexception.com/heap-vs-stack-value-type-vs-reference-type/)
 [Reference vs Pointer](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/references-are-not-addresses)
