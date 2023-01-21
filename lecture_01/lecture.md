@@ -15,7 +15,8 @@ img[alt~="center"] {
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+<!-- Style is applied to all slides bellow -->
+<!-- backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## What is .NET?
 
@@ -25,8 +26,6 @@ img[alt~="center"] {
 - Created because of [litigation](https://www.cnet.com/tech/tech-industry/sun-microsoft-settle-java-suit/) about Java “tweaking” on Windows
 
 ---
-
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## Why to choose .NET?
 
@@ -53,6 +52,8 @@ img[alt~="center"] {
 ---
 
 ### Almost every platform
+
+<!-- _backgroundImage: none -->
 
 ![height:500 center](./images/dotnet-platform.png)
 
@@ -111,8 +112,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
-
 ## .NET implementations (runtimes)
 
 - **.NET 5 and later versions** (current version is **.NET 7**)
@@ -128,8 +127,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
-
 ## .NET Standard
 
 - Formal specification of .NET APIs that are available on multiple .NET implementations
@@ -141,11 +138,11 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
+<!-- _backgroundImage: none -->
+
 ![center](./images/dotnet-standard.png)
 
 ---
-
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ## .NET Schedule
 
@@ -156,12 +153,15 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
+<!-- _backgroundImage: none -->
+
 ![height:400  bg right](./images/dotnet-mascot.png)
 
 ## .NET internals
 
 - CLI
 - CTS
+
 - CLR
 - CIL
 - BCL
@@ -169,7 +169,7 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
+<!-- backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ### Common Language Infrastructure (CLI)
 
@@ -186,8 +186,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
-
 ### Common Type System (CTS)
 
 - Defines how types are declared, used, and managed in the CLR
@@ -202,8 +200,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
-
 ### Common Intermediate Language (CIL)
 
 - More names:
@@ -215,8 +211,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 TODO - obrazok s ukazkou IL
 
 ---
-
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ### Common Language Runtime (CLR)
 
@@ -232,8 +226,6 @@ TODO - obrazok s ukazkou IL
 
 ---
 
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
-
 ### Base Class Library (BCL)
 
 - Predefined set of libraries with core functionality for programmers
@@ -241,8 +233,6 @@ TODO - obrazok s ukazkou IL
 - [Source code of the BCL](https://github.com/dotnet/runtime)
 
 ---
-
-<!-- _backgroundImage: url(../images/default-bg-with-logo.png) -->
 
 ### Garbage Collector (GC)
 
@@ -261,6 +251,8 @@ TODO - obrazok s ukazkou IL
 ![height:450 center](./images/clr-execution-model.jpg)
 
 ---
+
+<!-- backgroundImage: none -->
 
 # Introduction to C#
 
