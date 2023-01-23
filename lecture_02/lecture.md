@@ -120,7 +120,62 @@ img[alt~="center"] {
 
 ## Class
 
-TODO
+- The most common kind of reference type
+- Members:
+    - **Fields**, **Properties**, **Constants**
+    - **Constructors**
+    - **Methods**
+    - Operators
+    - Indexers
+    - Finalizers
+    - Nested Types
+    - Events
+
+---
+
+```csharp
+public class MyClass
+{
+    // Private field
+
+    // Public property
+}
+```
+
+---
+
+### Access Modifiers
+
+- `public` - accessible everywhere
+- `private` - accessible only in the same class or struct
+- `protected` - accessible only in the same class or struct or in derived class
+- `internal` - accessible in the same assembly, but not from another assemblies
+- `protected internal` - accessible in the assembly in which it's declared, or from within a derived class in another assembly (_internal_ **OR** _protected_)
+- `private protected` - accessible by types derived from the class that are declared within its containing assembly (_internal_ **AND** _protected_)
+
+---
+
+### Summary table
+
+| Caller's location                      | `public` | `protected internal` | `protected` | `internal` | `private protected` | `private` |
+| -------------------------------------- | :------: | :------------------: | :---------: | :--------: | :-----------------: | :-------: |
+| The class                       |    ✔️️     |          ✔️           |      ✔️      |     ✔️      |          ✔️          |     ✔️     |
+| Derived class (SA)          |    ✔️     |          ✔️           |      ✔️      |     ✔️      |          ✔️          |     ❌     |
+| Non-derived class (SA)      |    ✔️     |          ✔️           |      ❌      |     ✔️      |          ❌          |     ❌     |
+| Derived class (DA)     |    ✔️     |          ✔️           |      ✔️      |     ❌      |          ❌          |     ❌     |
+| Non-derived class (DA) |    ✔️     |          ❌           |      ❌      |     ❌      |          ❌          |     ❌     |
+
+---
+
+### Fields
+
+- Variable of any type that is declared directly in a class or struct
+- _private_ or _protected_ accessibility
+- Access to data via _methods_, _properties_ or _indexers_
+- Naming conventions:
+    - cammelCase
+    - _cammelCase
+
 
 ---
 
