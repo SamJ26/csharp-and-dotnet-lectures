@@ -1,0 +1,100 @@
+NOTES:
+- V prvej prednáške mám viac detailov z reference types iba o Arrays a Strings lebo všetko ostatné velmi nadväzuje na OOP
+- Druhá prednáška je hodne natlačená takže generiká budú asi až v 3. prednáške
+
+-----------------------------------------------------
+1. [2h] Lecture - Introduction to .NET and C# part 1
+-----------------------------------------------------
+
+Part 1:
+- Introduction to .NET
+Part 2:
+- Introduction to C#
+	- What is C#?
+	- HelloWorld project
+	- Syntax
+	- Comments
+	- Data types
+		- Value types
+			- Simple types
+			- Struct types
+			- Enumeration types
+			- Nullable value types
+		- Reference types
+			- String
+				- StringBuilder
+			- Array types
+		- Default values
+	- Operators and expressions
+	- Statements
+		- Selection statements
+		- Iteration statements
+		- Jump statements
+		- Checked and unchecked statements
+	- Namespace
+- Extra slides:
+	- Reference vs Pointer
+	- Stack vs Heap
+	- Global using directive
+	- Implicit global using directive
+
+-----------------------------------------------------
+2. [3h] Lecture - Introduction to .NET and C# part 2 + OOP
+-----------------------------------------------------
+
+Part 1:
+- Introduction to OOP
+Part 2:
+- OOP in C#
+	- Class
+	- Access modifiers
+	- Class members
+		- Fields + modifiers + example
+		- Constants
+		- Methods + modifiers + example
+		- Properties + modifiers + example
+		- Constructors
+		- Deconstructors
+		- Finalizer
+		- Indexers
+		- Nested Types
+	- new operator
+	- this keyword
+	- object in C#
+	- Inheritance in C#
+		- base keyword
+	- Abstract class and members
+	- Static class and members
+	- Partial class and members
+	- Sealed class and members
+	- Polymorphism
+		- virtual + override + sealed
+		- operator is, as
+		- upcasting, downcasting
+	- Interface
+	- Records
+	- Struct
+- Extra slides:
+	- Extension methods
+
+-----------------------------------------------------
+3. [3h] Lecture - Introduction to .NET and C# part 3
+-----------------------------------------------------
+
+- Generics
+	- Generic constrains
+
+-----------------------------------------------------
+4. [3h] Lecture - Introduction to .NET and C# part 4
+-----------------------------------------------------
+
+-----------------------------------------------------
+5. [3h] Lecture - Generic host (DI + Configuration + Logging)
+-----------------------------------------------------
+
+-----------------------------------------------------
+6. [3h] Lecture - Working with database in .NET (EFCore + Bogus)
+-----------------------------------------------------
+
+
+

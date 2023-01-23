@@ -13,13 +13,14 @@ part2 - Introduction to C#
 part1 - Introduction to OOP
 part2 - OOP in C#
     - class
-    - fields vs properties
-    - getters and setters
+    - fields
+    - properties
     - computed properties
     - const vs readonly
     - constructor
     - deconstructor
     - finalizer
+    - this keyword
     - access modifiers
     - inheritance
     - interfaces
@@ -29,6 +30,9 @@ part2 - OOP in C#
     - static + extensions
 
 # LECTURE 3:
+
+- advanced operators: ??, ??=, ?., null-forgiving operator, is, as, bang-bang operator
+- operator overloading
 
 - in, out, ref, params
 - tuples
@@ -41,7 +45,6 @@ part2 - OOP in C#
 - delegates
 - lambda expresions
 - Func and Action
-- local functions
 - anonymous functions
 
 - iterators
@@ -67,3 +70,5 @@ part2 - OOP in C#
 - implicit usings
 - top level statements
 - source generators
+- events
+- extensions
