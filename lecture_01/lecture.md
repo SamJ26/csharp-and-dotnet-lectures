@@ -48,6 +48,7 @@ img[alt~="center"] {
 - Extensive class libraries - NuGet
 - Common APIs
 - Multi-language support
+- Awesome IDEs: [Visual Studio](https://visualstudio.microsoft.com/), [Rider](https://www.jetbrains.com/rider/)
 
 ---
 
@@ -115,13 +116,13 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 ## .NET implementations (runtimes)
 
 - **.NET 5 and later versions** (current version is **.NET 7**)
+    - Successor of .NET Core and Mono
+    - The bright future of .NET 👏
 - .NET Core
-    - Implements .NET Standard
-    - Cross-platform
+    - Cross-platform successor of .NET Framework
 - .NET Framework
     - Original implementation of .NET
     - Windows OS only
-    - Versions 4.5 and later implement .NET Standard
 - Mono/Xamarin
 - UWP
 
@@ -252,6 +253,47 @@ TODO - obrazok s ukazkou IL
 
 ---
 
+## .NET tools - CLI
+
+- Cross-platform toolchain for developing, building, running and publishing
+- Part of .NET SDK
+- Invokes `dotnet` driver - resposible for app or command execution
+
+    ```bash
+    dotnet --version    # Get current SDK version
+    dotnet --list-sdks  # Lists all installed SDKs
+    dotnet new          # Creates a new project, configuration file, or solution
+    dotnet restore      # Restores the dependencies and tools of a project
+    dotnet build        # Builds a project and all of its dependencies
+    dotnet publish      # Publishes the app and its dependencies to a folder for deployment
+    dotnet run          # Runs source code
+    dotnet test         # Run available unit tests
+    dotnet pack         # Packs the code into a NuGet package
+    dotnet clean        # Cleans the output of a project
+    dotnet sln          # Lists or modifies the projects in a .NET solution file
+    dotnet format       # Formats code to match editorconfig settings
+    ```
+
+---
+
+## .NET tools - NuGet
+
+- Package manager for .NET platform
+- Nuget package
+    - Shareable unit of code
+    - `.nupkg` file with DLLs and assets
+- Responsible for managing dependency tree in projects
+- .NET Standard vs Multi-targeting
+- [nuget.org](https://www.nuget.org/)
+
+---
+
+<!-- backgroundImage: none -->
+
+![center width:1100](./images/nuget.png)
+
+---
+
 <!-- backgroundImage: none -->
 
 # Introduction to C#
@@ -319,17 +361,17 @@ class Program
 
 - **Identifiers**
     - Names that programmers choose for entities (variables, methods...)
-    ```csharp
-    var identifierOfVariable= "value of variable";
-    ```
+        ```csharp
+        var identifierOfVariable= "value of variable";
+        ```
 - **Keywords**
     - Names that mean something special to the compiler
     - Can be used as identifier with prefix `@`
     - [List of keywords](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/)
-    ```csharp
-    int class = 10;     // Illegal
-    int @class = 10;    // Legal but ugly
-    ```
+        ```csharp
+        int class = 10;     // Illegal
+        int @class = 10;    // Legal but ugly
+        ```
 ---
 
 ## Syntax
@@ -342,9 +384,21 @@ class Program
     - **Semicolon** `;`
         - Delimits a statement
         - C# allows to write statements on more lines
+            ```csharp
+            Console.WriteLine
+                (1 + 2 + 3 + 4);
+            ```
+---
+
+## Syntax
+
+- **Literals**
+    - Primitive pieces of data lexically embedded into the program
+    - Data inserted in a code
         ```csharp
-        Console.WriteLine
-            (1 + 2 + 3 + 4);
+        var integralConstant = 42;
+        var helloWorldString = "Hello World";
+        var pi = 3.14;
         ```
 ---
 
@@ -487,7 +541,6 @@ double nan = double.NaN;
 
 - Extensions of all other value types with a null value
 - Any nullable value type is an instance of the `System.Nullable<T>` structure
-- Because they are reference types, thus their default value is `null`
 
     ```csharp
     int  ten = 10;
