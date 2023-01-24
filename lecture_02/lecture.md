@@ -211,9 +211,66 @@ img[alt~="center"] {
 ### Properties
 
 - Flexible mechanism to read, write, or compute the value of a private field
-- Special methods called accessors
+- Simple **encapsulation** mechanism
+- Property accessors:
+    - `get` - return the property value
+    - `set` - assign a new value
+    - `init` - assign a new value only during object construction
+- Types of properties:
+    - Read-write
+    - Read-only
+    - Write-only
+    - Init-only
 
-TODO
+---
+
+```csharp
+class MyClass
+{
+    public int ReadWriteProp { get; set; }
+    public int ReadOnlyProp { get; }
+    public int ComputedProp => ReadWriteProp * 2;
+    public int InitOnlyProp { get; init; }
+}
+
+var o = new MyClass() { InitOnlyProp = 5 };
+
+var v0 = o.InitOnlyProp;        // Ok
+o.InitOnlyProp = 5;             // Error
+
+var v1 = o.ReadWriteProp;       // Ok
+o.ReadWriteProp = 5;            // Ok
+
+var v2 = o.ReadOnlyProp;        // Ok
+o.ReadOnlyProp = 5;             // Error - property has no setter
+
+var v3 = o.ComputedProp;        // Ok
+o.ComputedProp = 5;             // Error - property has no setter
+```
+
+---
+
+#### Properties under the hood
+
+- _Backing field_ = private field which holds value of property
+- Accessors internally compile to methods `get_XXX` and `set_XXX`
+
+    ```csharp
+    class MyClass
+    {
+        // public int Prop { get; set; }
+        private int _propBackingField;
+        public int Prop
+        {
+            get => _propBackingField;
+            set => _propBackingField = value;
+        }
+    }
+
+    var o = new MyClass();
+    var val = o.Prop;
+    o.Prop = 5;
+    ```
 
 ---
 
@@ -255,6 +312,28 @@ TODO
 ---
 
 ## Thank you for your attention :)
+
+---
+
+## Required properties (C# 11)
+
+- Adding `required` to property forces client code to initialize given property
+- Replacement of simple constructors
+
+    ```csharp
+    public class SaleItem
+    {
+        public required string Name { get; set; }
+        public required decimal Price { get; set; }
+    }
+
+    var item = new SaleItem
+    {
+        Name = "Shoes",
+        Price = 19.95m
+    };
+    Console.WriteLine($"{item.Name}: sells for {item.Price:C2}");
+    ```
 
 ---
 

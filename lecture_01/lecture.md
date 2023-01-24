@@ -522,7 +522,6 @@ double nan = double.NaN;
 
 #### Struct types
 
-- Similar to a class type
 - Use them to design small data-centric types that provide little or no behavior
 - .NET internally uses `struct` to represent a simple types
 
@@ -825,7 +824,7 @@ Console.WriteLine(b);       // output: null
 
 - Used to define a program control flow
     - `if` (`else`)
-    - `swith`
+    - `switch`
     - ternary operator `condition ? onTrue : onFalse`
 
 ---
@@ -1037,8 +1036,10 @@ if (i <= 5)
 ### Checked and unchecked statements
 
 - Specifies overflow-checking context for integral-type arithmetic operations and conversions
+- Compiler option _CheckForOverflowUnderflow_ to enable full-project checks
 - Overflow in _checked_ context => `System.OverflowException` is thrown
 - Overflow in _unchecked_ context => execution continues
+
     ```csharp
     int a = int.MinValue;
     a--;
@@ -1048,7 +1049,6 @@ if (i <= 5)
     var i = checked(b--); // throw OverflowException
     Console.WriteLine(i == int.MaxValue);
     ```
-
 ---
 
 ## Namespaces
