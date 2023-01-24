@@ -159,46 +159,12 @@ img[alt~="center"] {
 
 ---
 
-#### Field modifiers
-
-- `public`, `internal`, `private`, `protected`, `protected internal`, `private protected`
-- `static`
-- `new` - hides a member that is inherited from a base class
-- `readonly` - cannot be changed after construction
-- `volatile` - field might be modified by multiple threads
-- `unsafe`
-
----
-
-#### `Circle` class example
-
-```csharp
-class Circle
-{
-    private int _radius;
-}
-```
-
----
-
 ### Constants
 
 - Fields whose value is set at compile time and cannot be changed
 - `const` modifier
 - Must be initialized with a value!
 - User-defined types, including classes, structs, and arrays, cannot be `const`
-
----
-
-#### `Circle` class example
-
-```csharp
-class Circle
-{
-    private readonly int _radius;
-    private const double Pi = 3.14;     // Added
-}
-```
 
 ---
 
@@ -218,18 +184,6 @@ class Circle
     // Method overloading
     void Foo(int x, int y) => Console.WriteLine(x + y);
     ```
-
----
-
-#### Method modifiers
-
-- `public`, `internal`, `private`, `protected`, `protected internal`, `private protected`
-- `static`
-- `new`, `virtual`, `abstract`, `override`, `sealed`
-- `unsafe`
-- `partial` - separated declaration and definition of method
-- `extern` - e.g. for `dll` imports
-- `async`
 
 ---
 
@@ -254,17 +208,12 @@ class Circle
 
 ---
 
-#### `Circle` class example
+### Properties
 
-```csharp
-class Circle
-{
-    private readonly int _radius;
-    private const double Pi = 3.14;
+- Flexible mechanism to read, write, or compute the value of a private field
+- Special methods called accessors
 
-    public void Describe() => Console.Write($"I am circle with radius {_radius}");  // Added
-}
-```
+TODO
 
 ---
 
@@ -280,56 +229,6 @@ class Circle
 
 ---
 
-#### Constructor modifiers
-
-TODO
-
----
-
-#### `Circle` class example
-
-```csharp
-class Circle
-{
-    private readonly int _radius;
-    private const double Pi = 3.14;
-
-    public Circle(int radius)  => _radius = radius;     // Added
-
-    public void Describe() => Console.Write($"I am circle with radius {_radius}");
-}
-```
-
----
-
-### Properties
-
-- Flexible mechanism to read, write, or compute the value of a private field
-- Special methods called accessors
-
-TODO
-
----
-
-#### `Circle` class example
-
-```csharp
-class Circle
-{
-    private readonly int _radius;
-    private const double Pi = 3.14;
-
-    public Color Color { get; set; }                    // Added
-    public double Area => Pi * Double.Pow(_radius, 2);  // Added
-
-    public Circle(int radius)  => _radius = radius;
-
-    public void Describe() => Console.Write($"I am circle with radius {_radius}");
-}
-```
-
----
-
 ### Deconstructors
 
 - Opposite of a constructor
@@ -337,28 +236,21 @@ class Circle
 
 ---
 
-#### `Circle` class example
+### Finalizers
 
-```csharp
-class Circle
-{
-    private readonly int _radius;
-    private const double Pi = 3.14;
+TODO
 
-    public Color Color { get; set; }
-    public double Area => Pi * Double.Pow(_radius, 2);
+---
 
-    public Circle(int radius)  => _radius = radius;
+### Indexers
 
-    public void Deconstruct(out int radius, out Color color)    // Added
-    {
-        radius = _radius;
-        color = Color;
-    }
+TODO
 
-    public void Describe() => Console.Write($"I am circle with radius {_radius}");
-}
-```
+---
+
+### Nested Types
+
+TODO
 
 ---
 

@@ -119,3 +119,26 @@ TODO - obrazok ako funguje NuGet
 - Blogs:
     - [Andrew Lock](https://andrewlock.net/)
     - [Jeremy Likness](https://blog.jeremylikness.com/blog)
+
+---
+
+#### Field modifiers
+
+- `public`, `internal`, `private`, `protected`, `protected internal`, `private protected`
+- `static`
+- `new` - hides a member that is inherited from a base class
+- `readonly` - cannot be changed after construction
+- `volatile` - field might be modified by multiple threads
+- `unsafe`
+
+---
+
+#### Method modifiers
+
+- `public`, `internal`, `private`, `protected`, `protected internal`, `private protected`
+- `static`
+- `new`, `virtual`, `abstract`, `override`, `sealed`
+- `unsafe`
+- `partial` - separated declaration and definition of method
+- `extern` - e.g. for `dll` imports
+- `async`

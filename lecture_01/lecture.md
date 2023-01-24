@@ -162,9 +162,8 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
 
 - CLI
 - CTS
-
-- CLR
 - CIL
+- CLR
 - BCL
 - GC
 
@@ -719,6 +718,28 @@ Supported by **char** type and **integral** numeric types
 - `>` bigger than
 - `<=` less than or equal
 - `>=` bigger than or equal
+
+---
+
+### `new` operator
+
+- Creates a new instance of a type
+- Invokes constructor
+- A user-defined type can't overload the `new` operator
+
+    ```csharp
+    struct Point
+    {
+        int x;
+        int y;
+    }
+
+    var arr1 = new int[] { 1, 2, 3 };
+    int[] arr2 = new[] { 1, 2, 3 };
+
+    var struct1 = new Point();
+    Point struct2 = new();
+    ```
 
 ---
 
