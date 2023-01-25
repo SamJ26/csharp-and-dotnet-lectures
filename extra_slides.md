@@ -142,3 +142,12 @@ TODO - obrazok ako funguje NuGet
 - `partial` - separated declaration and definition of method
 - `extern` - e.g. for `dll` imports
 - `async`
+
+---
+
+### Deconstructors
+
+- Opposite of a constructor
+- Special method which must be called `Deconstruct` and have one or more `out` parameters,
+
+---

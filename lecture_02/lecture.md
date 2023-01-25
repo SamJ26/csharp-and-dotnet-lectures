@@ -124,7 +124,7 @@ img[alt~="center"] {
 - Members:
     - **Fields**, **Properties**, **Constants**
     - **Methods**
-    - **Constructors**, Deconstructors
+    - **Constructors**
     - Operators
     - Indexers
     - Finalizers
@@ -154,8 +154,8 @@ img[alt~="center"] {
     - Initialized before the constructor call (with default or predefined value)
     - Constructor can override initial value
 - Naming conventions:
-    - cammelCase
-    - _cammelCase
+    - cammelCase or _cammelCase for `private` fields
+    - PascalCase for `protected` fields
 
 ---
 
@@ -165,6 +165,19 @@ img[alt~="center"] {
 - `const` modifier
 - Must be initialized with a value!
 - User-defined types, including classes, structs, and arrays, cannot be `const`
+- Naming conventions: PascalCase
+
+---
+
+```csharp
+class MyClass
+{
+    private string _name;
+    protected int Number = 8;
+    
+    private const string Constant = "I am constant";
+}
+```
 
 ---
 
@@ -173,17 +186,31 @@ img[alt~="center"] {
 - Performs an action in a series of statements
 - Can access members of a `class`, `struct` or `record`
 - Method signature consist of method **name** and **parameter types**
+- Parameters vs Arguments:
+    - **Parameters** - method definition specifies the names and types of any parameters that are required
+    - **Argument** - concrete values provided by calling code for each parameter when method is called
 
-    ```csharp
-    // Classical method
-    int Foo(int x) { return x * 2; }
+---
 
-    // Expression-bodied method
-    int Foo(int x) => x * 2;
+```csharp
+class MyClass
+{
+    private string _name;
+    private const string Constant = "I am constant";
 
-    // Method overloading
-    void Foo(int x, int y) => Console.WriteLine(x + y);
-    ```
+    public void SayHi() => Console.Write($"Hi, I am {_name}");
+
+    public int DivideByTwo(int num)
+    {
+        if (num > 0)
+        {
+            return num / 2;
+        }
+        return 0;
+    }
+}
+
+```
 
 ---
 
@@ -286,28 +313,86 @@ o.ComputedProp = 5;             // Error - property has no setter
 
 ---
 
-### Deconstructors
+```csharp
+class Car
+{
+    public string Name { get; set; }
+    public string Owner { get; set; }
+    
+    public Car(string name) => Name = name;
 
-- Opposite of a constructor
-- Special method which must be called `Deconstruct` and have one or more `out` parameters,
+    public Car(string name, string owner)
+    {
+        Name = name;
+        Owner = owner;
+    }
+}
 
----
-
-### Finalizers
-
-TODO
+var car1 = new Car("Porsche");
+var car2 = new Car("Trabant", "Patrik Švikruha");
+var car3 = new Car();   // Error - ????
+```
 
 ---
 
 ### Indexers
 
-TODO
+-  Allow instances of a `class` or `struct` to be indexed just like arrays
+- Indexers resemble properties except that their accessors take parameters
+- Read-only indexer by omitting `get` accessor
+- Indexers can be overloaded
+- Indexers can have more than one formal parameter
+- **Be sure to incorporate some type of error-handling on invalid index value**
+
+---
+
+```csharp
+public class TempRecord
+{
+    float[] temps = new float[10]
+    {
+        56.2F, 56.7F, 56.5F, 56.9F, 58.8F,
+        61.3F, 65.9F, 62.1F, 59.2F, 57.5F
+    };
+
+    public int Length => temps.Length;
+    
+    // Indexer
+    public float this[int index]
+    {
+        get => temps[index];
+        set => temps[index] = value;
+    }
+}
+```
 
 ---
 
 ### Nested Types
 
-TODO
+- A type defined within a `class` or `struct`
+- They are accessible only from their containing type
+- A nested type has access to all of the members of its containing type
+
+---
+
+```csharp
+public class Container
+{
+    private const string Name = "Container";
+    
+    public class Nested
+    {
+        private Container _parent;
+        
+        public Nested(Container parent)
+        {
+            Console.WriteLine(Name);
+            this._parent = parent;
+        }
+    }
+}
+```
 
 ---
 
@@ -334,6 +419,35 @@ TODO
     };
     Console.WriteLine($"{item.Name}: sells for {item.Price:C2}");
     ```
+
+---
+
+## Finalizers
+
+- Used to perform any final clean-up when a class instance is being collected by GC
+- Important remarks:
+    - A class can only have one finalizer
+    - Finalizers cannot be called => they are invoked automatically
+    - A finalizer does not take modifiers or have parameters
+- Better alternative is to use `IDisposable`
+-  **.NET Core and later versions don't call finalizers as part of application termination**
+- _Finalizers are somewhat like lawyers - although there are cases in which you really need them, in general you don’t want to use them unless absolutely necessary_
+[Joseph Albahari - C# in Nutshell](https://www.albahari.com/nutshell/)
+
+---
+
+```csharp
+class Car
+{
+    public string Name { get; set; }
+
+    // Finalizer
+    ~Car()
+    {
+        // Cleanup statements...
+    }
+}
+```
 
 ---
 

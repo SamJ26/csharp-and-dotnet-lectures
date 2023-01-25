@@ -18,7 +18,6 @@ part2 - OOP in C#
     - computed properties
     - const vs readonly
     - constructor
-    - deconstructor
     - finalizer
     - this keyword
     - access modifiers
@@ -35,7 +34,7 @@ part2 - OOP in C#
 - operator overloading
 
 - in, out, ref, params
-- tuples
+- tuples + deconstructors
 - nullability
 - pretypovanie + dynamic
 - exceptions

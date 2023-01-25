@@ -30,7 +30,8 @@ Part 2:
 		- Boolean logical operators
 		- Bitwise and shift operators
 		- Comparison and equality operators
-		- new, sizeof, nameof operator
+		- new, sizeof, nameof, typeof operator
+		- switch expression
 	- Statements
 		- Selection statements
 		- Iteration statements
@@ -54,21 +55,20 @@ Part 2:
 	- Class
 	- Access modifiers
 	- Class members
-		- Fields + modifiers + example
+		- Fields + example
 		- Constants
-		- Methods + modifiers + example
-		- Properties + modifiers + example
-		- Constructors
-		- Deconstructors
-		- Finalizer
-		- Indexers
-		- Nested Types
+		- Methods + example
+		- Properties + example
+		- Constructors + example
+		- Indexers + example
+		- Nested Types + example
 	- object in C#
 	- this keyword
 	- Inheritance in C#
 		- base keyword
 	- Abstract class and members
 	- Static class and members
+		- Static constructor
 	- Partial class and members
 	- Sealed class and members
 	- Polymorphism
@@ -79,6 +79,8 @@ Part 2:
 	- Records
 	- Struct
 - Extra slides:
+	- Required properties
+	- Finalizers
 	- Extension methods
 
 -----------------------------------------------------
