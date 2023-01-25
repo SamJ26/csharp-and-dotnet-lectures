@@ -763,6 +763,23 @@ Supported by **char** type and **integral** numeric types
 
 ---
 
+### `typeof` operator
+
+- Obtains the `System.Type` instance for a type
+- The argument must be the name of a type or a type parameter
+- The argument can not be a type that requires metadata annotations
+- Operator can not be overloaded
+
+    ```csharp
+    Type t1 = typeof(char);         // t1 = System.Char
+    Type t2 = typeof(int[]);        // t2 = System.Int32[]
+    Type t3 = typeof(double);       // t3 = System.Double
+    Type t4 = typeof(string);       // t4 = System.String
+    Type t5 = typeof(string?);      // Error - can't be used on nullable reference types
+    Type t6 = typeof(dynamic);      // Error - can't be used on the dynamic type
+    ```
+---
+
 ### `switch` expression
 
 - Based in pattern matching
@@ -1031,6 +1048,8 @@ if (i <= 5)
 // Output: 12345
 ```
 
+**!! Do not use `goto` unless you really know what you're doing !!**
+
 ---
 
 ### Checked and unchecked statements
@@ -1054,7 +1073,7 @@ if (i <= 5)
 ## Namespaces
 
 - Groups classes and interfaces to named groups
-- A namespace forms an integral part of a type’s name.
+- A namespace forms an integral part of a type’s name
 - Usage of types from a `System.Security.Cryptography` namespace:
     ```csharp
     System.Security.Cryptography.RSA rsa = System.Security.Cryptography.RSA.Create();
