@@ -596,9 +596,71 @@ class Book : Publication
 
 ---
 
+TODO - change into two columns
+
 ### Composition vs Inheritance
 
-TODO
+**Inheritance** ❌
+
+```csharp
+class Engine
+{
+    private bool _started;
+
+    public void Start() => _started = true;
+}
+
+class Car : Engine
+{
+    public void Drive()
+    {
+        Start();
+        // ...
+    }
+}
+```
+
+**Composition** ✅
+
+```csharp
+class Engine
+{
+    private bool _started;
+
+    public void Start() => _started = true;
+}
+
+class Car
+{
+    public Engine Engine { get; }
+
+    public void Drive()
+    {
+        Engine.Start();
+        // ...
+    }
+}
+```
+
+---
+
+### Upcasting
+
+- Creates a base class reference from a subclass reference
+- Underlying object is not affected
+- Creates a more restrictive view on given object
+
+TODO - example
+
+---
+
+### Downcasting
+
+- Creates a subclass reference from a base class reference
+- Underlying object is not affected
+- Requires an explicit cast because it can fail at runtime
+
+TODO - example
 
 ---
 

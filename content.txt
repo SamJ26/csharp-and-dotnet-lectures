@@ -68,8 +68,8 @@ Part 2:
 	- Inheritance in C#
 		- base keyword
 		- Composition vs Inheritance
-	- Object
 		- Upcasting and Downcasting
+	- Object
 		- Boxing and Unboxing
 	- Sealed class and members
 	- Abstract class and members
