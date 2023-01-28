@@ -65,9 +65,9 @@ Part 2:
 	- this keyword
 	- Static class and members
 		- Static constructor
-	- Partial class and members
 	- Inheritance in C#
 		- base keyword
+		- Composition vs Inheritance
 	- Object
 		- Upcasting and Downcasting
 		- Boxing and Unboxing
@@ -76,6 +76,7 @@ Part 2:
 	- Polymorphism
 		- virtual + override + sealed
 		- operator is, as
+	- Partial class and members
 	- Interface
 	- Records
 	- Struct

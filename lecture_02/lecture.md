@@ -527,12 +527,76 @@ Console.WriteLine(secondInstance.Id);   // Output: 12
 
 ## Inheritance in C#
 
+- **Inheritance = ability to build new classes on top of existing ones**
+- Used to express an "**is a**" relationship
 - A class can only inherit from a single class
+- **Structs do not support inheritance**
 - Inheritance is transitive
 - What is not inherited by derived class:
     - Static constructors
     - Instance constructors
     - Finalizers
+
+---
+
+```csharp
+class Publication
+{
+    public string Publisher { get; set; }
+    public string Title { get; set; }
+    public uint Pages { get; set; }
+}
+
+class Book : Publication
+{
+    public string ISBN { get; set; }
+}
+
+class Article : Publication
+{
+    public string WebSite { get; set; }
+}
+
+var book = new Book();
+var article = new Article();
+
+Console.WriteLine(book.Title);
+Console.WriteLine(article.Title);
+```
+
+---
+
+### `base` keyword
+
+- Used to:
+    - Access members of the base class from within a derived class
+    - Specify which base-class constructor should be called
+- Cannot be used in static method
+
+---
+
+```csharp
+class Publication
+{
+    public string Title { get; set; }
+
+    public Publication(string title) => Title = title;
+}
+
+class Book : Publication
+{
+    public string ISBN { get; set; }
+
+    public Book(string ISBN, string title) : base(title)
+    {
+        this.ISBN = ISBN;
+    }
+}
+```
+
+---
+
+### Composition vs Inheritance
 
 TODO
 
@@ -540,10 +604,18 @@ TODO
 
 ## `System.Object`
 
-- It is the ultimate base class for all types
+- All types in the .NET type system **implicitly** inherit from `System.Object`
+- The common functionality of `Object` is available to any type
 - Any type can be upcast to object
+- The most important methods:
+    - `Equals(Object)`
+    - `GetHashCode()`
+    - `GetType()`
+    - `ToString()`
 
-TODO
+---
+
+TODO - example usage of System.Object methods
 
 ---
 
