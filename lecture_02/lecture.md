@@ -396,6 +396,157 @@ public class Container
 
 ---
 
+## `this` keyword
+
+- Refers to the **current instance** of the class
+
+    ```csharp
+    public class Employee
+    {
+        private string name;
+        private int age;
+
+        public Employee(string name, int age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+    }
+    ```
+
+---
+
+## `static` modifier
+
+- Class
+- Members
+- Constructor
+
+---
+
+### Static class
+
+- **Cannot be instantiated**
+- Class members are always accessed by the class name
+- Contains only static members
+- Is sealed - cannot be inherited
+- Cannot contain instance constructors
+
+---
+
+```csharp
+static class Calculator
+{
+    public static double Add(double num1, double num2) => num1 + num2;
+
+    public static double Subtract(double num1, double num2) => num1 - num2;
+}
+
+var calculator = new Calculator();  // Error - cannot create an instance of the static class
+
+var res1 = Calculator.Add(5, 4);
+var res2 = Calculator.Subtract(5, 4);
+```
+
+---
+
+### Static members
+
+- A non-static class can contain static methods, fields, properties, or events
+- Callable on a class even when no instance of the class has been created
+- Always accessed by the class name
+- Only one copy of a static member exists
+- A `const` field is essentially static in its behavior
+- Static method call is faster than non-static method call
+(`call` vs `callvirt` IL instructions)
+
+---
+
+```csharp
+class MyClass
+{
+    public uint Id { get; }
+    
+    private static uint _instanceCounter = 0;
+
+    public MyClass()
+    {
+        _instanceCounter++;
+        Id = _instanceCounter;
+    }
+
+    public static void SayHi() => Console.Write("Hi");
+}
+
+var firstInstance = new MyClass();
+Console.WriteLine(firstInstance.Id);    // Output: 1
+
+var secondInstance = new MyClass();
+Console.WriteLine(secondInstance.Id);   // Output: 2
+
+MyClass.SayHi();
+
+firstInstance.SayHi();      // Error - Cannot access static method in non-static context
+```
+
+---
+
+### Static constructor
+
+- **Used to initialize any static data**, or to perform a particular action only once
+- Is called automatically before the first instance is created or any static members are referenced
+- A static constructor doesn't take access modifiers or have parameters
+- A class or struct can only have one static constructor
+
+---
+
+```csharp
+class MyClass
+{
+    public uint Id { get; }
+    
+    private static uint _instanceCounter;
+
+    public MyClass() => Id = ++_instanceCounter;
+
+    static MyClass()
+    {
+        _instanceCounter = 10;
+        // Id = 10; Error - cannot access non-static property in static context 
+    }
+}
+
+var firstInstance = new MyClass();
+Console.WriteLine(firstInstance.Id);    // Output: 11
+
+var secondInstance = new MyClass();
+Console.WriteLine(secondInstance.Id);   // Output: 12
+```
+
+---
+
+## Inheritance in C#
+
+- A class can only inherit from a single class
+- Inheritance is transitive
+- What is not inherited by derived class:
+    - Static constructors
+    - Instance constructors
+    - Finalizers
+
+TODO
+
+---
+
+## `System.Object`
+
+- It is the ultimate base class for all types
+- Any type can be upcast to object
+
+TODO
+
+---
+
 ## Thank you for your attention :)
 
 ---

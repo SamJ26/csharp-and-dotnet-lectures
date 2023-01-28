@@ -62,19 +62,20 @@ Part 2:
 		- Constructors + example
 		- Indexers + example
 		- Nested Types + example
-	- object in C#
 	- this keyword
-	- Inheritance in C#
-		- base keyword
-	- Abstract class and members
 	- Static class and members
 		- Static constructor
 	- Partial class and members
+	- Inheritance in C#
+		- base keyword
+	- Object
+		- Upcasting and Downcasting
+		- Boxing and Unboxing
 	- Sealed class and members
+	- Abstract class and members
 	- Polymorphism
 		- virtual + override + sealed
 		- operator is, as
-		- upcasting, downcasting
 	- Interface
 	- Records
 	- Struct
