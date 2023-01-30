@@ -151,3 +151,10 @@ TODO - obrazok ako funguje NuGet
 - Special method which must be called `Deconstruct` and have one or more `out` parameters,
 
 ---
+
+### Operator overloading
+
+- User-defined implementation of some overloadable operator
+- `public static <return_type> operator <operator>(<parameters>) { <body> }`
+
+TODO - toto bude asi az v 3. prednaske

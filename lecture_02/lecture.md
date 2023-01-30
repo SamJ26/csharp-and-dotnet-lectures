@@ -92,10 +92,6 @@ img[alt~="center"] {
 - **Ability to access objects of different types through the same interface**
 - Ability of an object to “pretend” to be something else
 - Related to inheritance
-- Types:
-    - **Ad hoc polymorphism** - function overloading
-    - **Parametric polymorphism** - generics in OOP
-    - **Subtyping**
 
 ---
 
@@ -450,7 +446,7 @@ var res2 = Calculator.Subtract(5, 4);
 
 ---
 
-### Static members
+### Static class members
 
 - A non-static class can contain static methods, fields, properties, or events
 - Callable on a class even when no instance of the class has been created
@@ -644,23 +640,78 @@ class Car
 
 ---
 
-### Upcasting
+### Up-casting
 
 - Creates a base class reference from a subclass reference
-- Underlying object is not affected
 - Creates a more restrictive view on given object
 
-TODO - example
+### Down-casting
+
+- Creates a subclass reference from a base class reference
+- Requires an explicit cast because it can fail at runtime
 
 ---
 
-### Downcasting
+```csharp
+class Publication
+{
+    public string Publisher { get; set; }
+    public string Title { get; set; }
+    public uint Pages { get; set; }
+}
 
-- Creates a subclass reference from a base class reference
-- Underlying object is not affected
-- Requires an explicit cast because it can fail at runtime
+class Book : Publication
+{
+    public string ISBN { get; set; }
+}
 
-TODO - example
+Book book1 = new Book();
+Publication publication1 = book1;       // Up-casting
+
+Publication publication2 = new Book();
+Book book2 = (Book)publication2;        // Down-casting
+```
+
+---
+
+### Abstract class
+
+- **Cannot be instantiated**
+- Used to provide a common definition of a base class
+
+    ```csharp
+    abstract class AbstractBaseClass
+    {
+        public string Name { get; set; }
+    }
+
+    class DerivedClass : AbstractBaseClass
+    {
+        public uint Age { get; set; }
+    }
+
+    var derivedClass = new DerivedClass();              // Ok ✅
+    var abstractBaseClass = new AbstractBaseClass();    // Error ❌
+    ```
+
+---
+
+### Sealed class
+
+- **Cannot be used as a base class**
+- Run-time optimizations can make calling sealed class members slightly faster
+
+    ```csharp
+    sealed class SealedClass
+    {
+        public string Name { get; set; }
+    }
+
+    class AnotherClass : SealedClass    // Error ❌
+    {
+        public uint Age { get; set; }
+    }
+    ```
 
 ---
 
@@ -668,7 +719,7 @@ TODO - example
 
 - All types in the .NET type system **implicitly** inherit from `System.Object`
 - The common functionality of `Object` is available to any type
-- Any type can be upcast to object
+- **Any type can be upcasted to object**
 - The most important methods:
     - `Equals(Object)`
     - `GetHashCode()`
@@ -678,6 +729,173 @@ TODO - example
 ---
 
 TODO - example usage of System.Object methods
+
+---
+
+### Boxing
+
+- Implicit conversion of a value-type instance to an `object`
+- Wraps **copy of a value** inside an `object` and stores it on the heap
+
+    ```csharp
+    int i = 123;
+    object o = i;   // Boxing copies the value of i into object o.
+    i = 456;        // Change the value of i.
+
+    Console.WriteLine("The value-type value = {0}", i);     // 456
+    Console.WriteLine("The object-type value = {0}", o);    // 123
+    ```
+
+---
+
+### Unboxing
+
+- Explicit conversion from the type `object` to a value type
+- Consists of:
+    - Checking the object instance to make sure that it is a boxed value of the given value type
+    - Copying the value from the instance into the value-type variable
+- Boxing and unboxing are computationally expensive processes
+
+    ```csharp
+    int i = 123;
+    object o = i;
+
+    int j = (int)o;         // Ok
+    short s = (short)o;     // Will throw InvalidCastException
+    ```
+
+---
+
+## Polymorphism in C#
+
+- _"One name, many forms"_
+- Types:
+    - **Static Polymorphism** (Compile Time):
+        - Function overloading
+        - Operator overloading
+    - **Dynamic Polymorphism** (Run-Time):
+        - Virutal members - method overriding
+        - Abstract members - method implementation
+
+---
+
+### Function overloading
+
+- Multiple methods with the same name but different parameters
+
+    ```csharp
+    class Calculator
+    {
+        public int Sum(int n1, int n2) => n1 + n2;
+        public int Sum(int n1, int n2, int n3) => n1 + n2 + n3;
+        public double Sum(double n1, double n2) => n1 + n2;
+    }
+
+    var calculator = new Calculator();
+    var r1 = calculator.Sum(1, 2);
+    var r2 = calculator.Sum(1, 2, 3);
+    var r3 = calculator.Sum(1.0, 2.0);
+    ```
+
+---
+
+### Virtual class members
+
+- Their implementation can be overridden in subclasses
+- `virtual` + `override` keywords
+- Virtual can be:
+    - Methods
+    - Properties
+    - Indexers
+    - Events
+- `virtual` modifier cannot be used with the `static`, `abstract`, `private` or `override` modifiers 
+
+---
+
+```csharp
+class BaseClass
+{
+    public virtual void DoWork() => Console.WriteLine("I am doing NOTHING");
+
+    public virtual int WorkProperty { get { return 0; } }
+}
+class DerivedClass : BaseClass
+{
+    public override void DoWork() => Console.WriteLine("I am doing SOMETHING USEFUL");
+
+    public override int WorkProperty { get { return 1; } }
+}
+
+class AnotherDerivedClass : BaseClass {}
+
+var o1 = new DerivedClass();
+o1.DoWork();    // I am doing SOMETHING USEFUL
+
+var o2 = new AnotherDerivedClass();
+o2.DoWork();    // I am doing NOTHING
+```
+
+---
+
+#### Override and method selection
+
+- Order in which compiler looks for matching method:
+    1. Methods declared directly on the calling type
+    2. Overriden methods
+    3. Virtual methods on base class
+
+---
+
+```csharp
+public class BaseClass
+{
+    public virtual void DoWork(int param) =>
+        Console.Write("Base class implementation");
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void DoWork(int param) =>
+        Console.Write("Derived class INT implementation");
+
+    public void DoWork(double param) =>
+        Console.Write("Derived class DOUBLE implementation");
+}
+
+var obj = new DerivedClass();
+
+obj.DoWork(1.0);    // Calling with double
+                    // Output: Derived class DOUBLE implementation
+obj.DoWork(1);      // Calling with int => implicit conversion to double
+                    // Output: Derived class DOUBLE implementation
+```
+
+---
+
+#### `sealed` member modifier
+
+- Declaring an overriding member as `sealed` stops virtual inheritance
+- Sealed member cannot be overridden
+
+    ```csharp
+    class X
+    {
+        public virtual void F() { Console.WriteLine("X.F"); }
+    }
+    class Y : X
+    {
+        sealed public override void F() { Console.WriteLine("Y.F"); }
+    }
+    class Z : Y { }
+
+    (new X()).F();  // X.F
+    (new Y()).F();  // Y.F
+    (new Z()).F();  // Y.F
+    ```
+
+---
+
+### Abstract class members
 
 ---
 

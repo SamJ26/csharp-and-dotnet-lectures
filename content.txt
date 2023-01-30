@@ -55,26 +55,31 @@ Part 2:
 	- Class
 	- Access modifiers
 	- Class members
-		- Fields + example
+		- Fields
 		- Constants
-		- Methods + example
-		- Properties + example
-		- Constructors + example
-		- Indexers + example
-		- Nested Types + example
+		- Methods
+		- Properties
+		- Constructors
+		- Indexers
+		- Nested Types
 	- this keyword
-	- Static class and members
+	- static modifier
+		- Static class
+		- Static class members
 		- Static constructor
 	- Inheritance in C#
 		- base keyword
 		- Composition vs Inheritance
 		- Upcasting and Downcasting
+		- Abstract class
+		- Sealed class
 	- Object
 		- Boxing and Unboxing
-	- Sealed class and members
-	- Abstract class and members
-	- Polymorphism
-		- virtual + override + sealed
+	- Polymorphism in C#
+		- Function overloading
+		- Virtual class members
+			- sealed modifier
+		- Abstract class members
 		- operator is, as
 	- Partial class and members
 	- Interface
