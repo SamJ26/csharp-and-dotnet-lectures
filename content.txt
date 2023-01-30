@@ -81,8 +81,8 @@ Part 2:
 			- sealed modifier
 		- Abstract class members
 	- Partial class and members
-	- Records
 	- Struct
+	- Records
 	- Interface
 - Extra slides:
 	- Required properties

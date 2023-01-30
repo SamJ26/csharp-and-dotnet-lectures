@@ -11,6 +11,10 @@ img[alt~="center"] {
 }
 </style>
 
+TODO - revision of previous lecture
+
+---
+
 # Introduction to OOP
 
 ---
@@ -956,8 +960,8 @@ class DerivedClass : AbstractBaseClass
 ### Partial methods
 
 - Declaration of the method is in another class than implementation
-- If there is no implementation, compiler removes the signature (declaration)
-- Allowed only in partial classes
+- If there is no implementation, compiler removes the signature and all method calls
+- Allowed **only in partial classes**
 
     ```csharp
     partial class A
@@ -971,6 +975,31 @@ class DerivedClass : AbstractBaseClass
         public partial string Foo() => "string";
     }
     ```
+
+---
+
+## Struct
+
+- Value type
+- **Does not support inheritance** (apart from implicitly inheritance from `object`)
+- Supports
+- Struct cannot have:
+    - Finalizer
+    - Virtual, abstract and protected members
+    - Parameterless constructor
+- A constructor of a structure type must initialize all instance fields
+
+---
+
+## Record
+
+TODO
+
+---
+
+## Interfaces
+
+TODO
 
 ---
 
