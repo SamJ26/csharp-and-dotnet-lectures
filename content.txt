@@ -80,11 +80,10 @@ Part 2:
 		- Virtual class members
 			- sealed modifier
 		- Abstract class members
-		- operator is, as
 	- Partial class and members
-	- Interface
 	- Records
 	- Struct
+	- Interface
 - Extra slides:
 	- Required properties
 	- Finalizers

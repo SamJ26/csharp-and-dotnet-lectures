@@ -803,11 +803,7 @@ TODO - example usage of System.Object methods
 
 - Their implementation can be overridden in subclasses
 - `virtual` + `override` keywords
-- Virtual can be:
-    - Methods
-    - Properties
-    - Indexers
-    - Events
+- Virtual can be methods, properties, indexers or events
 - `virtual` modifier cannot be used with the `static`, `abstract`, `private` or `override` modifiers 
 
 ---
@@ -896,6 +892,85 @@ obj.DoWork(1);      // Calling with int => implicit conversion to double
 ---
 
 ### Abstract class members
+
+- Members with missing implementation
+- `abstract` + `override` keywords
+- Abstract can be methods, properties, indexers or events
+- An abstract method:
+    - Is implicitly a virtual method
+    - Is only permitted in abstract class
+    - Has no body (only declaration)
+- `abstract` can not be used with `static`
+
+---
+
+```csharp
+abstract class AbstractBaseClass
+{
+    public abstract int Number { get; }
+    public abstract void Foo();
+}
+
+class DerivedClass : AbstractBaseClass
+{
+    public override int Number { get; }
+    public override void Foo()
+    {
+        Console.WriteLine("My awesome implementation of abstract method");
+    }
+}
+```
+
+---
+
+## `partial` modifier
+
+- Types
+- Methods
+
+---
+
+### Partial types
+
+- Allows for the definition of a class, struct or interface to be split into multiple files
+- All parts must be in the same assembly
+- Usage: large projects, source generators etc.
+
+    ```csharp
+    partial class A
+    {
+        public string Name { get; set; }
+    }
+    partial class A
+    {
+        public int Age { get; set; }
+    }
+
+    var a = new A();
+    Console.WriteLine(a.Name);
+    Console.WriteLine(a.Age);
+    ```
+
+---
+
+### Partial methods
+
+- Declaration of the method is in another class than implementation
+- If there is no implementation, compiler removes the signature (declaration)
+- Allowed only in partial classes
+
+    ```csharp
+    partial class A
+    {
+        partial void Func1();
+        public partial string Foo();
+    }
+
+    partial class A
+    {
+        public partial string Foo() => "string";
+    }
+    ```
 
 ---
 
