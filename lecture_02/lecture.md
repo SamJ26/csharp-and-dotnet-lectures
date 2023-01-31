@@ -980,9 +980,9 @@ class DerivedClass : AbstractBaseClass
 
 ## Struct
 
-- Value type
-- **Does not support inheritance** (apart from implicitly inheritance from `object`)
-- Supports
+- **Value type**
+- **Does not support inheritance** (apart from implicit inheritance from `object`)
+- Can implement interfaces
 - Struct cannot have:
     - Finalizer
     - Virtual, abstract and protected members
@@ -991,15 +991,115 @@ class DerivedClass : AbstractBaseClass
 
 ---
 
-## Record
+## Interfaces
 
 TODO
 
 ---
 
-## Interfaces
+## Records
 
-TODO
+- **Reference type**
+- Introduced in C# 9
+- Inspired by functional programming
+- Basically `class` or `struct` that provides special syntax and behavior
+- Primarily intended for supporting immutable data models
+- Implicit **comparison by value** not by reference
+- Are not appropriate for use as entity types in _Entity Framework Core_
+
+---
+
+**Positional syntax**
+```csharp
+public record Person(string FirstName, string LastName);
+```
+=
+**Positional syntax**
+```csharp
+public record class Person(string FirstName, string LastName);
+```
+=
+**Class-like syntax**
+```csharp
+public record Person
+{
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+};
+```
+
+---
+
+### Benefits of records
+
+- A public auto-implemented init-only property for each positional parameter
+- A primary constructor whose parameters match the positional parameters
+- Copy constructor
+- A `Deconstruct` method
+- Implementation of `System.IEquatable<T>` interface
+- Overrides of operators `==` and `!=`
+- An override of `Object.ToString()` method with human readable output
+- An override of `Object.GetHashCode()`
+- An override of `Object.Equals(Object)`
+
+---
+
+### Value equality
+
+```csharp
+public record Person(string FirstName, string LastName, string[] PhoneNumbers);
+
+public static void Main()
+{
+    var phoneNumbers = new string[2];
+    Person person1 = new("Nancy", "Davolio", phoneNumbers);
+    Person person2 = new("Nancy", "Davolio", phoneNumbers);
+    Console.WriteLine(person1 == person2); // output: True
+
+    person1.PhoneNumbers[0] = "555-1234";
+    Console.WriteLine(person1 == person2); // output: True
+
+    Console.WriteLine(ReferenceEquals(person1, person2)); // output: False
+}
+```
+
+---
+
+### `with` expression
+
+- Nondestructive mutation
+- Makes a copy of a `record` instance with specified modifications
+- Use of _object initializer_ syntax
+- The result of a `with` expression is a **shallow copy** - for a reference property, only the reference to an instance is copied
+
+    ```csharp
+    record Person(string FirstName, string LastName);
+
+    var person = new Person("Mads", "Nielsen");
+    // person: Person { FirstName = Mads, LastName = Nielsen }
+
+    var otherPerson = person with { LastName = "Torgersen" };
+   // otherPerson: Person { FirstName = Mads, LastName = Torgersen }
+    ```
+
+---
+
+### Inheritance
+
+- Only applies to `record class` types
+- **A record can inherit from another record**
+
+    ```csharp
+    record BaseRecord
+    {
+        public string Id { get; init; }
+    }
+
+    record Person(string FirstName, string LastName) : BaseRecord;
+
+    var person = new Person("Mads", "Nielsen") { Id = "as36d4f68a" };
+    // Output: Person { Id = as36d4f68a, FirstName = Mads, LastName = Nielsen }
+    ```
 
 ---
 
