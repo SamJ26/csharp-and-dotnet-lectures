@@ -11,10 +11,6 @@ img[alt~="center"] {
 }
 </style>
 
-TODO - revision of previous lecture
-
----
-
 # Introduction to OOP
 
 ---
@@ -993,7 +989,75 @@ class DerivedClass : AbstractBaseClass
 
 ## Interfaces
 
-TODO
+```csharp
+interface IReusable
+{
+    void Reuse();
+}
+
+class MyClass : IReusable
+{
+    public void Reuse()
+    {
+        Console.WriteLine("I am reusing this instance");
+    }
+}
+```
+
+---
+
+- Specifies behavior (**defines a contract**) and does not hold data
+- **An interface can't be instantiated directly**
+- A class or struct can implement multiple interfaces
+- By convention, interface names begin with a capital `I`
+- Interface can contain methods, properties, events, indexers and static constructors, static fields, static constants, or operators
+- Interface members are public by default, and you can explicitly specify accessibility modifiers
+
+
+---
+
+### Default interface members
+
+- Member with default implementation is **optional to implement**
+- Allows us to add members to an existing interface without breaking the code
+-  A `private` members must have a default implementation
+
+    ```csharp
+    interface ILogger
+    {
+        void Log(string text) => Console.Write(text);
+    }
+    class MyClass : ILogger
+    {
+        public void Foo1() => Console.Write("Foo1");
+    }
+
+    var obj = new MyClass();
+    obj.Log("Message");              // Error - MyClass does not implement Log method
+    ((ILogger)obj).Log("Message");   // Ok
+    ```
+
+---
+
+### Interface inheritance
+
+```csharp
+interface ISampleInterface1
+{
+    void Foo1();
+}
+
+interface ISampleInterface2 : ISampleInterface1
+{
+    void Foo2();
+}
+
+class MyClass : ISampleInterface2
+{
+    public void Foo1() => Console.Write("Foo1");
+    public void Foo2() => Console.Write("Foo2");
+}
+```
 
 ---
 
@@ -1155,6 +1219,12 @@ class Car
     }
 }
 ```
+
+---
+
+## Extension methods
+
+TODO
 
 ---
 
