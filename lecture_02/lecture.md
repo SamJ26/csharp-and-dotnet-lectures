@@ -592,29 +592,10 @@ class Book : Publication
 
 ---
 
-TODO - change into two columns
-
 ### Composition vs Inheritance
 
-**Inheritance** ❌
-
-```csharp
-class Engine
-{
-    private bool _started;
-
-    public void Start() => _started = true;
-}
-
-class Car : Engine
-{
-    public void Drive()
-    {
-        Start();
-        // ...
-    }
-}
-```
+<div class="col2">
+<div>
 
 **Composition** ✅
 
@@ -637,6 +618,32 @@ class Car
     }
 }
 ```
+
+</div>
+<div>
+
+**Inheritance** ❌
+
+```csharp
+class Engine
+{
+    private bool _started;
+
+    public void Start() => _started = true;
+}
+
+class Car : Engine
+{
+    public void Drive()
+    {
+        Start();
+        // ...
+    }
+}
+```
+
+</div>
+</div>
 
 ---
 
