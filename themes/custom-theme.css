@@ -29,6 +29,11 @@ h6 {
   font-size: 1.1em;
 }
 
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+
 .col2 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

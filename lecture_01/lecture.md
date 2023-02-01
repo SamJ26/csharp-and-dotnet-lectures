@@ -4,13 +4,6 @@ paginate: true
 theme: custom-theme
 ---
 
-<style>
-img[alt~="center"] {
-  display: block;
-  margin: 0 auto;
-}
-</style>
-
 # Introduction to .NET
 
 ---

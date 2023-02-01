@@ -1,7 +1,3 @@
-NOTES:
-- V prvej prednáške mám viac detailov z reference types iba o Arrays a Strings lebo všetko ostatné velmi nadväzuje na OOP
-- Druhá prednáška je hodne natlačená takže generiká budú asi až v 3. prednáške
-
 -----------------------------------------------------
 1. [2h] Lecture - Introduction to .NET and C# part 1
 -----------------------------------------------------
@@ -38,7 +34,7 @@ Part 2:
 		- Jump statements
 		- Checked and unchecked statements
 	- Namespace
-- Extra slides:
+- Extra slides
 	- Reference vs Pointer
 	- Stack vs Heap
 	- Global using directive
@@ -84,7 +80,7 @@ Part 2:
 	- Struct
 	- Records
 	- Interface
-- Extra slides:
+- Extra slides
 	- Required properties
 	- Finalizers
 	- Extension methods
@@ -95,6 +91,8 @@ Part 2:
 
 - Generics
 	- Generic constrains
+- Extra slides
+	- Covariance and contravariance of generic type parameters
 
 -----------------------------------------------------
 4. [3h] Lecture - Introduction to .NET and C# part 4

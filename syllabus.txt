@@ -23,20 +23,20 @@ part2 - OOP in C#
     - access modifiers
     - inheritance
     - interfaces
-    - generics
     - records
     - abstract, virtual, override
     - static + extensions
 
 # LECTURE 3:
 
+- generics
 - advanced operators: ??, ??=, ?., null-forgiving operator, is, as, bang-bang operator
 - operator overloading
 
 - in, out, ref, params
 - tuples + deconstructors
 - nullability
-- pretypovanie + dynamic
+- dynamic keyword
 - exceptions
 - disposable + using
 - pattern matching
@@ -51,8 +51,6 @@ part2 - OOP in C#
 
 # LECTURE 4:
 
-- boxing/unboxing
-
 - attributes
 
 - linq
@@ -66,8 +64,8 @@ part2 - OOP in C#
 - reflexion
 
 # EXTRA - ak bude niekde plac tak sa to tam pridá:
-- implicit usings
+- implicit global usings
 - top level statements
 - source generators
 - events
-- extensions
+- extension methods
