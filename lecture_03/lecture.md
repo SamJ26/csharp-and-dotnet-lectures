@@ -8,6 +8,109 @@ theme: custom-theme
 
 ---
 
+## Method parameters
+
+- Arguments can be passed:
+    - **by value** = passing a **copy of the variable** to the method
+    - **by reference** = passing **access to the variable** to the method
+- **By default, all types are passed by value**
+
+---
+
+### Passing value types by value
+
+TODO
+
+---
+
+### Passing reference types by value
+
+TODO
+
+---
+
+### Passing value types by reference
+
+TODO
+
+---
+
+### Passing reference types by reference
+
+---
+
+### `out` parameter modifier
+
+- Argument is **passed by reference**
+- Arguments do not have to be initialized before being passed
+- The method must assign a value to given parameter before the method returns
+- Used to return multiple values from single method
+
+---
+
+```csharp
+static bool TryParse(string text, out int number)
+{
+    foreach (var ch in text)
+    {
+        if (ch < 48 || ch > 57)
+        {
+            number = 0;
+            return false;
+        }
+    }
+    number = int.Parse(text);
+    return true;
+}
+```
+
+```csharp
+var parseResult = TryParse("12a3456", out int result);
+if (parseResult == false)
+    Console.WriteLine("Parsing failed");
+else
+    Console.WriteLine(result);
+```
+
+---
+
+### `in` parameter modifier
+
+- Argument is **passed by reference** and **cannot be modified** in method
+- Variables passed as _in_ arguments must be initialized
+- Potential performance optimization (large data can be safely passed by reference)
+
+---
+
+TODO - example
+
+---
+
+### `params` keyword
+
+- Method parameter that takes a variable number of arguments
+- No additional parameters are permitted after the `params` keyword
+- Only one `params` keyword is permitted in a method declaration
+- Given parameter must be of type **single-dimensional array**
+
+---
+
+```csharp
+static int Sum(params int[] numbers)
+{
+    var sum = 0;
+    foreach (var num in numbers)
+    {
+        sum += num;
+    }
+    return sum;
+}
+
+Sum(1,2,3,4,5,6);
+```
+
+---
+
 ## Generics
 
 - **Code template that contains placeholder (_type parameter_) for specific type**
@@ -152,9 +255,31 @@ var stack2 = new Stack<Item>();      // Ok
 
 ---
 
-## Advanced operators
+## Exceptions
 
-TODO
+
+- All exceptions derive from `System.Exception`
+
+- Exception is thrown in `try` block => associated exception handler is invoked
+- Exception is thrown anywhere else => the program stops with an error message
+
+---
+
+### Rules for using exceptions
+
+- Don't catch an exception unless you can handle it
+
+---
+
+### Key properties of `System.Exception`
+
+- `StackTrace`
+    - A string representing all the methods that are called from the origin of the exception to the catch block
+- `Message`
+    - A string with a description of the error
+- `InnerException`
+    - The inner exception(if any) that caused the outer exception
+    - InnerException may have another InnerException
 
 ---
 

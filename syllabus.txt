@@ -30,14 +30,16 @@ part2 - OOP in C#
 # LECTURE 3:
 
 - generics
-- advanced operators: ??, ??=, ?., null-forgiving operator, is, as, bang-bang operator
+- advanced operators: ??, ??=, ?., is, as
 - operator overloading
 
+- exceptions
 - in, out, ref, params
 - tuples + deconstructors
-- nullability
+
+- nullability + null-forgiving operator
 - dynamic keyword
-- exceptions
+
 - disposable + using
 - pattern matching
 
@@ -46,12 +48,12 @@ part2 - OOP in C#
 - Func and Action
 - anonymous functions
 
-- iterators
-- collections
+- attributes
 
 # LECTURE 4:
 
-- attributes
+- iterators
+- collections
 
 - linq
 
@@ -69,3 +71,4 @@ part2 - OOP in C#
 - source generators
 - events
 - extension methods
+- patterns

@@ -89,14 +89,41 @@ Part 2:
 3. [3h] Lecture - Introduction to .NET and C# part 3
 -----------------------------------------------------
 
+- Method parameters
+- Tuples
+	- Deconstructors
+- dynamic keyword
+- Exceptions
+- Disposables
 - Generics
+	- Generic classes
+	- Generic interfaces
+	- Generic methods
+	- Why generics
 	- Generic constrains
+- Null and stuff around
+	- Nullable value types
+	- Nullable reference types
+	- Null Operators
+		- Null-Coalescing Operator ??
+		- Null-Coalescing Assignment Operator ??=
+		- Null-Conditional Operator ?.
+- Delegates
+	- Func
+	- Action
+- Lambda expressions
+- Anonymous methods
+- Preprocessor directives
+- Attributes
 - Extra slides
 	- Covariance and contravariance of generic type parameters
 
 -----------------------------------------------------
 4. [3h] Lecture - Introduction to .NET and C# part 4
 -----------------------------------------------------
+
+- Collections in .NET
+- LINQ
 
 -----------------------------------------------------
 5. [3h] Lecture - Generic host (DI + Configuration + Logging)
