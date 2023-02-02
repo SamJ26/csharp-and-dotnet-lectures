@@ -92,7 +92,6 @@ Part 2:
 - Method parameters
 - Tuples
 	- Deconstructors
-- dynamic keyword
 - Exceptions
 - Disposables
 - Generics

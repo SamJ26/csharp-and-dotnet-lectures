@@ -14,28 +14,97 @@ theme: custom-theme
     - **by value** = passing a **copy of the variable** to the method
     - **by reference** = passing **access to the variable** to the method
 - **By default, all types are passed by value**
+- Use `ref` keyword to pass variable by reference
 
 ---
 
 ### Passing value types by value
 
-TODO
+```csharp
+class Program
+{
+    static void Change(int number)
+    {
+        number = number * 2;    // This is local change
+    }
+    
+    static void Main(string[] args)
+    {
+        int num = 1;
+        // num: 1
+        Change(num);
+        // num: 1
+    }
+}
+```
 
 ---
 
 ### Passing reference types by value
 
-TODO
+```csharp
+class Program
+{
+    static void Change(int[] arr)
+    {
+        arr[0] = 888;                    // This change affects arr in Main
+        arr = new int[3] { 1, 1, 1 };    // This change is local
+    }
+    
+    static void Main(string[] args)
+    {
+        int[] arr = { 1, 2, 3 };
+        // arr: { 1, 2, 3 }
+        Change(arr);
+        // arr: { 888, 2, 3 }
+    }
+}
+```
 
 ---
 
 ### Passing value types by reference
 
-TODO
+```csharp
+class Program
+{
+    static void Change(ref int number)
+    {
+        number = number * 2;    // This change affects num in Main
+    }
+    
+    static void Main(string[] args)
+    {
+        int num = 1;
+        // num: 1
+        Change(ref num);
+        // num: 2
+    }
+}
+```
 
 ---
 
 ### Passing reference types by reference
+
+```csharp
+class Program
+{
+    static void Change(ref int[] arr)
+    {
+        arr[0] = 888;                    // This change affects arr in Main
+        arr = new int[3] { 1, 1, 1 };    // This change affects arr in Main
+    }
+    
+    static void Main(string[] args)
+    {
+        int[] arr = { 1, 2, 3 };
+        // arr: { 1, 2, 3 }
+        Change(ref arr);
+        // arr: { 1, 1, 1 }
+    }
+}
+```
 
 ---
 
@@ -78,11 +147,16 @@ else
 
 - Argument is **passed by reference** and **cannot be modified** in method
 - Variables passed as _in_ arguments must be initialized
-- Potential performance optimization (large data can be safely passed by reference)
+- Potential performance optimization when using with **readonly** data structures
 
----
+    ```csharp
+    static void Foo(in double number)
+    {
+        number = 8;     // Error
+    }
 
-TODO - example
+    Foo(1.5);
+    ```
 
 ---
 
@@ -93,21 +167,197 @@ TODO - example
 - Only one `params` keyword is permitted in a method declaration
 - Given parameter must be of type **single-dimensional array**
 
+    ```csharp
+    static int Sum(params int[] numbers)
+    {
+        var sum = 0;
+        foreach (var num in numbers) { sum += num; }
+        return sum;
+    }
+
+    Sum(1,2,3,4,5,6);
+    ```
+
+---
+
+## Tuples
+
+```csharp
+// Tuple with default names
+var t1 = (111, "text");
+Console.WriteLine($"{t1.Item1} {t1.Item2}");
+
+// Tuple with field names
+(int Number, string Text) t2 = (111, "text");
+Console.WriteLine($"{t2.Number} {t2.Text}");
+
+// Tuples equality
+Console.WriteLine(t1 == t2);    // True
+
+// Deconstruction
+(int n, string t) = t2;
+Console.WriteLine(n);   // 111
+Console.WriteLine(t);   // "text"
+```
+
+---
+
+- Mutable **value types**
+- Provides concise syntax to group multiple data in a lightweight data structure
+- Support the `==` and `!=` operators
+- Syntactic sugar for `System.ValueTuple` struct
+- Tuple elements are public
+- For immutable tuples use reference type `System.Tuple`
+
+---
+
+#### Deconstructors
+
+- Assigns fields to a set of variables
+- A deconstruction method must be called `Deconstruct` and have one or more _out_ parameters
+- A deconstruction method can be implemented as _extension method_
+
 ---
 
 ```csharp
-static int Sum(params int[] numbers)
+class Person
 {
-    var sum = 0;
-    foreach (var num in numbers)
-    {
-        sum += num;
-    }
-    return sum;
-}
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 
-Sum(1,2,3,4,5,6);
+    public void Deconstruct(out string firstName, out string lastName)
+    {
+        firstName = FirstName;
+        lastName = LastName;
+    }
+}
 ```
+
+```csharp
+var person = new Person() { FirstName = "Samuel", LastName = "Janek" };
+(string firstName, string lastName) = person;
+Console.WriteLine(firstName);
+Console.WriteLine(lastName);
+```
+
+---
+
+## Exceptions
+
+- Events that require execution of code outside the normal flow of control
+- Two types of exceptions:
+    - _Hardware exceptions_ - initiated by CPU
+    - _Software exceptions_ - initiated by apps or OS
+- C# has [Structured Exception Handling](https://learn.microsoft.com/en-us/windows/win32/debug/structured-exception-handling) - handles HW and SW exceptions identically
+- All exceptions derive from `System.Exception`
+
+---
+
+### Keywords
+
+- `try`
+    - Code block subject to error-handling or cleanup code
+    - Must be followed by:
+        - `catch` block
+        - `finally` block
+        - or both
+- `catch`
+    - Executes when an error occurs in the `try` block
+    - Has access to thrown exception
+- `finally`
+    - Executes always
+
+---
+
+### Syntax
+
+```csharp
+try
+{
+ ... // exception may get thrown within execution of this block
+}
+catch(ExceptionA ex)
+{
+ ... // handle exception of type ExceptionA
+}
+catch(ExceptionB ex)
+{
+ ... // handle exception of type ExceptionB
+}
+finally
+{
+ ... // cleanup code - unmanaged resources
+}
+```
+
+---
+
+### Example - throwing exceptions
+
+```csharp
+class Test
+{
+    static void Display(string name)
+    {
+        if(name == null)
+            throw new ArgumentNullException(nameof(name));
+        Console.WriteLine(name);
+    }
+
+    static void Main()
+    {
+        try { Display(null); }
+        catch(ArgumentNullException ex)
+        {
+            Console.WriteLine("Caught the exception");
+        }
+    }
+}
+```
+
+---
+
+### Example - finally block
+
+```csharp
+static void ReadFile()
+{
+    StreamReader reader = null; // In System.IO namespace
+    try
+    {
+        reader = File.OpenText("file.txt");
+        if(reader.EndOfStream) return;
+        Console.WriteLine(reader.ReadToEnd());
+    }
+    finally
+    {
+        if(reader != null) reader.Dispose();
+    }
+}
+```
+
+---
+
+### Key members of `System.Exception`
+
+- `StackTrace`
+    - A string representing all the methods that are called from the origin of the exception to the catch block
+- `Message`
+    - A string with a description of the error
+- `InnerException`
+    - The inner exception (if any) that caused the outer exception
+    - InnerException may have another InnerException
+
+---
+
+### Important remarks
+
+- Don't catch an exception unless you can handle it
+- Don't throw `System.Exception` - create specialized exceptions
+- Use "_Exception_" suffix for the user defined exceptions
+- Rethrowing exceptions:
+
+TODO
 
 ---
 
@@ -252,48 +502,6 @@ public class Stack<T> where T : IContainerItem
 var stack1 = new Stack<int>();       // Error
 var stack2 = new Stack<Item>();      // Ok
 ```
-
----
-
-## Exceptions
-
-
-- All exceptions derive from `System.Exception`
-
-- Exception is thrown in `try` block => associated exception handler is invoked
-- Exception is thrown anywhere else => the program stops with an error message
-
----
-
-### Rules for using exceptions
-
-- Don't catch an exception unless you can handle it
-
----
-
-### Key properties of `System.Exception`
-
-- `StackTrace`
-    - A string representing all the methods that are called from the origin of the exception to the catch block
-- `Message`
-    - A string with a description of the error
-- `InnerException`
-    - The inner exception(if any) that caused the outer exception
-    - InnerException may have another InnerException
-
----
-
-## Operator overloading
-
-TODO
-
----
-
-## Collections in .NET
-
-- Generics everywhere
-
-TODO
 
 ---
 
