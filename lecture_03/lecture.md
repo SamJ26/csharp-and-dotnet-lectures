@@ -245,6 +245,7 @@ Console.WriteLine(lastName);
 ## Exceptions
 
 - Events that require execution of code outside the normal flow of control
+- Indicate that an error has occurred while running the program
 - Two types of exceptions:
     - _Hardware exceptions_ - initiated by CPU
     - _Software exceptions_ - initiated by apps or OS
@@ -257,15 +258,14 @@ Console.WriteLine(lastName);
 
 - `try`
     - Code block subject to error-handling or cleanup code
-    - Must be followed by:
-        - `catch` block
-        - `finally` block
-        - or both
+    - Must be followed by `catch` blocks or `finally` block
 - `catch`
     - Executes when an error occurs in the `try` block
     - Has access to thrown exception
 - `finally`
     - Executes always
+- `throw`
+    - Signals the occurrence of an exception during program execution
 
 ---
 
@@ -353,11 +353,95 @@ static void ReadFile()
 ### Important remarks
 
 - Don't catch an exception unless you can handle it
-- Don't throw `System.Exception` - create specialized exceptions
-- Use "_Exception_" suffix for the user defined exceptions
-- Rethrowing exceptions:
+- Don't throw `Exception`, `SystemException`, `NullReferenceException`, or `IndexOutOfRangeException`
+- Use "_Exception_" suffix for the user-defined exceptions
+- Re-throwing exceptions:
+    - `throw;`
+    - `throw e;`
+        - Stack trace of the original exception is not preserved
+        - **DO NOT USE THIS**
 
-TODO
+---
+
+## `IDisposable` and `using` statement
+
+- **Used to properly release unmanaged resources**
+- `IDisposable`
+    - Interface with only one method `Dispose()`
+    - Implementated by all types which encapsulate unmanaged resources
+- `using` statement
+    - Syntactic sugar for calling `Dispose()` on objects that implement `IDisposable`
+    - A variable declared with a `using` declaration is **read-only**
+    - Defines new scope
+---
+
+### Example - file reading
+
+```csharp
+class Program
+{
+    static void Main(string[] args)
+    {
+        using (StreamReader sr = new StreamReader("TestFile.txt"))
+        {
+            string line = sr.ReadLine();
+            while (line != null)
+            {
+                Console.WriteLine(line);
+                line = sr.ReadLine();
+            }
+        }
+    }
+}
+```
+
+---
+
+### `using` under the hood
+
+<div class="col2">
+<div>
+
+**Original code**
+
+```csharp
+using (var sr = new StreamReader("file"))
+{
+    // ...
+}
+```
+
+</div>
+<div>
+
+**Lowered code**
+
+```csharp
+StreamReader sr =
+    new StreamReader("file");
+try
+{
+    // ...
+}
+finally
+{
+    if (sr != null)
+    {
+        ((IDisposable)sr).Dispose();
+    }
+}
+```
+
+</div>
+</div>
+
+---
+
+### Remarks
+
+- The GC does not call `Dispose` instead of you
+- Dispose pattern has a bit different implementations for sealed and non-sealed classes (see the [docs](https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose) for more information)
+- For asynchronous cleanup operations use `DisposeAsync` method
 
 ---
 
