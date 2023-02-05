@@ -589,6 +589,116 @@ var stack2 = new Stack<Item>();      // Ok
 
 ---
 
+## Null and related stuff
+
+- `null` - reference that points to a nonexistent or invalid object or address
+- [Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare) - **billion-dollar mistake**
+- Nullable value types
+- Nullable reference types
+- Null operators
+
+---
+
+### Nullable value types
+
+- Extension of other value types with a `null` value
+- Denoted with a value type followed by the `?` symbol
+
+    ```csharp
+    bool? isReady = null;
+    ```
+
+- `T?` translates into generic `System.Nullable<T>` structure
+- Default value is `null`
+- **Operator lifting** - `T?` supports any operator that is supported by `T`
+- Conversions:
+    - Implicit conversion from `T` to `T?`
+    - Explicit conversion from `T?` to `T` (exception when value of `T` is `null`)
+
+---
+
+### Nullable reference types
+
+- **Optional** language feature (turned on by default)
+- Goal is to avoid `NullReferenceExceptions` 
+- Denoted with a reference type followed by the `?` symbol
+
+    ```csharp
+    string? text = null;
+    ```
+
+- Only available in **nullable context**:
+    - Enabled using `.csproj` settings or `#nullable ...` directives
+    - Advanced `null` related static analysis
+- Compile-time feature - reference types `T` and `T?` are equal during runtime
+
+---
+
+#### Example - nullable context
+
+```csharp
+#nullable enable
+
+namespace HelloWorld;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string text1 = null;        // Compiler warning
+        string? text2 = null;       // Ok - it is nullable reference type
+        int num1 = 5;               // Ok - it is ordinary value type
+        int? num2 = null;           // Ok - it is nullable value type
+
+        Console.WriteLine(text1);   // null
+        Console.WriteLine(text2);   // null
+        Console.WriteLine(num1);    // 5
+        Console.WriteLine(num2);    // null
+    }
+}
+```
+
+---
+
+#### Null-forgiving operator `!`
+
+- Useful only in _nullable context_
+- Compile-time feature - has no effect at run time
+- Suppresses compiler warnings related to `null`
+
+    ```csharp
+    class Person
+    {
+        public string Name { get; set; } = null!;
+        public string? Address { get; set; }
+
+        public void Foo(Person obj)
+        {
+            var firstLetter = obj.Address![0];
+        }
+    }
+    ```
+
+---
+
+### Null-coalescing operator `??`
+
+TODO
+
+---
+
+### Null-coalescing assignment operator `??=`
+
+TODO
+
+---
+
+### Null-conditional operator `?.`
+
+TODO
+
+---
+
 ## Thank you for your attention :)
 
 ---

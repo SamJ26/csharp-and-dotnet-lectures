@@ -449,7 +449,7 @@ class Program
 - **Struct types**
     - User-defined types that can encapsulate data and related functionality
 - **Nullable value types**
-    - Extensions of all other value types with a null value
+    - Extension of all other value types with a null value
 
 ---
 
