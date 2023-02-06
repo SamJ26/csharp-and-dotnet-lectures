@@ -676,12 +676,12 @@ class Program
     ```csharp
     class Person
     {
-        public string Name { get; set; } = null!;
+        public string Name { get; set; } = null!;   // Good usage
         public string? Address { get; set; }
 
         public void Foo(Person obj)
         {
-            var firstLetter = obj.Address![0];
+            var firstLetter = obj.Address![0];   // Bad usage - possible exception
         }
     }
     ```
@@ -690,19 +690,56 @@ class Program
 
 ### Null-coalescing operator `??`
 
-TODO
+- `var x = y ?? z`
+- Returns `y` if it isn't `null`, otherwise evaluates `z` and returns result
+- `x` must be a nullable type
+- Right-associative: `a ?? b ?? c` <=> `a ?? (b ?? c)`
+
+    <div class="col2">
+    <div>
+
+    ```csharp
+    string text = null;
+    if (text == null)
+    {
+        throw new Exception();
+    }
+    string copy = text;
+    ```
+
+    </div>
+    <div>
+
+    ```csharp
+    string text = null;
+    var copy = text ?? throw new Exception();
+    ```
+
+    </div>
+    </div>
 
 ---
 
 ### Null-coalescing assignment operator `??=`
 
-TODO
+- `var x ??= y`
+- Assigns `y` to `x` if and only if `x` evaluates to `null`
+- `x` must be a nullable type
+- Right-associative: `d ??= e ??= f` <=> `d ??= (e ??= f)`
 
+    ```csharp
+    string text = null;
+    Console.WriteLine(text);    // null
+    text ??= "seesharp";
+    Console.WriteLine(text);    // "seesharp"
+    ```
 ---
 
 ### Null-conditional operator `?.`
 
-TODO
+- `var x = y?.z`
+- Applies a member access operation iff `y` evaluates to non-null
+- Returns `null` if `y` evaluates to `null`
 
 ---
 
