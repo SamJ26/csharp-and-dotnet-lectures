@@ -4,6 +4,17 @@ paginate: true
 theme: custom-theme
 ---
 
+# C# and .NET part 2
+
+<div class="lectors">
+    <hr/>
+    Ing. Patrik Švikruha
+    <br/>
+    Bc. Samuel Janek
+</div>
+
+---
+
 # Introduction to OOP
 
 ---

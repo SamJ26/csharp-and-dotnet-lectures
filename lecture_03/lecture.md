@@ -6,6 +6,13 @@ theme: custom-theme
 
 # C# and .NET part 3
 
+<div class="lectors">
+    <hr/>
+    Ing. Patrik Švikruha
+    <br/>
+    Bc. Samuel Janek
+</div>
+
 ---
 
 ## Method parameters
