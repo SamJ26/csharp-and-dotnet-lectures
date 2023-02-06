@@ -55,12 +55,9 @@ theme: custom-theme
 
 ### Performance
 
-TODO
-
-\+ aktualne performance testy
-\+ mozno porovnanie rychlosti .NET 6 a .NET 7
-
-https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
+- It's really **fast** 🚀
+- 7 million plaintext responses per second
+- [Benchmarks](https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext)
 
 ---
 
@@ -200,8 +197,6 @@ https://www.techempower.com/benchmarks/#section=data-r21&hw=ph&test=plaintext
     - Intermediate Language
 - Language of a virtual execution environment (CLR)
 - Set of platform independent instructions
-
-TODO - obrazok s ukazkou IL
 
 ---
 
@@ -353,13 +348,16 @@ class Program
 
 - **Identifiers**
     - Names that programmers choose for entities (variables, methods...)
+
         ```csharp
         var identifierOfVariable= "value of variable";
         ```
+
 - **Keywords**
     - Names that mean something special to the compiler
     - Can be used as identifier with prefix `@`
     - [List of keywords](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/)
+
         ```csharp
         int class = 10;     // Illegal
         int @class = 10;    // Legal but ugly
@@ -376,6 +374,7 @@ class Program
     - **Semicolon** `;`
         - Delimits a statement
         - C# allows to write statements on more lines
+
             ```csharp
             Console.WriteLine
                 (1 + 2 + 3 + 4);
@@ -387,6 +386,7 @@ class Program
 - **Literals**
     - Primitive pieces of data lexically embedded into the program
     - Data inserted in a code
+
         ```csharp
         var integralConstant = 42;
         var helloWorldString = "Hello World";
@@ -480,18 +480,18 @@ double nan = double.NaN;
 ---
 
 ##### Numerical data types casting
-* Transformation of **integral type** to **integral type**:
-  * *implicit* when *target type* can accommodate the whole range of *source type*
-  * *explicit* otherwise
-* Transformation of **decimal type** to **decimal type**:
-  * `float` can be *implicitly* casted to `double`
-  * `double` has to be casted *explicitly* to `float`
-* Transformation of **integral type** to **decimal type**:
-  * Casting is *implicit*
-* Transformation of **decimal type** to **integral type**:
-  * Casting has to be *explicit*
-    * Lost precision
-    * Truncation can occur
+- Transformation of **integral type** to **integral type**:
+    - _implicit_ when _target type_ can accommodate the whole range of _source type_
+    - _explicit_ otherwise
+- Transformation of **decimal type** to **decimal type**:
+    - `float` can be _implicitly_ casted to `double`
+    - `double` has to be casted _explicitly_ to `float`
+- Transformation of **integral type** to **decimal type**:
+    - Casting is _implicit_
+- Transformation of **decimal type** to **integral type**:
+    - Casting has to be _explicit_
+        - Lost precision
+        - Truncation can occur
 
 ---
 
@@ -621,9 +621,7 @@ char c = s7[0]                              // c = '1'
 - Represents fixed length data structure of homogeneous items
 - The elements are stored in a **contiguous block of memory**
 - Initialization according to data type
-- **Single-dimensional**
-- **Multidimensional**
-- **Jagged**
+- Array types: **Single-dimensional**, **Multidimensional**, **Jagged**
 
     ```csharp
     int[] array1 = new int[5];
@@ -1047,7 +1045,7 @@ if (i <= 5)
 
 ### Checked and unchecked statements
 
-- Specifies overflow-checking context for integral-type arithmetic operations and conversions
+- **Specifies overflow-checking** context for integral-type arithmetic operations and conversions
 - Compiler option _CheckForOverflowUnderflow_ to enable full-project checks
 - Overflow in _checked_ context => `System.OverflowException` is thrown
 - Overflow in _unchecked_ context => execution continues
@@ -1068,20 +1066,17 @@ if (i <= 5)
 - Groups classes and interfaces to named groups
 - A namespace forms an integral part of a type’s name
 - Usage of types from a `System.Security.Cryptography` namespace:
+
     ```csharp
     System.Security.Cryptography.RSA rsa = System.Security.Cryptography.RSA.Create();
     ```
+
 - Directive `using`
+
     ```csharp
     using System.Security.Cryptography;
 
-    public class Namespace
-    {
-        public void Method()
-        {
-            RSA rsa = RSA.Create(); // Don't need fully qualified name
-        }
-    }
+    RSA rsa = RSA.Create(); // Don't need fully qualified name
     ```
 
 ---
@@ -1191,9 +1186,11 @@ class Class2 {}         // Inside MyNamespace
 ## Implicit global usings (.NET 6)
 
 - You need to set _ImplicitUsings_ element to true in project file (`.csproj`)
+
     ```xml
     <ImplicitUsings>enable</ImplicitUsings>
     ```
+
 - Following namespaces are automatically imported:
     - `System`
     - `System.Collections.Generic`
@@ -1207,7 +1204,9 @@ class Class2 {}         // Inside MyNamespace
 
 ## Resources
 
-[Heap vs Stack](https://tooslowexception.com/heap-vs-stack-value-type-vs-reference-type/)
-[Reference vs Pointer](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/references-are-not-addresses)
-[The Stack Is An Implementation Detail, Part One](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-one)
-[The Stack Is An Implementation Detail, Part Two](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-two)
+- [C# in Nutshell](https://www.amazon.com/gp/product/1098121953?ie=UTF8&tag=cinanu-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=1098121953)
+- [VUT FIT ICS slides](https://github.com/nesfit/ICS/tree/master/Lectures)
+- [Heap vs Stack](https://tooslowexception.com/heap-vs-stack-value-type-vs-reference-type/)
+- [Reference vs Pointer](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/references-are-not-addresses)
+- [The Stack Is An Implementation Detail, Part One](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-one)
+- [The Stack Is An Implementation Detail, Part Two](https://learn.microsoft.com/en-us/archive/blogs/ericlippert/the-stack-is-an-implementation-detail-part-two)
