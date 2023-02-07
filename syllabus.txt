@@ -72,3 +72,4 @@ part2 - OOP in C#
 - events
 - extension methods
 - patterns
+- regex

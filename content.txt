@@ -100,7 +100,7 @@ Part 2:
 	- Generic methods
 	- Why generics
 	- Generic constrains
-- Null and stuff around
+- Null and related stuff
 	- Nullable value types
 	- Nullable reference types
 	- Null Operators
@@ -108,14 +108,13 @@ Part 2:
 		- Null-Coalescing Assignment Operator ??=
 		- Null-Conditional Operator ?.
 - Delegates
-	- Func
-	- Action
+	- Func and Action delegates
 - Lambda expressions
-- Anonymous methods
-- Preprocessor directives
+	- Static lambdas
 - Attributes
+- Preprocessor directives
 - Extra slides
-	- Covariance and contravariance of generic type parameters
+	- Covariance and contravariance
 
 -----------------------------------------------------
 4. [3h] Lecture - Introduction to .NET and C# part 4
@@ -123,6 +122,8 @@ Part 2:
 
 - Collections in .NET
 - LINQ
+- Extra slides
+	- Closures
 
 -----------------------------------------------------
 5. [3h] Lecture - Generic host (DI + Configuration + Logging)

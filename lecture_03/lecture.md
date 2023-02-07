@@ -904,6 +904,94 @@ class Program
 
 ---
 
+## Lambda expressions
+
+- `(parameters) => expression-or-statement-block`
+- Used to create anonymous functions
+- Compiler converts the lambda expression to _delegate instance_ or _expression tree_
+
+    ```csharp
+    Func<int, int> pow = (int x) => x * x;
+    pow(2);             // output: 4
+
+    Action greet = () => Console.WriteLine("Hi");
+    greet();            // output: "Hi"
+
+    Action<string> writer = Console.WriteLine;
+    writer("Hello");    // output: "Hello"
+    ```
+
+---
+
+### Capture of outer variables and variable scope
+
+- Variables outside of lambda's scope (outer variables) can be used in lambda's body
+- These outer variables are called _captured variables_
+- Lifetime of _captured variables_ is extended to lifetime of the delegate
+
+    ```csharp
+    static Func<int> Foo()
+    {
+        int seed = 0;
+        return () => seed++;        // Returns closure
+    }
+    
+    static void Main(string[] args)
+    {
+        Func<int> foo = Foo();
+        Console.WriteLine(foo());   // output: 0
+        Console.WriteLine(foo());   // output: 1
+    }
+    ```
+
+---
+
+### Static lambdas
+
+- _Captured variables_ incur a small performance cost
+- **Static lambda cannot capture any outer variable**
+
+    ```csharp
+    int factor = 2;
+    Func<int, int> multiplier1 = static n => n * 2;         // Ok
+    Func<int, int> multiplier2 = static n => n * factor;    // Error
+    ```
+
+---
+
+## Attributes
+
+- Mechanism for adding custom information to code elements
+
+TODO
+
+---
+
+## Preprocessor directives
+
+- Conditional compilation
+
+    ```csharp
+    #define DEBUG
+    #ifdef DEBUG
+    // this is included if DEBUG symbol is defined
+    #endif
+    ```
+
+- Disable/restore warnings
+
+    ```csharp
+    #pragma warning disable 414
+    ```
+
+- Disable/enable nullable reference types
+
+    ```csharp
+    #nullable enable
+    ```
+
+---
+
 ## Thank you for your attention :)
 
 ---
