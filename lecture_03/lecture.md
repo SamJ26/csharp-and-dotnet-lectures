@@ -738,8 +738,169 @@ class Program
 ### Null-conditional operator `?.`
 
 - `var x = y?.z`
-- Applies a member access operation iff `y` evaluates to non-null
+- Applies a member access operation or method call iff `y` evaluates to non-null
 - Returns `null` if `y` evaluates to `null`
+
+    ```csharp
+    StringBuilder sb = null;
+    string text = sb?.ToString();
+    char? firstLetter = (sb?.ToString())?[0];
+    ```
+
+---
+
+## Delegates
+
+- **Type that represents references to methods**
+- Defines method's return type and parameters
+- Assigning a method to a delegate variable creates a delegate instance
+- The code associated with a delegate is invoked using a virtual method added to a delegate type
+- **Delegates are immutable**
+- Syntax:
+
+    ```csharp
+    delegate void Calculation(int n1, int n2);
+    ```
+
+---
+
+### Example - instance target methods
+
+```csharp
+class Calculator
+{
+    public int Add(int x, int y) => x + y;
+    public int Sub(int x, int y) => x - y;
+}
+
+delegate int Delegate(int x, int y);
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var obj = new Calculator();
+        Delegate calc1 = obj.Add;
+        Console.WriteLine(calc1(10, 5));    // 15
+        Delegate calc2 = obj.Sub;
+        Console.WriteLine(calc2(10, 5));    // 5
+    }
+}
+```
+
+---
+
+### Example - pass method as argument
+
+```csharp
+class Calculator
+{
+    public int Calculate(Delegate method, int x, int y) => method(x, y);
+}
+
+delegate int Delegate(int x, int y);
+
+class Program
+{
+    public static int Add(int x, int y) => x + y;
+    public static int Sub(int x, int y) => x - y;
+    
+    static void Main(string[] args)
+    {
+        var obj = new Calculator();
+        Console.WriteLine(obj.Calculate(Add, 10, 5));    // 15
+        Console.WriteLine(obj.Calculate(Sub, 10, 5));    // 5
+    }
+}
+```
+
+---
+
+### Multicast delegates
+
+- **Invoke more than one method usign one delegate**
+- Delegate contains invocation list
+- Methods are invoked in the same order in which they were added
+- All delegate instances have _multicast_ capability
+- To add method to invocation list use `+` or `+=`
+- To remove method from invocation list use `-` or `-=`
+- If a multicast delegate has a nonvoid return type, **the caller receives the return value from the last method to be invoked**
+
+---
+
+#### Example - multicasting
+
+```csharp
+class MethodsClass
+{
+    public void Foo1() => Console.Write("1");
+    public void Foo2() => Console.Write("2");
+    public void Foo3() => Console.Write("3");
+}
+
+delegate void MulticastDelegate();
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var obj = new MethodsClass();
+        MulticastDelegate del = obj.Foo1;
+        del += obj.Foo2;
+        del += obj.Foo3;
+
+        del();  // output: 1 2 3
+    }
+}
+```
+
+---
+
+### `Func` and `Action` delegates
+
+- Based on _generics_
+- Defined in `System` namespace
+- `Func` - has a return value
+
+    ```csharp
+    public delegate TResult Func<out TResult>();
+    public delegate TResult Func<in T,out TResult>(T arg);
+    public delegate TResult Func<in T1,in T2,out TResult>(T1 arg1, T2 arg2);
+    ```
+
+- `Action` - does not have a return value
+
+    ```csharp
+    public delegate void Action();
+    public delegate void Action<in T>(T obj);
+    public delegate void Action<in T1,in T2>(T1 arg1, T2 arg2);
+    ```
+
+---
+
+#### Example - `Func` and `Action` delegates
+
+```csharp
+class MyClass
+{
+    public void Foo1(Action method) => method();
+    public int Foo2(Func<int, int> method, int value) => method(value);
+}
+
+class Program
+{
+    static void SayHi() => Console.WriteLine("Hi");
+    static int Multiply(int value) => value * 2;
+    
+    static void Main(string[] args)
+    {
+        var obj = new MyClass();
+        obj.Foo1(SayHi);                    // output: "Hi"
+        var result = obj.Foo2(Multiply, 2);     
+        Console.WriteLine(result);          // output: 4 
+    }
+}
+```
 
 ---
 
