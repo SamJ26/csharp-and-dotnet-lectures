@@ -70,6 +70,5 @@ part2 - OOP in C#
 - top level statements
 - source generators
 - events
-- extension methods
 - patterns
 - regex

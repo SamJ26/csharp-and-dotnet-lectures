@@ -187,6 +187,12 @@ else
 
 ---
 
+## Extension methods
+
+TODO
+
+---
+
 ## Tuples
 
 ```csharp
@@ -361,7 +367,7 @@ static void ReadFile()
 
 - Don't catch an exception unless you can handle it
 - Don't throw `Exception`, `SystemException`, `NullReferenceException`, or `IndexOutOfRangeException`
-- Use "_Exception_" suffix for the user-defined exceptions
+- Use "_Exception_" suffix for user-defined exceptions
 - Re-throwing exceptions:
     - `throw;`
     - `throw e;`
@@ -593,6 +599,12 @@ public class Stack<T> where T : IContainerItem
 var stack1 = new Stack<int>();       // Error
 var stack2 = new Stack<Item>();      // Ok
 ```
+
+---
+
+### Covariance and Contravariance
+
+TODO
 
 ---
 

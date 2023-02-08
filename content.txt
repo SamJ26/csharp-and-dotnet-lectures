@@ -83,13 +83,13 @@ Part 2:
 - Extra slides
 	- Required properties
 	- Finalizers
-	- Extension methods
 
 -----------------------------------------------------
 3. [3h] Lecture - Introduction to .NET and C# part 3
 -----------------------------------------------------
 
 - Method parameters
+- Extension methods
 - Tuples
 	- Deconstructors
 - Exceptions
@@ -100,9 +100,11 @@ Part 2:
 	- Generic methods
 	- Why generics
 	- Generic constrains
+	- Covariance and contravariance
 - Null and related stuff
 	- Nullable value types
 	- Nullable reference types
+		- Null-forgiving operator !
 	- Null Operators
 		- Null-Coalescing Operator ??
 		- Null-Coalescing Assignment Operator ??=
@@ -114,7 +116,7 @@ Part 2:
 - Attributes
 - Preprocessor directives
 - Extra slides
-	- Covariance and contravariance
+	- Generics at runtime
 
 -----------------------------------------------------
 4. [3h] Lecture - Introduction to .NET and C# part 4
