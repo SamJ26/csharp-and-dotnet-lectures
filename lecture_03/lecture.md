@@ -189,7 +189,38 @@ else
 
 ## Extension methods
 
-TODO
+- Enables us to add methods to existing types
+- **Static methods** called as if they were instance methods
+- Cannot access private variables in the type they are extending
+- **Must be defined in static class**
+- Extending _value types_ can be tricky
+    (first parameter `this instance` vs `ref this instance`)
+- Compatible instance method will always take precedence over an extension method
+
+---
+
+### Example - extension method for `string`
+
+```csharp
+static class Extensions
+{
+    public static bool IsCapitalized(this string s)
+    {
+        if (string.IsNullOrEmpty(s)) return false;
+        return char.IsUpper(s[0]);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string text = "HelloWorld";
+        Console.WriteLine(text.IsCapitalized());    // True
+        // Extensions.IsCapitalized(text);
+    }
+}
+```
 
 ---
 
@@ -599,12 +630,6 @@ public class Stack<T> where T : IContainerItem
 var stack1 = new Stack<int>();       // Error
 var stack2 = new Stack<Item>();      // Ok
 ```
-
----
-
-### Covariance and Contravariance
-
-TODO
 
 ---
 
@@ -1047,17 +1072,14 @@ class Program
 ### Generics at runtime
 
 - Generic type **substitutions are performed at run time**
-- Compiled generic type contains metadata that identifies it as having type parameters
+- Compiled generic type contains metadata that identifies it as having type params
 - Type parameter of a **value type**:
     - When specialized generic type should be created, CLR takes compiled generic type and generates new type by substituting _type parameters_
     - Specialized generic types are created one time for each unique value type that is used as a parameter
     - Previously generate specialized generic types are reused
 - Type parameter of a **reference type**:
-    - All references are the same size
-    - The first time a specialized generic type is constructed with any reference type, CLR generates new type by substituting _type parameters_ with object references
-    - CLR reuses the previously created specialized version of the generic type for every reference type
-
-TODO
+    - The first time a specialized generic type is constructed with any reference type, CLR generates new type by substituting _type parameters_ with _object_ references
+    - Previously created specialized version of the generic type is reused for every reference type
 
 ---
 

@@ -100,7 +100,6 @@ Part 2:
 	- Generic methods
 	- Why generics
 	- Generic constrains
-	- Covariance and contravariance
 - Null and related stuff
 	- Nullable value types
 	- Nullable reference types
