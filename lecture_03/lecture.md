@@ -961,9 +961,45 @@ class Program
 
 ## Attributes
 
-- Mechanism for adding custom information to code elements
+- **Mechanism for adding custom information (metadata) to code elements**
+- Program can examine metadata using _reflexion_
+- All attributes inherit from `System.Attribute`
+- By convention, all attribute names end with "_Attribute_" suffix
+- The target of the attribute can be _class_, _method_, _assembly_, _parameter_...
+- Syntax:
 
-TODO
+    ```csharp
+    [Serializable]
+    public class SampleClass {}
+    ```
+
+---
+
+
+### Example - custom attribute
+
+```csharp
+[AttributeUsage(AttributeTargets.Class)]
+class AuthorAttribute : Attribute
+{
+    public string Name { get; }
+    
+    public AuthorAttribute(string name) => Name = name;
+}
+```
+
+```csharp
+[Author("Samuel Janek", "1.0.0")]
+class Program
+{
+    static void Main(string[] args)
+    {
+        var attribute = Attribute.GetCustomAttribute(typeof(Program), typeof(AuthorAttribute));
+        var authorAttr = (AuthorAttribute)attribute;
+        Console.WriteLine(authorAttr.Name);
+    }
+}
+```
 
 ---
 

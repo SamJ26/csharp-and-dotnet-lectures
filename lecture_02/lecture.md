@@ -659,7 +659,7 @@ class Car : Engine
 ### Down-casting
 
 - Creates a subclass reference from a base class reference
-- Requires an explicit cast because it can fail at runtime
+- Requires an explicit cast because it **can fail at runtime**
 
 ---
 
