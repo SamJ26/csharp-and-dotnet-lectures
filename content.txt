@@ -93,7 +93,7 @@ Part 2:
 - Tuples
 	- Deconstructors
 - Exceptions
-- Disposables
+- IDisposable and using statement
 - Generics
 	- Generic classes
 	- Generic interfaces

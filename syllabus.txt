@@ -52,8 +52,8 @@ part2 - OOP in C#
 
 # LECTURE 4:
 
-- iterators
 - collections
+- iterators
 
 - linq
 
@@ -72,3 +72,4 @@ part2 - OOP in C#
 - events
 - patterns
 - regex
+- Working with files

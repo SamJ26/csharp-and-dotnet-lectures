@@ -8,9 +8,9 @@ theme: custom-theme
 
 <div class="lectors">
     <hr/>
-    Ing. Patrik Švikruha
+    Patrik Švikruha
     <br/>
-    Bc. Samuel Janek
+    Samuel Janek
 </div>
 
 ---
@@ -736,10 +736,6 @@ Book book2 = (Book)publication2;        // Down-casting
     - `GetHashCode()`
     - `GetType()`
     - `ToString()`
-
----
-
-TODO - example usage of System.Object methods
 
 ---
 

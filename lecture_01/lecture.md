@@ -8,9 +8,9 @@ theme: custom-theme
 
 <div class="lectors">
     <hr/>
-    Ing. Patrik Švikruha
+    Patrik Švikruha
     <br/>
-    Bc. Samuel Janek
+    Samuel Janek
 </div>
 
 ---
