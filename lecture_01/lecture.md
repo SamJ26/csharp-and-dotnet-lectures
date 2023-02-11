@@ -361,7 +361,7 @@ class Program
     - Names that programmers choose for entities (variables, methods...)
 
         ```csharp
-        var identifierOfVariable= "value of variable";
+        var identifierOfVariable = "value of variable";
         ```
 
 - **Keywords**

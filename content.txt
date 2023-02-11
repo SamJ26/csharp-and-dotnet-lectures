@@ -122,7 +122,27 @@ Part 2:
 -----------------------------------------------------
 
 - Collections in .NET
+	- Important interfaces
+	- Enumaration and iterators
+		- IEnumerable
+		- IEnumerator
+		- foreach and enumerators
+		- Iterators
+		- IEnumerable remarks
+	- ICollection
+	- IList
+	- IEnumerable vs ICollection vs IList
+	- IReadOnlyCollection and IReadOnlyList
+	- Array
+	- Other collections:
+		- LinkedList
+		- Queue
+		- Stack
+		- HashSet
+		- Dictionary
+		- Immutable collections
 - LINQ
+
 - Extra slides
 	- Closures
 

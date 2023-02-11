@@ -28,8 +28,20 @@ img[alt~="center"] {
 	- **Arrays** - part of C# language
 	- **Collections** - ordinary classes
 		- Generic
+            - Type-safe at compile time
+            - Better performance
 		- Non-generic
+            - Legacy support
+            - **DO NOT USE THEM**
 - `System.Collections` namespace
+
+---
+
+### Important interfaces
+
+![height:500 center](./images/collection-interfaces.png)
+
+Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
 
 ---
 
@@ -66,7 +78,8 @@ img[alt~="center"] {
 
 #### `IEnumerable<T>`
 
-- This interface is usually implemented by collections
+- Collection which implements this interface can be
+    traversed in **forward-only** manner
 - Automatically implemented by **arrays**
 - "_IEnumerator provider_"
 
@@ -123,14 +136,10 @@ using (var e = "beer".GetEnumerator())
 
 ---
 
-TODO - obrazok 7 Collection interfaces z knihy 
-
----
-
-### Iterators
+#### Iterators
 
 - Realized using `yield` statement
-- An **iterator method** defines how to generate the objects in a sequence
+- Movable pointer to any element in the collection
 
     ```csharp
     static IEnumerable<int> GenerateNumbers()
@@ -148,15 +157,51 @@ TODO - obrazok 7 Collection interfaces z knihy
     ```
 ---
 
-### Iterators
+#### Iterators
 
 - Producer of an _enumerator_
 - Alternative to implementing `IEnumerable<T>` interface by yourself
+- An **iterator method** defines how to generate the objects in a sequence
 - An iterator methods must return one of the following:
     - `IEnumerable` or `IEnumerable<T>`
     - `Enumerator` or  `IEnumerator<T>`
 - `yield return` cannot appear in `try`, `catch` or `finally` blocks
 - `yield break` signals the end of iteration
+
+---
+
+#### `IEnumerable<T>` remarks
+
+- The base interface for collections in the `System.Collections.Generic` namespace
+- It **doesn't** provide mechanism to:
+    - Determine the size of the collection
+    - Access member by index
+    - Modify the collection
+    - Search in the collection
+
+---
+
+### `ICollection<T>`
+
+---
+
+WORK IN PROGRESS
+
++ ako su vnutorne jednotlive kolekcie implementovane
++ Kedy zvolit aku kolekciu
+
+### `ICollection`
+
+- Generic version `ICollection<T>` is not thread safe 
+
+### Readonly collections
+
+- Can be casted to non-read-only collection = not really a readonly
+
+Dictionaries
+
+- ukazka vlozenie a vybratia hodnoty
+
 
 ---
 
@@ -168,7 +213,7 @@ TODO - obrazok 7 Collection interfaces z knihy
 
 - Compiler converts iterator method into private class that implements `IEnumerable<T>` and `IEnumerator<T>`
 - Iterator method then returns instance of a compiler written class which has a `GetEnumerator()` method which returns enumerator
-- `foreach` statement which consumes your iterator method is rewritten to `while` loop as shown on [slide 6](#6)
+- `foreach` statement which consumes your iterator method is rewritten to `while` loop as shown on [slide 7](#7)
 - For more details, you can examine lowered code on [sharplab.io](https://sharplab.io/)
 
 ---
