@@ -158,3 +158,22 @@ TODO - obrazok ako funguje NuGet
 - `public static <return_type> operator <operator>(<parameters>) { <body> }`
 
 TODO - toto bude asi az v 3. prednaske
+
+---
+
+#### StringBuilder
+
+- `System.Text.StringBuilder`
+- Using the `+` operator repeatedly to build up a string is inefficient
+- Represents a mutable string of characters
+
+    ```csharp
+    StringBuilder sb = new StringBuilder();
+    sb.Append("This is the beginning of a sentence, ");         
+    sb.Replace("the beginning of ", "");
+    sb.Insert(sb.ToString().IndexOf("a ") + 2, "complete ");
+    sb.Replace(",", ".");
+    Console.WriteLine(sb.ToString());       // This is a complete sentence
+    ```
+
+---

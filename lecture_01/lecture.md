@@ -527,7 +527,7 @@ double nan = double.NaN;
 #### Struct types
 
 - Use them to design small data-centric types that provide little or no behavior
-- .NET internally uses `struct` to represent a simple types
+- .NET internally uses `struct` to represent simple types
 
     ```csharp
     struct Foo
@@ -580,9 +580,10 @@ double nan = double.NaN;
 #### String
 
 - Represents sequence of characters
-- Always **immutable**
+- Always **immutable** = each operation that appears to modify a string actually creates a new string
 - Literal is denoted by double-quotes: `"string value"`
-- Equality operators are defined to compare the values of string objects, not references
+- **Equality operators are defined to compare the values of string objects**, not references
+- For extensive string manipulation use `StringBuilder` instead of `String`
 
 ---
 
@@ -607,23 +608,6 @@ string s7 = $"{i}. iteration";              // s7 = "1. iteration"
 // Accessing individual characters
 char c = s7[0]                              // c = '1'                 
 ```
-
----
-
-#### StringBuilder
-
-- `System.Text.StringBuilder`
-- Using the `+` operator repeatedly to build up a string is inefficient
-- Represents a mutable string of characters
-
-    ```csharp
-    StringBuilder sb = new StringBuilder();
-    sb.Append("This is the beginning of a sentence, ");         
-    sb.Replace("the beginning of ", "");
-    sb.Insert(sb.ToString().IndexOf("a ") + 2, "complete ");
-    sb.Replace(",", ".");
-    Console.WriteLine(sb.ToString());       // This is a complete sentence
-    ```
 
 ---
 
@@ -747,20 +731,11 @@ Supported by **char** type and **integral** numeric types
 ### `sizeof` operator
 
 - Returns the number of bytes occupied by a variable of a given type
-- The argument must be a type parameter
+- The argument must be an **unmanaged type** or a **type parameter** that is constrained to be an unmanaged type (**it cannot be a reference type**)
+
     ```csharp
     Console.WriteLine(sizeof(double));      // 8 bytes
     Console.WriteLine(sizeof(int));         // 4 bytes
-    ```
-
-### `nameof` expression
-
-- Produces the name of a variable, type, or member as the string constant
-- Evaluated at compile time and has no effect at run time
-    ```csharp
-    int a = 10;
-    Console.WriteLine(nameof(a));               // a
-    Console.WriteLine(nameof(Console.Write));   // Write
     ```
 
 ---
@@ -780,6 +755,20 @@ Supported by **char** type and **integral** numeric types
     Type t5 = typeof(string?);      // Error - can't be used on nullable reference types
     Type t6 = typeof(dynamic);      // Error - can't be used on the dynamic type
     ```
+
+---
+
+### `nameof` expression
+
+- Produces the name of a variable, type, or member as the string constant
+- Evaluated at compile time and has no effect at run time
+
+    ```csharp
+    int a = 10;
+    Console.WriteLine(nameof(a));               // a
+    Console.WriteLine(nameof(Console.Write));   // Write
+    ```
+
 ---
 
 ### `switch` expression
@@ -906,7 +895,11 @@ var res1 = (1 > 0) ? OnTrue() : OnFalse();      // res1 = "It's true!"
 var res2 = (0 > 1) ? OnTrue() : OnFalse();      // res2 = "It's false!"
 
 string OnTrue() => "It's true!";
-string OnFalse() => "It's false!";
+
+string OnFalse()
+{
+    return "It's false!";
+}
 ```
 
 ---
