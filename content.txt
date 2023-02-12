@@ -18,7 +18,6 @@ Part 2:
 			- Nullable value types
 		- Reference types
 			- String
-				- StringBuilder
 			- Array types
 		- Default values
 	- Operators and expressions
@@ -123,29 +122,26 @@ Part 2:
 
 - Collections in .NET
 	- Important interfaces
-	- Enumaration and iterators
-		- IEnumerable
-		- IEnumerator
-		- foreach and enumerators
-		- Iterators
-		- IEnumerable remarks
-	- ICollection
-	- IList
-	- IEnumerable vs ICollection vs IList
-	- IReadOnlyCollection and IReadOnlyList
-	- Array
-	- Other collections:
-		- LinkedList
+		- Enumaration and iterators
+			- IEnumerable<T>
+			- IEnumerator<T>
+			- foreach and enumerators
+			- Iterators
+			- IEnumerable<T> remarks
+		- ICollection<T>
+		- IList<T>
+		- IDictionary<TKey, Tvalue>
+	- Collection types:
+		- Array
+		- List<T>
+		- LinkedList<T>
 		- Queue
 		- Stack
 		- HashSet
-		- Dictionary
-		- Immutable collections
+		- Dictionary<TKey, TValue>
+	- Immutable collections
 - LINQ
-
-- Extra slides
-	- Closures
-
+	
 -----------------------------------------------------
 5. [3h] Lecture - Generic host (DI + Configuration + Logging)
 -----------------------------------------------------

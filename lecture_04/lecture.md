@@ -139,7 +139,7 @@ using (var e = "beer".GetEnumerator())
 #### Iterators
 
 - Realized using `yield` statement
-- Movable pointer to any element in the collection
+- An **iterator method** defines how to generate the objects in a sequence
 
     ```csharp
     static IEnumerable<int> GenerateNumbers()
@@ -155,13 +155,13 @@ using (var e = "beer".GetEnumerator())
     }
     // Output: 123
     ```
+
 ---
 
 #### Iterators
 
 - Producer of an _enumerator_
 - Alternative to implementing `IEnumerable<T>` interface by yourself
-- An **iterator method** defines how to generate the objects in a sequence
 - An iterator methods must return one of the following:
     - `IEnumerable` or `IEnumerable<T>`
     - `Enumerator` or  `IEnumerator<T>`
@@ -183,25 +183,115 @@ using (var e = "beer".GetEnumerator())
 
 ### `ICollection<T>`
 
+```csharp
+public interface ICollection<T> : IEnumerable<T>
+{
+    int Count { get; }
+    bool IsReadOnly { get; }
+    void Add(T item);
+    void Clear();
+    bool Contains(T item);
+    void CopyTo(T[] array, int arrayIndex);
+    bool Remove(T item);
+}
+```
+
+---
+
+#### `ICollection<T>` remarks
+
+- Extends `IEnumerable<T>` interface
+- Standard interface for **countable collections** of objects.
+- The base interface for classes in the `System.Collections.Generic` namespace
+- Read-only version is `IReadOnlyCollection<T>`
+
+---
+
+### `IList<T>`
+
+```csharp
+public interface IList<T> : ICollection<T>
+{
+    T this[int index] { get; set; }
+    int IndexOf(T item);
+    void Insert(int index, T item);
+    void RemoveAt(int index);
+}
+```
+
+---
+
+#### `IList<T>` remarks
+
+- Extends `ICollection<T>` interface
+- Represents a collection of objects that can be individually **accessed by index**
+- Arrays implement both `IList` and `IList<T>`
+- Read-only version is `IReadOnlyList<T>`
+
+---
+
+### `IDictionary<TKey, TValue>`
+
+```csharp
+public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>
+{
+    TValue this[TKey key] { get; set; }
+    ICollection<TKey> Keys { get; }
+    ICollection<TValue> Values { get; }
+    bool ContainsKey(TKey key);
+    void Add(TKey key, TValue value);
+    bool Remove(TKey key);
+    bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value);
+}
+```
+
+---
+
+#### `IDictionary<TKey, TValue>` remarks
+
+- Extends `ICollection<T>` interface
+- Defines the standard protocol for all key/value-based collections
+- Keys can be any **non-null** object
+- Values can be any object
+- **Duplicate keys are forbidden**
+- Read-only version is `IReadOnlyDictionary<TKey, TValue>`
+
+---
+
+## Collection types
+
+- `Array`
+- `ArrayList`
+- `List<T>`
+- `LinkedList<T>`
+- `Queue`
+- `Stack`
+- `HashSet`
+- `Dictionary<TKey, TValue>`
+
+---
+
+### `Array`
+
+- Implicit base class for all types of arrays in C#
+- Fixed length, contiguous space in memory
+- Implements `ICollection`, `IEnumerable`, `IList`
+- [Documentation](https://learn.microsoft.com/en-us/dotnet/api/system.array?view=net-7.0)
+
+TODO - sample
+
+---
+
+## Immutable collections
+
 ---
 
 WORK IN PROGRESS
 
-+ ako su vnutorne jednotlive kolekcie implementovane
-+ Kedy zvolit aku kolekciu
+LINQ
 
-### `ICollection`
-
-- Generic version `ICollection<T>` is not thread safe 
-
-### Readonly collections
-
-- Can be casted to non-read-only collection = not really a readonly
-
-Dictionaries
-
-- ukazka vlozenie a vybratia hodnoty
-
+- AsXXX robi iba casting
+- ToXXX alokuje novu kolekciu
 
 ---
 
@@ -213,7 +303,7 @@ Dictionaries
 
 - Compiler converts iterator method into private class that implements `IEnumerable<T>` and `IEnumerator<T>`
 - Iterator method then returns instance of a compiler written class which has a `GetEnumerator()` method which returns enumerator
-- `foreach` statement which consumes your iterator method is rewritten to `while` loop as shown on [slide 7](#7)
+- `foreach` statement which consumes your iterator method is rewritten to `while` loop which uses enumerator to travers the collection
 - For more details, you can examine lowered code on [sharplab.io](https://sharplab.io/)
 
 ---
