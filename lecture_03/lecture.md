@@ -396,7 +396,7 @@ static void ReadFile()
 
 ### Important remarks
 
-- Don't catch an exception unless you can handle it
+- Don't use empty `catch` blocks
 - Don't throw `Exception`, `SystemException`, `NullReferenceException`, or `IndexOutOfRangeException`
 - Use "_Exception_" suffix for user-defined exceptions
 - Re-throwing exceptions:
@@ -404,6 +404,11 @@ static void ReadFile()
     - `throw e;`
         - Stack trace of the original exception is not preserved
         - **DO NOT USE THIS**
+
+<!--
+SPEAKER NOTES:
+- Nie vzdy je cielom v catch bloku exception vyriesit. Niekedy ju chceme iba zaloggovat
+-->
 
 ---
 
@@ -992,6 +997,26 @@ class Program
     int factor = 2;
     Func<int, int> multiplier1 = static n => n * 2;         // Ok
     Func<int, int> multiplier2 = static n => n * factor;    // Error
+    ```
+
+---
+
+## Local methods
+
+- Method within another method
+- Visible only to the enclosing method
+- Can access the local variables and parameters of the enclosing method
+- `static` modifier prevents it from seeing the local variables and parameters of the enclosing method
+
+    ```csharp
+    void WriteCubes()
+    {
+        const int n = 2;
+        Console.WriteLine(Compute(3));
+        Console.WriteLine(Compute(4));
+
+        int Compute(int value) => value * n;
+    }
     ```
 
 ---

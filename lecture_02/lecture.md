@@ -81,7 +81,7 @@ theme: custom-theme
 ### Inheritance
 
 - **Ability to build new classes on top of existing ones**
-- Allows us to share functionality and data
+- Allows us to share (reuse) existing functionality and data
 - _SubClass_ vs _SuperClass_
 - A frequent stumbling-block
     - Types of relationships:
@@ -104,7 +104,7 @@ theme: custom-theme
 **Pros**:
 - Structured code and productivity
 - Analogy with real world
-- Logical conhesion
+- Logical cohesion
 - Code maintainability
 - Black box
 
@@ -157,6 +157,12 @@ theme: custom-theme
     - cammelCase or _cammelCase for `private` fields
     - PascalCase for `protected` fields
 
+<!-- 
+SPEAKER NOTES:
+- Je dolezite aby ste si vybrali pre vas projekt jednu naming convention a tu pouzivali vsetci
+- Dodrzovanie naming conventions je mozne dosiahnut pomocou editorconfigu
+-->
+
 ---
 
 ### Constants
@@ -184,7 +190,7 @@ class MyClass
 ### Methods
 
 - Performs an action in a series of statements
-- Can access members of a `class`, `struct` or `record`
+- Can access members of a `class` or `struct`
 - Method signature consist of method **name** and **parameter types**
 - Parameters vs Arguments:
     - **Parameters** - method definition specifies the names and types of any parameters that are required
@@ -211,27 +217,6 @@ class MyClass
 }
 
 ```
-
----
-
-#### Local methods
-
-- Method within another method
-- Visible only to the enclosing method
-- Can access the local variables and parameters of the enclosing method
-
-    ```csharp
-    void WriteCubes()
-    {
-        const int n = 2;
-
-        Console.WriteLine(Compute(3));
-        Console.WriteLine(Compute(4));
-        Console.WriteLine(Compute(5));
-
-        int Compute(int value) => value * n;
-    }
-    ```
 
 ---
 
@@ -303,7 +288,7 @@ o.ComputedProp = 5;             // Error - property has no setter
 
 ### Constructors
 
-- Contains initialization code on a `class`, `struct` or `record`
+- Contains initialization code on a `class` or `struct`
 - Special method with the same name as enclosing type and without return type
 - Support expression-bodied notation
 - Class can have multiple constructors with different parameters
@@ -342,7 +327,13 @@ var car3 = new Car();   // Error - ????
 - Read-only indexer by omitting `get` accessor
 - Indexers can be overloaded
 - Indexers can have more than one formal parameter
+- The indexer parameter is not limited only to `int`
 - **Be sure to incorporate some type of error-handling on invalid index value**
+
+<!--
+SPEAKER NOTES:
+- Niekedy sa hodí mať napr. dva indexery, jeden ktory berie string a druhy napr. int
+-->
 
 ---
 
@@ -781,7 +772,7 @@ Book book2 = (Book)publication2;        // Down-casting
         - Function overloading
         - Operator overloading
     - **Dynamic Polymorphism** (Run-Time):
-        - Virutal members - method overriding
+        - Virtual members - method overriding
         - Abstract members - method implementation
 
 ---
@@ -812,6 +803,11 @@ Book book2 = (Book)publication2;        // Down-casting
 - `virtual` + `override` keywords
 - Virtual can be methods, properties, indexers or events
 - `virtual` modifier cannot be used with the `static`, `abstract`, `private` or `override` modifiers 
+
+<!--
+SPEAKER NOTES:
+- Narozdiel od Javy, class members nie su v C# by default oznacene ako virtual
+-->
 
 ---
 

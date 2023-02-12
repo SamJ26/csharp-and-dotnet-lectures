@@ -111,6 +111,7 @@ Part 2:
 	- Func and Action delegates
 - Lambda expressions
 	- Static lambdas
+- Local methods
 - Attributes
 - Preprocessor directives
 - Extra slides
