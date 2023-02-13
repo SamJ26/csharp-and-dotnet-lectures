@@ -136,13 +136,17 @@ Part 2:
 		- Array
 		- List<T>
 		- LinkedList<T>
-		- Queue
-		- Stack
-		- HashSet
+		- Queue<T>
+		- Stack<T>
+		- HashSet<T>
 		- Dictionary<TKey, TValue>
-	- Immutable collections
 - LINQ
-	
+- Concurrency and Asynchrony
+	- Motivation
+	- Possible approaches
+	- Task and Task<T>
+		- Task.Delay vs Thread.Sleep
+
 -----------------------------------------------------
 5. [3h] Lecture - Generic host (DI + Configuration + Logging)
 -----------------------------------------------------
@@ -150,6 +154,3 @@ Part 2:
 -----------------------------------------------------
 6. [3h] Lecture - Working with database in .NET (EFCore + Bogus)
 -----------------------------------------------------
-
-
-

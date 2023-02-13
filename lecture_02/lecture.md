@@ -986,7 +986,7 @@ class DerivedClass : AbstractBaseClass
     - Finalizer
     - Virtual, abstract and protected members
     - Parameterless constructor
-- A constructor of a structure type must initialize all instance fields
+- A constructor of a structure type must initialize all instance fields (does not apply to **C# 11** and later - compiler initiales uninitialized fields to default values)
 
 ---
 

@@ -261,28 +261,157 @@ public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TVal
 ## Collection types
 
 - `Array`
-- `ArrayList`
 - `List<T>`
 - `LinkedList<T>`
-- `Queue`
-- `Stack`
-- `HashSet`
+- `Queue<T>`
+- `Stack<T>`
+- `HashSet<T>`
 - `Dictionary<TKey, TValue>`
 
 ---
 
 ### `Array`
 
+- Implements `ICollection`, `IEnumerable`, `IList`
 - Implicit base class for all types of arrays in C#
 - Fixed length, contiguous space in memory
-- Implements `ICollection`, `IEnumerable`, `IList`
-- [Documentation](https://learn.microsoft.com/en-us/dotnet/api/system.array?view=net-7.0)
+
+---
 
 TODO - sample
 
 ---
 
-## Immutable collections
+### `List<T>`
+
+- Implements `ICollection<T>`, `IEnumerable<T>`, `IList<T>`
+- Represents a **strongly typed** list of objects that **can be accessed by index**
+- Internally implemented using an **array whose size is dynamically increased as required**
+- Accepts `null` as a valid value for reference types and allows duplicate elements
+
+---
+
+TODO - sample
+
+---
+
+### `LinkedList<T>`
+
+- Implements `ICollection<T>`, `IEnumerable<T>`
+- **Does not** implement `IList<T>` => **access by index is not supported**
+- Generic **doubly linked** list
+- Nodes are of type `LinkedListNode<T>`
+- Accepts `null` as a valid value for reference types and allows duplicate values
+
+---
+
+TODO - sample
+
+---
+
+![height:500 center](./images/linked-list.png)
+
+Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 366
+
+---
+
+### `Queue<T>`
+
+- Implements `IEnumerable<T>`
+- **Does not** implement `IList<T>` => **access by index is not supported**
+- FIFO (first-in-first-out) data structure
+- Internally implemented using an **array whose size is dynamically increased as required**
+- Accepts `null` as a valid value for reference types and allows duplicate elements
+- Basic operations:
+    - `Enqueue` - adds an element to the end 
+    - `Dequeue` - removes the oldest element from the start
+    - `Peek` - returns the oldest element that is at the start but does not remove it
+
+---
+
+TODO - sample
+
+---
+
+### `Stack<T>`
+
+- Implements `IEnumerable<T>`
+- **Does not** implement `IList<T>` => **access by index is not supported**
+- LIFO (last-in-first-out) data structure
+- Internally implemented using an **array whose size is dynamically increased as required**
+- Accepts `null` as a valid value for reference types and allows duplicate elements
+- Basic operations:
+    - `Push` - inserts an element at the top
+    - `Pop` - removes an element from the top
+    - `Peek` - returns an element that is at the top but does not remove it
+
+---
+
+TODO - sample
+
+---
+
+### `HashSet<T>`
+
+- Implements `ICollection<T>`, `IEnumerable<T>`
+- Represents a set of values
+- Provides high-performance set operations
+- **No duplicate elements**
+- Internally implemented using **hash table**
+- Supports mathematical set operations such as _union_, _intersection_, _subtraction_
+
+---
+
+TODO - sample
+
+---
+
+### `Dictionary<TKey, TValue>`
+
+- Implements `ICollection<T>`, `IEnumerable<T>` where `T` is `KeyValuePair<TKey,TValue>`
+- Represents a **collection of keys and values**
+- Internally implemented using **hash table**
+- A key cannot be `null`
+- `Add` method throws an exception when attempting to add a **duplicate key**
+- `KeyNotFoundException` is thrown when a requested key is not present
+
+---
+
+TODO - sample
+
+---
+
+## LINQ
+
+---
+
+TODO
+
+---
+
+## Concurrency and Asynchrony
+
+---
+
+### Motivation
+
+- Most applications need to deal with more than one thing happening at a time
+- Common concurrency scenarios:
+    - Writing responsive UI
+    - Allowing requests to process simultaneously
+    - Parallel programming
+
+---
+
+### Possible approaches
+
+- Working with threads
+- Using tasks
+- Asynchronous programming
+
+---
+
+TODO
 
 ---
 
