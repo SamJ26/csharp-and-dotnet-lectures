@@ -152,5 +152,5 @@ Part 2:
 -----------------------------------------------------
 
 -----------------------------------------------------
-6. [3h] Lecture - Working with database in .NET (EFCore + Bogus)
+7. [3h] Lecture - Working with database in .NET (EFCore + Bogus)
 -----------------------------------------------------

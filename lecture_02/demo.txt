@@ -1,0 +1,11 @@
+- Informácie k projektu
+- Ukázať im VS Code extension Git Graph na prácu s gitom
+- Vytváranie aplikácie cez command line a GUI
+- Klasický main vs top level statements
+- Implicit usings
+- File scoped namespaces
+- Ukázať access modifiers (hlavne ako to funguje na úrovni assemblies)
+- Ukážka OOP na príklade s grafickými tvarmi
+- Ukážka práce s recordami
+- Porovnanie records a classes
+- Ukážka sharplab.io nástroju a čo všetko compiler vygeneruje pri použití records
