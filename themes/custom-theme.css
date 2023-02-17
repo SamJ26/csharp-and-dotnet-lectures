@@ -44,3 +44,7 @@ img[alt~="center"] {
   font-size: 1.4em;
   color: #2c4c6b;
 }
+
+section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+}

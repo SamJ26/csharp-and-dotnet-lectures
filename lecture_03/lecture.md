@@ -1090,6 +1090,74 @@ class Program
 
 ---
 
+## Useful types
+
+- `StringBuilder`
+- `DateTime`
+- `Guid`
+
+<!--
+SPEAKER NOTES:
+- Táto sekcia je tu na predstavenie základných typov ktoré sa môžu hodiť pri projekte
+-->
+
+---
+
+### `StringBuilder`
+
+- Defined in `System.Text` namespace
+- Using the `+` operator repeatedly to build up a string is inefficient
+- Represents a **mutable string**
+
+    ```csharp
+    StringBuilder sb = new StringBuilder();
+
+    sb.Append("This is the BEGINNING!");         
+    sb.Replace("BEGINNING", "END");
+    sb.Insert(sb.ToString().IndexOf("the") + 4, "BIG ");
+
+    Console.WriteLine(sb.ToString());       // This is the BIG END!
+    ```
+
+---
+
+### `DateTime`
+
+- **Immutable structs** for representing a date and optionally a time
+- There are many ways how to create instance of this struct
+- Supports mathematical operations such as `Add` and `Subtract`
+
+    ```csharp
+    DateTime date0 = new DateTime(2020, 5, 1, 8, 30, 52);
+    DateTime date1 = DateTime.Parse("5/1/2008 8:30:52 AM");
+
+    DateTime date2 = DateTime.Now;      // Current date and time on pc
+    DateTime date4 = DateTime.Today;    // Current date
+
+    Console.WriteLine(date0.Date);      // 01/05/2020 00:00:00
+    Console.WriteLine(date0.Hour);      // 8
+    ```
+
+---
+
+### `Guid`
+
+- It's a **struct** (value type)
+- Represents a globally unique identifier (GUID).
+- A GUID is a 128-bit integer (16-byte)
+
+    ```csharp
+    Guid g1 = Guid.NewGuid();
+    Guid g2 = new Guid("4f8a02ec-72c3-4e7a-89e0-0f48dac3978d");
+    
+    Console.WriteLine(g1.ToString());        // Output: ????????
+    Console.WriteLine(g2.ToString());        // Output: 4f8a02ec-72c3-4e7a-89e0-0f48dac3978d
+    
+    Guid g3 = new Guid("this is not guid");  // Error - throws System.FormatException
+    ```
+
+---
+
 ## Thank you for your attention :)
 
 ---
