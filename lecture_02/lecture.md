@@ -340,11 +340,7 @@ SPEAKER NOTES:
 ```csharp
 public class TempRecord
 {
-    float[] temps = new float[10]
-    {
-        56.2F, 56.7F, 56.5F, 56.9F, 58.8F,
-        61.3F, 65.9F, 62.1F, 59.2F, 57.5F
-    };
+    float[] temps = new float[5] { 56.8F, 56.7F, 56.5F, 56.9F, 58.8F };
 
     public int Length => temps.Length;
     
@@ -355,6 +351,14 @@ public class TempRecord
         set => temps[index] = value;
     }
 }
+```
+
+```csharp
+var temp = new TempRecord();
+
+Console.WriteLine(temp[4]);   // Output: 58.8
+temp[3] = 100;
+Console.WriteLine(temp[3]);   // Output: 100
 ```
 
 ---
@@ -370,19 +374,21 @@ public class TempRecord
 ```csharp
 public class Container
 {
-    private const string Name = "Container";
+    private const string Text = "Hello";
     
     public class Nested
     {
-        private Container _parent;
-        
-        public Nested(Container parent)
+        public Nested()
         {
-            Console.WriteLine(Name);
-            this._parent = parent;
+            Console.WriteLine(Text);
         }
     }
 }
+```
+
+```csharp
+var container = new Container();
+var nested = new Container.Nested();    // Output: "Hello"
 ```
 
 ---
@@ -422,6 +428,11 @@ public class Container
 - Contains only static members
 - Is sealed - cannot be inherited
 - Cannot contain instance constructors
+
+<!--
+SPEAKER NOTES:
+- Static classy sa pouzivaju napr. na extension methods alebo ako kontajner pre metody ktore nemanipuju s nicim inym okrem svojho vstupu
+-->
 
 ---
 
@@ -583,6 +594,8 @@ class Book : Publication
         this.ISBN = ISBN;
     }
 }
+
+var book = new Book("isbn", "C# in Nutshell");
 ```
 
 ---
@@ -612,6 +625,8 @@ class Car
         // ...
     }
 }
+
+(new Car()).Drive();
 ```
 
 </div>
@@ -635,6 +650,8 @@ class Car : Engine
         // ...
     }
 }
+
+(new Car()).Drive();
 ```
 
 </div>
@@ -658,8 +675,6 @@ class Car : Engine
 class Publication
 {
     public string Publisher { get; set; }
-    public string Title { get; set; }
-    public uint Pages { get; set; }
 }
 
 class Book : Publication
@@ -668,10 +683,14 @@ class Book : Publication
 }
 
 Book book1 = new Book();
-Publication publication1 = book1;       // Up-casting
+Publication publication1 = book1;           // Up-casting
+Console.WriteLine(publication1.Publisher);  // Ok ✅
+Console.WriteLine(publication1.ISBN);       // Error ❌
 
 Publication publication2 = new Book();
 Book book2 = (Book)publication2;        // Down-casting
+Console.WriteLine(book2.Publisher);     // Ok ✅
+Console.WriteLine(book2.ISBN);          // Ok ✅
 ```
 
 ---
@@ -713,6 +732,8 @@ Book book2 = (Book)publication2;        // Down-casting
     {
         public uint Age { get; set; }
     }
+
+    var instance = new SealedClass();   // Ok ✅
     ```
 
 ---
@@ -818,20 +839,21 @@ class BaseClass
 
     public virtual int WorkProperty { get { return 0; } }
 }
-class DerivedClass : BaseClass
+
+class X : BaseClass
 {
     public override void DoWork() => Console.WriteLine("I am doing SOMETHING USEFUL");
 
     public override int WorkProperty { get { return 1; } }
 }
 
-class AnotherDerivedClass : BaseClass {}
+class Y : BaseClass {}
 
-var o1 = new DerivedClass();
-o1.DoWork();    // I am doing SOMETHING USEFUL
+var x = new X();
+x.DoWork();         // I am doing SOMETHING USEFUL
 
-var o2 = new AnotherDerivedClass();
-o2.DoWork();    // I am doing NOTHING
+var y = new Y();
+y.DoWork();         // I am doing NOTHING
 ```
 
 ---
@@ -922,6 +944,9 @@ class DerivedClass : AbstractBaseClass
         Console.WriteLine("My awesome implementation of abstract method");
     }
 }
+
+var instance = new DerivedClass();
+instance.Foo();
 ```
 
 ---
@@ -1005,6 +1030,9 @@ class MyClass : IReusable
         Console.WriteLine("I am reusing this instance");
     }
 }
+
+var instance = new MyClass();
+instance.Reuse();
 ```
 
 ---
