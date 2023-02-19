@@ -384,6 +384,7 @@ TODO - sample
 ## LINQ
 
 - **Language Integrated Query**
+- Defined in `System.Linq` namespace
 - Set of langauge and runtime features for writing **structured type-safe queries**
 - Usable with any collection implementing `IEnumerable<T>` or `IQueryable<T>`
 - Extensive use of generics, delegates and extension methods
@@ -522,9 +523,215 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 
 ### Query operators
 
+- Defined as **extension methods** of the type that they operate on
 - **Never alter the input sequence** (they return a new sequence)
+- The standard query operators differ in the timing of their execution
+- Not each of them is applicable using query expression syntax
+- [50+ operators](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution#classification-table) 🚀
 
 ---
+
+#### Standard operators - `Where`
+
+- Filters a sequence of values based on a predicate
+- Deffered execution
+
+    ```csharp
+    int[] numbers = new[] { 0, 1, 2, 3, 4 };
+            
+    var query = numbers.Where(n => n > 5);
+
+    foreach (var number in query)
+    {
+        Console.WriteLine(number);
+    }
+    // Output: { 6, 7, 8, 9 }
+    ```
+
+---
+
+#### Standard operators - `Select`
+
+- Projects each element of a sequence into a new form
+- Deffered execution
+
+    ```csharp
+    int[] numbers = new[] { 5, 6, 7, 8 };
+            
+    var query = numbers.Select((number, index) => number * index);
+
+    foreach (var number in query)
+    {
+        Console.WriteLine(number);
+    }
+    // Output: { 0, 6, 14, 24 }
+    ```
+
+---
+
+#### Standard operators - `Any`
+
+- Determines whether any element of a sequence exists or satisfies a condition
+- **Immediate execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+            
+    var res1 = numbers.Any();
+    var res2 = numbers.Any(n => n > 10);
+
+    Console.WriteLine(res1);    // True
+    Console.WriteLine(res2);    // False
+    ```
+
+---
+
+#### Standard operators - `Contains`
+
+- Determines whether a sequence contains a specified element by using the default equality comparer
+- **Immediate execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var res1 = numbers.Contains(3);
+    var res2 = numbers.Contains(10);
+
+    Console.WriteLine(res1);    // True
+    Console.WriteLine(res2);    // False
+    ```
+
+---
+
+#### Standard operators - `ElementAt`
+
+- Returns the element at a specified index in a sequence
+- **Immediate execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var elem1 = numbers.ElementAt(3);
+
+    Console.WriteLine(elem1);           // 4
+
+    var elem2 = numbers.ElementAt(10);  // ArgumentOutOfRangeException
+    ```
+
+---
+
+#### Standard operators - `First` and `FirstOrDefault`
+
+- `First` - returns the first element of a sequence
+- `FirstOrDefault` - returns the first element of the sequence that satisfies a condition, or a specified default value if no such element is found
+- **Immediate execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var n1 = numbers.First();                        // 1
+    var n2 = numbers.First(n => n > 3);              // 4
+    var n3 = numbers.FirstOrDefault();               // 1
+    var n4 = numbers.FirstOrDefault(n => n > 10);    // 0
+    ```
+
+---
+
+#### Standard operators - `Single` and `SingleOrDefault`
+
+- `Single` - returns the only element of a sequence that satisfies a specified condition, and throws an exception if more than one such element exists
+- `SingleOrDefault` - returns the only element of a sequence, or a default value if the sequence is empty or throws an exception if more than one such element exists
+- **Immediate execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var n1 = numbers.Single(n => n == 2);               // 2
+    var n2 = numbers.SingleOrDefault(n => n == 10);     // 0 - default value
+    var n3 = numbers.SingleOrDefault(n => n > 1);       // Exception 
+    ```
+
+---
+
+#### Standard operators - `GroupBy`
+
+- Groups the elements of a sequence according to a specified key selector function and creates a result value from each group and its key
+- Deffered execution
+
+    ```csharp
+    record Person(string Name, uint Age);
+
+    Person[] persons = new Person[]
+        { new("John", 40), new("Adam", 22), new("Mike", 22), new("Carl", 52) };
+
+    var grouped = persons.GroupBy(p => p.Age);
+    foreach (var group in grouped)
+        Console.WriteLine(group);
+
+    // { Key: 40, [ { Name: "John", Age: 40 } ]}
+    // { Key: 22, [ { Name: "Adam", Age: 22 }, { Name: "Mike", Age: 22 } ]}
+    // { Key: 50, [ { Name: "Carl", Age: 50 } ]}
+    ```
+
+---
+
+#### Standard operators - `Join`
+
+- Correlates the elements of two sequences based on matching keys
+- The default equality comparer is used to compare keys
+
+```csharp
+TODO
+```
+
+---
+
+#### Standard operators - `OrderBy`
+
+- Sorts the elements of a sequence in ascending order according to a key
+
+```csharp
+TODO
+```
+
+---
+
+#### Standard operators - `Skip` and `SkipWhile`
+
+- Bypasses a specified number of elements in a sequence and then returns the remaining elements
+
+```csharp
+TODO
+```
+
+---
+
+#### Standard operators - `Take` and `TakeWhile`
+
+```csharp
+TODO
+```
+
+---
+
+#### Standard operators - `Range`
+
+- Generates a sequence of integral numbers within a specified range
+
+```csharp
+TODO
+```
+
+---
+
+#### Standard operators - `Aggregate`
+
+- Applies an accumulator function over a sequence
+- The specified seed value is used as the initial accumulator value
+
+```csharp
+TODO
+```
 
 ---
 
