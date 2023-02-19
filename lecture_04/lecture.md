@@ -383,9 +383,148 @@ TODO - sample
 
 ## LINQ
 
+- **Language Integrated Query**
+- Set of langauge and runtime features for writing **structured type-safe queries**
+- Usable with any collection implementing `IEnumerable<T>` or `IQueryable<T>`
+- Extensive use of generics, delegates and extension methods
+- Inspired by functional programming
+- Different types:
+    - LINQ to SQL
+    - LINQ to XML
+    - LINQ to Objects
+
 ---
 
+### Motivation - sum of all items
+
+**Custom method**
+
+```csharp
 TODO
+```
+
+---
+
+### Motivation - sum of all items
+
+**Using LINQ**
+
+```csharp
+TODO
+```
+
+---
+
+### Query expression
+
+- Specifies what operations should be applied to data source
+- Composed of **query operators**
+- Only stores the query commands (not the result)
+- LINQ queries are compiled:
+    - `IQueryable<T>` => **expression trees**
+    - `IEnumerable<T>` => **delegates**
+
+---
+
+### Fluent vs Query syntax
+
+<div class="col2">
+<div>
+
+**Fluent syntax**
+
+```csharp
+string[] names = { "Dick", "Harry", "Jay" };
+
+IEnumerable<string> query = names
+    .Where(n => n.Contains("a"))
+    .OrderBy(n => n.Length)
+    .Select(n => n.ToUpper());
+
+foreach (string name in query)
+    Console.WriteLine(name);
+
+// Output: JAY, HARRY
+```
+
+</div>
+<div>
+
+**Query syntax**
+
+```csharp
+string[] names = { "Dick", "Harry", "Jay" };
+
+IEnumerable<string> query =
+    from n in names
+    where n.Contains("a")
+    orderby n.Length
+    select n.ToUpper();
+
+foreach (string name in query)
+    Console.WriteLine(name);
+
+// Output: JAY, HARRY
+```
+
+</div>
+</div>
+
+---
+
+![height:500 center](./images/linq-conveyor-belt.png)
+
+Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
+
+---
+
+### Deferred vs Immediate execution
+
+- **Execution of the query is deferred** until you iterate over the query variable
+- `ToList` or `ToArray` methods force immediate execution of the query
+- Some queries are by default executed immediately (`Count`, `Max`, `Average`, `First`)
+
+    ```csharp
+    string[] names = { "Dick", "Harry", "Jay" };
+            
+    IEnumerable<string> query = names.Where(n => n.Contains("a"));
+    // query: instance of Enumerable.WhereArrayIterator<string>
+
+    var count = names.Max(n => n.Length);
+    // count: 5
+
+    var queryResult = query.ToList();
+    // queryResult: { "Harry", "Jay" }
+    ```
+
+---
+
+### Reevalution
+
+- **Deferred execution query is reevaluated when you reenumerate it**
+- Some queries can be computationally intensine => it is better to save a copy of the result (evaluation) using `ToList` or `ToArray` methods
+
+    ```csharp
+    string[] names = { "Dick", "Harry", "Jay" };
+
+    IEnumerable<string> query = names.Select(n => n.ToUpper());
+
+    // 1. evaluation
+    foreach (var name in query) Console.WriteLine(name);
+    
+    // 2. evaluation
+    foreach (var name in query) Console.WriteLine(name);
+
+    var evaluationResult = query.ToList();
+    ```
+
+---
+
+### Query operators
+
+- **Never alter the input sequence** (they return a new sequence)
+
+---
 
 ---
 
