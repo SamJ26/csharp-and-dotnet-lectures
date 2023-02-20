@@ -4,13 +4,6 @@ paginate: true
 theme: custom-theme
 ---
 
-<style>
-img[alt~="center"] {
-  display: block;
-  margin: 0 auto;
-}
-</style>
-
 # C# and .NET part 4
 
 <div class="lectors">
@@ -33,7 +26,6 @@ img[alt~="center"] {
 		- Non-generic
             - Legacy support
             - **DO NOT USE THEM**
-- `System.Collections` namespace
 
 ---
 
@@ -45,7 +37,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
 
 ---
 
-### Enumeration and iterators
+#### Enumeration and iterators
 
 - Enumeration = **froward-only** traversal through the collection
 - Realized using
@@ -54,7 +46,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
 
 ---
 
-#### `IEnumerator<T>`
+##### `IEnumerator<T>`
 
 - Defines a protocol by which elements in a collection can be
 	traversed in **forward-only** manner
@@ -76,7 +68,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
 
 ---
 
-#### `IEnumerable<T>`
+##### `IEnumerable<T>`
 
 - Collection which implements this interface can be
     traversed in **forward-only** manner
@@ -97,7 +89,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
 
 ---
 
-#### `foreach` statement and enumerators
+##### `foreach` statement and enumerators
 
 `foreach` statement is a consumer of an _enumerator_
 
@@ -136,7 +128,7 @@ using (var e = "beer".GetEnumerator())
 
 ---
 
-#### Iterators
+##### Iterators
 
 - Realized using `yield` statement
 - An **iterator method** defines how to generate the objects in a sequence
@@ -158,7 +150,7 @@ using (var e = "beer".GetEnumerator())
 
 ---
 
-#### Iterators
+##### Iterators
 
 - Producer of an _enumerator_
 - Alternative to implementing `IEnumerable<T>` interface by yourself
@@ -170,7 +162,7 @@ using (var e = "beer".GetEnumerator())
 
 ---
 
-#### `IEnumerable<T>` remarks
+##### `IEnumerable<T>` remarks
 
 - The base interface for collections in the `System.Collections.Generic` namespace
 - It **doesn't** provide mechanism to:
@@ -181,7 +173,7 @@ using (var e = "beer".GetEnumerator())
 
 ---
 
-### `ICollection<T>`
+#### `ICollection<T>`
 
 ```csharp
 public interface ICollection<T> : IEnumerable<T>
@@ -198,7 +190,7 @@ public interface ICollection<T> : IEnumerable<T>
 
 ---
 
-#### `ICollection<T>` remarks
+##### `ICollection<T>` remarks
 
 - Extends `IEnumerable<T>` interface
 - Standard interface for **countable collections** of objects.
@@ -207,7 +199,7 @@ public interface ICollection<T> : IEnumerable<T>
 
 ---
 
-### `IList<T>`
+#### `IList<T>`
 
 ```csharp
 public interface IList<T> : ICollection<T>
@@ -221,7 +213,7 @@ public interface IList<T> : ICollection<T>
 
 ---
 
-#### `IList<T>` remarks
+##### `IList<T>` remarks
 
 - Extends `ICollection<T>` interface
 - Represents a collection of objects that can be individually **accessed by index**
@@ -230,7 +222,7 @@ public interface IList<T> : ICollection<T>
 
 ---
 
-### `IDictionary<TKey, TValue>`
+#### `IDictionary<TKey, TValue>`
 
 ```csharp
 public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TValue>>
@@ -247,7 +239,7 @@ public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TVal
 
 ---
 
-#### `IDictionary<TKey, TValue>` remarks
+##### `IDictionary<TKey, TValue>` remarks
 
 - Extends `ICollection<T>` interface
 - Defines the standard protocol for all key/value-based collections
@@ -258,7 +250,7 @@ public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TVal
 
 ---
 
-## Collection types
+### Collection types
 
 - `Array`
 - `List<T>`
@@ -270,7 +262,7 @@ public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TVal
 
 ---
 
-### `Array`
+#### `Array`
 
 - Implements `ICollection`, `IEnumerable`, `IList`
 - Implicit base class for all types of arrays in C#
@@ -282,7 +274,7 @@ TODO - sample
 
 ---
 
-### `List<T>`
+#### `List<T>`
 
 - Implements `ICollection<T>`, `IEnumerable<T>`, `IList<T>`
 - Represents a **strongly typed** list of objects that **can be accessed by index**
@@ -295,7 +287,7 @@ TODO - sample
 
 ---
 
-### `LinkedList<T>`
+#### `LinkedList<T>`
 
 - Implements `ICollection<T>`, `IEnumerable<T>`
 - **Does not** implement `IList<T>` => **access by index is not supported**
@@ -305,17 +297,17 @@ TODO - sample
 
 ---
 
-TODO - sample
-
----
-
 ![height:500 center](./images/linked-list.png)
 
 Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 366
 
 ---
 
-### `Queue<T>`
+TODO - sample
+
+---
+
+#### `Queue<T>`
 
 - Implements `IEnumerable<T>`
 - **Does not** implement `IList<T>` => **access by index is not supported**
@@ -333,7 +325,7 @@ TODO - sample
 
 ---
 
-### `Stack<T>`
+#### `Stack<T>`
 
 - Implements `IEnumerable<T>`
 - **Does not** implement `IList<T>` => **access by index is not supported**
@@ -351,7 +343,7 @@ TODO - sample
 
 ---
 
-### `HashSet<T>`
+#### `HashSet<T>`
 
 - Implements `ICollection<T>`, `IEnumerable<T>`
 - Represents a set of values
@@ -366,7 +358,7 @@ TODO - sample
 
 ---
 
-### `Dictionary<TKey, TValue>`
+#### `Dictionary<TKey, TValue>`
 
 - Implements `ICollection<T>`, `IEnumerable<T>` where `T` is `KeyValuePair<TKey,TValue>`
 - Represents a **collection of keys and values**
@@ -401,7 +393,20 @@ TODO - sample
 **Custom method**
 
 ```csharp
-TODO
+static int Sum(int[] arr)
+{
+    var sum = 0;
+    foreach (var num in arr)
+        sum += num;
+    return sum;
+}
+    
+static void Main(string[] args)
+{
+    int[] numbers = { 1, 2, 3, 4, 5 };
+    var sum = Sum(numbers);
+    Console.WriteLine(sum);     // Output: 15
+}
 ```
 
 ---
@@ -411,7 +416,14 @@ TODO
 **Using LINQ**
 
 ```csharp
-TODO
+using System.Linq;
+
+static void Main(string[] args)
+{
+    int[] numbers = { 1, 2, 3, 4, 5 };
+    var sum = numbers.Sum();
+    Console.WriteLine(sum);     // Output: 15
+}
 ```
 
 ---
@@ -473,7 +485,7 @@ foreach (string name in query)
 
 ---
 
-![height:500 center](./images/linq-conveyor-belt.png)
+![height:400 center](./images/linq-conveyor-belt.png)
 
 Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 
@@ -534,7 +546,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 #### Standard operators - `Where`
 
 - Filters a sequence of values based on a predicate
-- Deffered execution
+- **Deffered execution**
 
     ```csharp
     int[] numbers = new[] { 0, 1, 2, 3, 4 };
@@ -553,7 +565,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 #### Standard operators - `Select`
 
 - Projects each element of a sequence into a new form
-- Deffered execution
+- **Deffered execution**
 
     ```csharp
     int[] numbers = new[] { 5, 6, 7, 8 };
@@ -655,72 +667,97 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 
 #### Standard operators - `GroupBy`
 
-- Groups the elements of a sequence according to a specified key selector function and creates a result value from each group and its key
-- Deffered execution
+- Groups the elements of a sequence according to a specified key
+- **Deffered execution**
 
     ```csharp
     record Person(string Name, uint Age);
 
-    Person[] persons = new Person[]
+    var persons = new Person[]
         { new("John", 40), new("Adam", 22), new("Mike", 22), new("Carl", 52) };
 
     var grouped = persons.GroupBy(p => p.Age);
-    foreach (var group in grouped)
-        Console.WriteLine(group);
 
-    // { Key: 40, [ { Name: "John", Age: 40 } ]}
-    // { Key: 22, [ { Name: "Adam", Age: 22 }, { Name: "Mike", Age: 22 } ]}
-    // { Key: 50, [ { Name: "Carl", Age: 50 } ]}
+    foreach (var group in grouped) Console.WriteLine(group);
+
+    // { Key: 40, [ { Name: "John", Age: 40 } ] }
+    // { Key: 22, [ { Name: "Adam", Age: 22 }, { Name: "Mike", Age: 22 } ] }
+    // { Key: 50, [ { Name: "Carl", Age: 50 } ] }
     ```
-
----
-
-#### Standard operators - `Join`
-
-- Correlates the elements of two sequences based on matching keys
-- The default equality comparer is used to compare keys
-
-```csharp
-TODO
-```
 
 ---
 
 #### Standard operators - `OrderBy`
 
 - Sorts the elements of a sequence in ascending order according to a key
+- **Deffered execution**
 
-```csharp
-TODO
-```
+    ```csharp
+    record Person(string Name, uint Age);
+
+    var persons = new Person[]
+        { new("John", 40), new("Adam", 22), new("Mike", 22), new("Carl", 52) };
+
+    var ordered = persons.OrderBy(p => p.Age);
+
+    foreach (var person in ordered) Console.WriteLine(person.Name);
+
+    // Output: Adam, Mike, John, Carl
+    ```
 
 ---
 
 #### Standard operators - `Skip` and `SkipWhile`
 
-- Bypasses a specified number of elements in a sequence and then returns the remaining elements
+- `Skip` - bypasses a specified number of elements in a sequence and then returns the remaining elements
+- `SkipWhile` - bypasses elements in a sequence as long as a specified condition is true and then returns the remaining elements
+- **Deffered execution**
 
-```csharp
-TODO
-```
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var query1 = numbers.Skip(2);
+    var qeury2 = numbers.SkipWhile(n => n < 3);
+
+    foreach (var n in query1) Console.WriteLine(n);     // Output: 3,4,5
+    foreach (var n in qeury2) Console.WriteLine(n);     // Output: 3,4,5
+    ```
 
 ---
 
 #### Standard operators - `Take` and `TakeWhile`
 
-```csharp
-TODO
-```
+- `Take` - returns a specified number of elements from the start of a sequence
+- `TakeWhile` - returns elements from a sequence as long as a condition is true
+- **Deffered execution**
+
+    ```csharp
+    int[] numbers = new[] { 1, 2, 3, 4, 5 };
+
+    var query1 = numbers.Take(2);
+    var qeury2 = numbers.TakeWhile(n => n < 3);
+
+    foreach (var n in query1) Console.WriteLine(n);     // Output: 1,2
+    foreach (var n in qeury2) Console.WriteLine(n);     // Output: 1,2
+    ```
 
 ---
 
 #### Standard operators - `Range`
 
 - Generates a sequence of integral numbers within a specified range
+- Parameters:
+    1. `start` - the value of the first integer in the sequence
+    2. `count` - the number of sequential integers to generate
+- **Deffered execution**
 
-```csharp
-TODO
-```
+    ```csharp
+    var seq1 = Enumerable.Range(-5, 5);
+    var seq2 = Enumerable.Range(1, 5);
+
+    foreach (var n in seq1) Console.WriteLine(n);   // -5,-4,-3,-2,-1
+    foreach (var n in seq2) Console.WriteLine(n);   // 1,2,3,4,5
+    ```
 
 ---
 
@@ -728,14 +765,26 @@ TODO
 
 - Applies an accumulator function over a sequence
 - The specified seed value is used as the initial accumulator value
+- **Deffered execution**
 
-```csharp
-TODO
-```
+    ```csharp
+    string[] words = { "car", "do", "monitor", "auto", "begin" };
+
+    string longestWord = words.Aggregate("car", (longest, text) =>
+    {
+        if (longest.Length < text.Length)
+            return text;
+        return longest;
+    });
+
+    Console.WriteLine(longestWord);     // Output: monitor
+    ```
 
 ---
 
 ## Concurrency and Asynchrony
+
+TODO
 
 ---
 

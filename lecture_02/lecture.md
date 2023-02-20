@@ -858,41 +858,6 @@ y.DoWork();         // I am doing NOTHING
 
 ---
 
-#### Override and method selection
-
-- Order in which compiler looks for matching method:
-    1. Methods declared directly on the calling type
-    2. Overriden methods
-    3. Virtual methods on base class
-
----
-
-```csharp
-public class BaseClass
-{
-    public virtual void DoWork(int param) =>
-        Console.Write("Base class implementation");
-}
-
-public class DerivedClass : BaseClass
-{
-    public override void DoWork(int param) =>
-        Console.Write("Derived class INT implementation");
-
-    public void DoWork(double param) =>
-        Console.Write("Derived class DOUBLE implementation");
-}
-
-var obj = new DerivedClass();
-
-obj.DoWork(1.0);    // Calling with double
-                    // Output: Derived class DOUBLE implementation
-obj.DoWork(1);      // Calling with int => implicit conversion to double
-                    // Output: Derived class DOUBLE implementation
-```
-
----
-
 #### `sealed` member modifier
 
 - Declaring an overriding member as `sealed` stops virtual inheritance
@@ -1249,6 +1214,41 @@ class Car
         // Cleanup statements...
     }
 }
+```
+
+---
+
+## Override and method selection
+
+- Order in which compiler looks for matching method:
+    1. Methods declared directly on the calling type
+    2. Overriden methods
+    3. Virtual methods on base class
+
+---
+
+```csharp
+public class BaseClass
+{
+    public virtual void DoWork(int param) =>
+        Console.Write("Base class implementation");
+}
+
+public class DerivedClass : BaseClass
+{
+    public override void DoWork(int param) =>
+        Console.Write("Derived class INT implementation");
+
+    public void DoWork(double param) =>
+        Console.Write("Derived class DOUBLE implementation");
+}
+
+var obj = new DerivedClass();
+
+obj.DoWork(1.0);    // Calling with double
+                    // Output: Derived class DOUBLE implementation
+obj.DoWork(1);      // Calling with int => implicit conversion to double
+                    // Output: Derived class DOUBLE implementation
 ```
 
 ---
