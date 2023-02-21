@@ -839,7 +839,43 @@ SPEAKER NOTES:
 
 ---
 
-TODO - async await a async methods
+##### Important properties
+
+- `Exception` - gets the `AggregateException` that caused the task to end prematurely
+- `IsCanceled` - gets whether the task has completed due to being canceled
+- `IsCompleted` - gets a value that indicates whether the task has completed
+- `IsCompletedSuccessfully` - gets whether the task ran to completion
+- `IsFaulted` - gets whether the task completed due to an unhandled exception
+
+<!--
+SPEAKER NOTES:
+- IsCompleted will return true when the task is in one of the three final states: RanToCompletion, Faulted, or Canceled
+- IsCompletedSuccessfully je true iba ak sa task skončil úspešne
+-->
+
+---
+
+#### `async` keyword
+
+- Turns a method into an async method, which allows you to use the `await` keyword in its body
+
+#### `await` operator
+
+- Suspends the calling method and yields control back to its caller until the awaited task is complete
+- Under the covers, the await functionality installs a callback on the task by using a continuation
+
+---
+
+#### Asynchronous method
+
+- Is intended to be non-blocking operation
+- Runs synchronously until it reaches its first `await` expression
+- Can't declare any `in`, `ref` or `out` parameters
+- Can have the following return types:
+    - `Task` or `Task<TResult>`
+    - `void` - event handlers
+    - `IAsyncEnumerable<T>` - async streams
+    - Any type that has an accessible `GetAwaiter` method
 
 ---
 
@@ -857,7 +893,7 @@ TODO - async await a async methods
     - Asynchronous slow version
     - Asynchronous fast version
 
-TODO - pridat nejaky meme obrazok
+TODO - pridat nejaky obrazok
 
 <!--
 SPEAKER NOTES:
@@ -866,60 +902,109 @@ SPEAKER NOTES:
 
 ---
 
-TODO - Pouzitie taskov a ich properties
-
----
-
-ASYNC
-
-- turns a method into an async method, which allows you to use the await keyword in its body
-
-AWAIT
-
-- suspends the calling method and yields control back to its caller until the awaited task is complete
-- Under the covers, the await functionality installs a callback on the task by using a continuation
-
-ASYNC METHOD
-
-- runs synchronously until it reaches its first await expression
-- Is intended to be non-blocking operation
-- Can be awaited by calling methods
-- Doesn't require multithreading because it doesn't run on its own thread (to spawn a new thread use `Task.Run` method)
-- Runs on the current synchronization context
-- Typically returns a `Task` or `Task<TResult>`
-- Pridat vsetky mozne return values
-- The async method can't declare any in, ref or out parameters
-
----
-
-TASK CLASS INTERNALS
-
-- The Result property is a blocking propert
-y. If you try to access it before its task is finished, the thread that's currently active is blocked until the task completes and the value is available
-- provides a life cycle for asynchronous operations, and that cycle is represented by the TaskStatus enumeration
-
-ASYNC EXCEPTIONS
+#### Exceptions in asynchronous code
 
 - Asynchronous methods throw exceptions, just like their synchronous counterparts
-- When a task that runs asynchronously throws an exception, that Task is faulted and that exception is stored in the Task
+- When a task that runs asynchronously throws an exception, that task is faulted and exception is stored in the task
 - Faulted tasks throw an exception when they're awaited
-- Nepouzivat async void
-- Nepouzivat try catch ak tam neawaitujeme async operaciu
+- **Important remarks**:
+    - Exceptions from `async void` methods cannot be catched!!
+    - Always await asynchronous method in `try` block
 
-BEST PRACTICES AND CONVENTIONS
+---
 
-- Async methods has `Async` sufffix
-- Async all the way down
-- Do not use async methods without await inside it - big performance implication
-- Odkaz na github clanok o async await
-- I/O-bound, use async and await without Task.Run
-- CPU-bound and you care about responsiveness, use async and await, but spawn off the work on another thread with Task.Run
-- Use await instead of Task.Wait - second options blocks the thread
-- Consider using ValueTask where possible
-- Do not use void return type with async methods unless you are forced to do it - because of exceptions
+#### Exceptions in asynchronous code
+
+<div class="col2">
+<div>
+
+**async void** ❌
+
+```csharp
+static async void ThrowExceptionVoidAsync()
+    => throw new Exception();
+
+static async Task Main(string[] args)
+{
+    Console.WriteLine("START");
+    try
+    {
+        ThrowExceptionVoidAsync();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("EXCEPTION");
+    }
+    Console.WriteLine("END");
+}
+
+// Output: START, END
+```
+
+</div>
+<div>
+
+**async Task** ✅
+
+```csharp
+static async Task ThrowExceptionTaskAsync()
+    => throw new Exception();
+
+static async Task Main(string[] args)
+{
+    Console.WriteLine("START");
+    try
+    {
+        await ThrowExceptionTaskAsync();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("EXCEPTION");
+    }
+    Console.WriteLine("END");
+}
+
+// Output: START, EXCEPTION, END
+```
+
+</div>
+</div>
+
+---
+
+#### Cancellation
+
+- Sometimes, we need to cancel async operation after it's started
+- `CancellationTokenSource` - class
+    - Manages cancellation tokens
+    - Has `Cancel` method which initiates cancellation
+- `CancellationToken` - struct
+    - Propagates notification that operations should be canceled
+    - Cannot be used to initiate cancellation
+- Cancellation can be initiated automatically after specified period of time
+- Most asynchronous methods in the CLR support cancellation tokens
+
+<!--
+SPEAKER NOTES:
+- Cancellation je riešená cez dve triedy kvoli bezpečnosti:
+    - Producent vytvorí CancellationTokenSource objekt z ktorého získa CancellationToken a ten poskytne konzumentovi
+    - Konzument tokenu (async method) môže na CancellationToken objekte skontrolovať či neprišiel požiadavok na zrušenie vykonávania
+    - Požiadavok na zrušenie je možné vyvolať pomocou Cancel metody na CancellationTokenSource
+    - Tým že k metóde Cancel nemá konzument prístup, tak nemôže nastať prípad že by si sám pozastavil vykonávanie
+-->
+
+---
+
+#### Best practices
+
+- Add "_Async_" suffix to async method name
+- Do not create async methods without `await` in its body
+- Prefer `async Task` methods over `async void` methods
+- Async all the way - don’t mix blocking and async code
+- Configure synchronization context - use `ConfigureAwait(false)` when you can
+- Do not use `Task.Wait` or `Task.Result` - await the task instead
 - Use `Task.Delay` instead of `Thread.Sleep` method
-
-CANCELLATION TOKEN
+- You can find more tips here: [David Fowler - Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md)
 
 ---
 
@@ -939,10 +1024,6 @@ CANCELLATION TOKEN
 ### Async vs Parallel
 
 TODO
-
-- Async vs Parallel execution:
-    - One person can make breakfast asynchronously by starting the next task before the first task completes
-    - For a parallel algorithm, you'd need multiple cooks (or threads). One would make the eggs, one the bacon, and so on.
 
 ---
 
