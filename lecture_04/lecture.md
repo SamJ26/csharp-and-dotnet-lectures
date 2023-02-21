@@ -784,17 +784,16 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 
 ## Concurrency and Asynchrony
 
-TODO
-
 ---
 
 ### Motivation
 
 - Most applications need to deal with more than one thing happening at a time
-- Common concurrency scenarios:
+- When do we need _concurrency and asynchrony_?
     - Writing responsive UI
-    - Allowing requests to process simultaneously
     - Parallel programming
+    - I/O operations (e.g. file reading)
+    - Expensive computations
 
 ---
 
@@ -802,20 +801,125 @@ TODO
 
 - Working with threads
 - Using tasks
-- Asynchronous programming
+- **Asynchronous programming**
 
 ---
 
-TODO
+### Asynchronous programming
+
+- Supported by .NET runtime
+- Uses `async` and `await` keywords
+- Preferred over direct usage of threads or tasks
+- Compiler does most of the heavy lifting
+- Async programming with `async` and `await` follows the
+    [Task-based Asynchronous Pattern (TAP)](https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap)
 
 ---
 
-WORK IN PROGRESS
+#### Tasks
 
-LINQ
+- The core of async programming
+- Represent an async operation that **might or might not be backed by a thread**
+- The **task scheduler** orchestrates task execution
+- Higher-level abstraction compared to a threads
+- `Task` - represents an async operation that **does not return a value**
+- `Task<TResult>` - represents an async operation that **returns a value**
+- `ValueTask<TResult>` - optimization scenarios
 
-- AsXXX robi iba casting
-- ToXXX alokuje novu kolekciu
+<!--
+SPEAKER NOTES:
+- Tasky nie su nevyhnutne použivané kvôli performance
+- Ich hlavná výhoda je zvýšenie škálovateľnosti aplikácie (neblokujeme jedno hlavné vlákno)
+- V praxi by sme sa nemali až tak starať o to ako sú realizované na úrovni HW
+- ValueTask:
+    - Nepoužívajte ak fakt neviete ako sa s ním pracuje
+    - V prípade že metóda skončí synchronne ušetrí alokáciu na heape
+    - Je to value type
+-->
+
+---
+
+TODO - async await a async methods
+
+---
+
+#### What happens in an async method
+
+![height:500 center](./images/navigation-trace-async-program.png)
+
+---
+
+#### Cooking example - demo
+
+- Code for breakfast preparation
+- Multiple versions:
+    - Synchronous version
+    - Asynchronous slow version
+    - Asynchronous fast version
+
+TODO - pridat nejaky meme obrazok
+
+<!--
+SPEAKER NOTES:
+- Ukázať Cooking project v /src zložke
+-->
+
+---
+
+TODO - Pouzitie taskov a ich properties
+
+---
+
+ASYNC
+
+- turns a method into an async method, which allows you to use the await keyword in its body
+
+AWAIT
+
+- suspends the calling method and yields control back to its caller until the awaited task is complete
+- Under the covers, the await functionality installs a callback on the task by using a continuation
+
+ASYNC METHOD
+
+- runs synchronously until it reaches its first await expression
+- Is intended to be non-blocking operation
+- Can be awaited by calling methods
+- Doesn't require multithreading because it doesn't run on its own thread (to spawn a new thread use `Task.Run` method)
+- Runs on the current synchronization context
+- Typically returns a `Task` or `Task<TResult>`
+- Pridat vsetky mozne return values
+- The async method can't declare any in, ref or out parameters
+
+---
+
+TASK CLASS INTERNALS
+
+- The Result property is a blocking propert
+y. If you try to access it before its task is finished, the thread that's currently active is blocked until the task completes and the value is available
+- provides a life cycle for asynchronous operations, and that cycle is represented by the TaskStatus enumeration
+
+ASYNC EXCEPTIONS
+
+- Asynchronous methods throw exceptions, just like their synchronous counterparts
+- When a task that runs asynchronously throws an exception, that Task is faulted and that exception is stored in the Task
+- Faulted tasks throw an exception when they're awaited
+- Nepouzivat async void
+- Nepouzivat try catch ak tam neawaitujeme async operaciu
+
+BEST PRACTICES AND CONVENTIONS
+
+- Async methods has `Async` sufffix
+- Async all the way down
+- Do not use async methods without await inside it - big performance implication
+- Odkaz na github clanok o async await
+- I/O-bound, use async and await without Task.Run
+- CPU-bound and you care about responsiveness, use async and await, but spawn off the work on another thread with Task.Run
+- Use await instead of Task.Wait - second options blocks the thread
+- Consider using ValueTask where possible
+- Do not use void return type with async methods unless you are forced to do it - because of exceptions
+- Use `Task.Delay` instead of `Thread.Sleep` method
+
+CANCELLATION TOKEN
 
 ---
 
@@ -832,7 +936,19 @@ LINQ
 
 ---
 
+### Async vs Parallel
+
+TODO
+
+- Async vs Parallel execution:
+    - One person can make breakfast asynchronously by starting the next task before the first task completes
+    - For a parallel algorithm, you'd need multiple cooks (or threads). One would make the eggs, one the bacon, and so on.
+
+---
+
 ## Resources
 
 - [C# in Nutshell](https://www.amazon.com/gp/product/1098121953?ie=UTF8&tag=cinanu-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=1098121953)
 - [VUT FIT ICS slides](https://github.com/nesfit/ICS/tree/master/Lectures)
+- [Tasks are not threads and they are not for performance](https://steven-giesel.com/blogPost/d095383f-7ea9-4419-96b8-889c6981cce0?utm_source=substack&utm_medium=email)
+- [David Fowler - Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md)
