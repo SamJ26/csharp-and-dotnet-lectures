@@ -1023,7 +1023,14 @@ SPEAKER NOTES:
 
 ### Async vs Parallel
 
-TODO
+- **Asynchronous** cooking:
+    - You start boiling the eggs and in the meantime you prepare the bread
+    - You are not waiting until the eggs are finished
+    - You are the only one person who is cooking
+- **Parallel** cooking:
+    - One person prepares the eggs and the other prepares the bread
+    - Both activities are running in parallel
+    - Both activities are performed by different chefs
 
 ---
 
