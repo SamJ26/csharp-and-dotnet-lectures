@@ -163,6 +163,9 @@ else
     }
 
     Foo(1.5);
+
+    double number = 5;      // Must be initialized
+    Foo(number);
     ```
 
 ---
@@ -787,6 +790,7 @@ class Program
     StringBuilder sb = null;
     string text = sb?.ToString();
     char? firstLetter = (sb?.ToString())?[0];
+    Console.WriteLine(firstLetter);             // Output: null
     ```
 
 ---
@@ -797,7 +801,7 @@ class Program
 - Defines method's return type and parameters
 - Assigning a method to a delegate variable creates a delegate instance
 - The code associated with a delegate is invoked using a virtual method added to a delegate type
-- **Delegates are immutable**
+- **Delegates are immutable** = re-assignment creates a new delegate instance
 - Syntax:
 
     ```csharp
