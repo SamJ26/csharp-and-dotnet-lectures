@@ -197,7 +197,7 @@ else
 - Cannot access private variables in the type they are extending
 - **Must be defined in static class**
 - Extending _value types_ can be tricky
-    (first parameter `this instance` vs `ref this instance`)
+    (first parameter `this Type instance` vs `ref this Type instance`)
 - Compatible instance method will always take precedence over an extension method
 
 ---
@@ -526,6 +526,12 @@ stack.Push(2);
 var val = stack.Pop();
 ```
 
+<!--
+SPEAKER NOTES:
+- Spomenúť že možným riešením ako tento stack používať z rôznymi data types by bolo použiť object namiesto int
+- To by ale viedlo k tragickej performance kvôli un/boxingu v prípade value types
+-->
+
 ---
 
 ### Generic version - problem solved 👏
@@ -583,7 +589,7 @@ class Program
     static void DoWork<T1, T2>() {}
 
     static void Foo<T1, T2>() =>
-        Console.WriteLine($"T: {typeof(T1)}, U: {typeof(T2)}");
+        Console.WriteLine($"T1: {typeof(T1)}, T2: {typeof(T2)}");
     
     static void Main(string[] args)
     {
@@ -635,8 +641,8 @@ public class Stack<T> where T : IContainerItem
 ```
 
 ```csharp
-var stack1 = new Stack<int>();       // Error
-var stack2 = new Stack<Item>();      // Ok
+var stack1 = new Stack<int>();       // Error ❌
+var stack2 = new Stack<Item>();      // Ok ✅
 ```
 
 ---
@@ -1055,7 +1061,7 @@ class AuthorAttribute : Attribute
 ```
 
 ```csharp
-[Author("Samuel Janek", "1.0.0")]
+[Author("Samuel Janek")]
 class Program
 {
     static void Main(string[] args)
