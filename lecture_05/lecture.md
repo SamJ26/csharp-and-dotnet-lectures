@@ -168,6 +168,7 @@ IEnumerable<TService> vs TService
 
 ## Resources
 
+- [Microsoft documentation](https://learn.microsoft.com/en-us/docs/)
 - [C# in Nutshell](https://www.amazon.com/gp/product/1098121953?ie=UTF8&tag=cinanu-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=1098121953)
-- [VUT FIT ICS slides](https://github.com/nesfit/ICS/tree/master/Lectures)
+- [VUT FIT IW5 lecture 02 - Michal Mrnuštík](https://github.com/nesfit/IW5/tree/main/Lectures/Lecture_02)
 - [Dependency Injection vs Dependency Inversion vs IoC](https://medium.com/ssense-tech/dependency-injection-vs-dependency-inversion-vs-inversion-of-control-lets-set-the-record-straight-5dc818dc32d1)

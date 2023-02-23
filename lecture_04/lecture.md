@@ -1036,7 +1036,7 @@ SPEAKER NOTES:
 
 ## Resources
 
+- [Microsoft documentation](https://learn.microsoft.com/en-us/docs/)
 - [C# in Nutshell](https://www.amazon.com/gp/product/1098121953?ie=UTF8&tag=cinanu-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=1098121953)
-- [VUT FIT ICS slides](https://github.com/nesfit/ICS/tree/master/Lectures)
 - [Tasks are not threads and they are not for performance](https://steven-giesel.com/blogPost/d095383f-7ea9-4419-96b8-889c6981cce0?utm_source=substack&utm_medium=email)
 - [David Fowler - Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md)
