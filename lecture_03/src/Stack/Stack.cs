@@ -49,7 +49,7 @@ public sealed class Stack<T>
         foreach (var item in _items)
         {
             builder.AppendLine(item.ToString());
-        } 
+        }
         builder.AppendLine("}");
         return builder.ToString();
     }

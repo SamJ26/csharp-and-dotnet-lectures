@@ -7,7 +7,10 @@ class Program
         // Func example
         string[] arr = new[] { "Harry", "Gary", "Mike", "Adam" };
         
-        Func<string, string> toUpperCase = (string value) => value.ToUpper();
+        Func<string, string> toUpperCase = (string value) =>
+        {
+            return value.ToUpper();
+        };
         Func<string, string> toLowerCase = (string value) => value.ToLower();
         Func<string, string> clone = (string value) => value + value;
 

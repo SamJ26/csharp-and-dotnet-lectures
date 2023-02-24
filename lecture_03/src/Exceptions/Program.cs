@@ -63,7 +63,7 @@ class Program
 
     static void Method()
     {
-        throw new Exception("ORDINARY EXCEPTION");
-        // throw new ArgumentException("ARGUMENT EXCEPTION");
+        // throw new Exception("ORDINARY EXCEPTION");
+        throw new ArgumentException("ARGUMENT EXCEPTION");
     }
 }
