@@ -267,10 +267,7 @@ public interface IDictionary<TKey, TValue> : ICollection<KeyValuePair<TKey, TVal
 - Implements `ICollection`, `IEnumerable`, `IList`
 - Implicit base class for all types of arrays in C#
 - Fixed length, contiguous space in memory
-
----
-
-TODO - sample
+- The array size is limited to a total of 4 billion elements
 
 ---
 
@@ -283,7 +280,26 @@ TODO - sample
 
 ---
 
-TODO - sample
+```csharp
+record Person(string Name, uint Age);
+
+List<Person> persons = new List<Person>();
+
+persons.Add(new Person("Samuel", 24));
+persons.AddRange(new []
+{
+    new Person("Adam", 42),
+    new Person("Norbit", 58)
+});
+
+Console.WriteLine(persons.Count);       // 3
+Console.WriteLine(persons.Capacity);    // 4 - it is not always Count + 1
+
+Console.WriteLine(persons.Contains(new Person("Samuel", 24)));    // True
+Console.WriteLine(persons.Contains(new Person("Animal", 100)));   // False
+
+Console.WriteLine(persons[0].Name);     // "Samuel"
+```
 
 ---
 
@@ -303,7 +319,24 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 366
 
 ---
 
-TODO - sample
+```csharp
+LinkedList<string> list = new();
+
+Console.WriteLine(list.First == list.Last == false);
+
+list.AddFirst("1");
+list.AddFirst("0");
+list.AddLast("4");
+list.AddBefore(list.Last!,"2");
+list.AddBefore(list.Last!, "3");
+
+Console.WriteLine(list.Count);      // 5
+
+foreach (var node in list)
+{
+    Console.WriteLine(node);        // Output: 0 1 2 3 4
+}
+```
 
 ---
 
@@ -321,7 +354,19 @@ TODO - sample
 
 ---
 
-TODO - sample
+```csharp
+Queue<int> numbers = new Queue<int>();
+        
+numbers.Enqueue(5);
+numbers.Enqueue(10);
+
+Console.WriteLine(numbers.Peek());      // 5
+Console.WriteLine(numbers.Count);       // 2
+Console.WriteLine(numbers.Dequeue());   // 5
+Console.WriteLine(numbers.Count);       // 1
+
+Console.WriteLine(numbers.Contains(11));    // False
+```
 
 ---
 
@@ -339,7 +384,19 @@ TODO - sample
 
 ---
 
-TODO - sample
+```csharp
+Stack<int> numbers = new Stack<int>();
+        
+numbers.Push(5);
+numbers.Push(10);
+
+Console.WriteLine(numbers.Peek());      // 10
+Console.WriteLine(numbers.Count);       // 2
+Console.WriteLine(numbers.Pop());       // 10
+Console.WriteLine(numbers.Count);       // 1
+
+Console.WriteLine(numbers.Contains(11));    // False
+```
 
 ---
 
@@ -354,7 +411,25 @@ TODO - sample
 
 ---
 
-TODO - sample
+```csharp
+HashSet<int> set1 = new HashSet<int>();
+
+set1.Add(1);
+set1.Add(2);
+set1.Add(2);    // Trying to add duplicate value
+
+HashSet<int> set2 = new() { 2, 3, 4 };
+
+Console.WriteLine(set1.Count);       // 2
+Console.WriteLine(set2.Count);       // 3
+
+set1.UnionWith(set2);
+
+foreach (var n in set1)
+{
+    Console.WriteLine(n);       // Output: 1 2 3 4
+}
+```
 
 ---
 
@@ -369,7 +444,22 @@ TODO - sample
 
 ---
 
-TODO - sample
+```csharp
+Dictionary<int, string> dictionary = new();
+        
+dictionary.Add(8, "Eight");         // Ok
+dictionary.Add(8, "Value");         // Exception ❌
+dictionary.TryAdd(8, "Value");      // Ok
+
+var v1 = dictionary[8];                         // Ok
+dictionary.TryGetValue(8, out string? v2);      // Ok
+var v3 = dictionary[10];                        // Exception ❌
+
+foreach (var pair in dictionary)
+{
+    Console.WriteLine(pair.Key + " " + pair.Value);
+}
+```
 
 ---
 
