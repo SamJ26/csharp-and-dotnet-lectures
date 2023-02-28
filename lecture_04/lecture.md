@@ -893,8 +893,6 @@ SPEAKER NOTES:
     - Asynchronous slow version
     - Asynchronous fast version
 
-TODO - pridat nejaky obrazok
-
 <!--
 SPEAKER NOTES:
 - Ukázať Cooking project v /src zložke
