@@ -1069,6 +1069,7 @@ static async Task Main(string[] args)
 - `CancellationToken` - struct
     - Propagates notification that operations should be canceled
     - Cannot be used to initiate cancellation
+- **Cancelled task throws `TaskCanceledException` when awaited**
 - Cancellation can be initiated automatically after specified period of time
 - Most asynchronous methods in the CLR support cancellation tokens
 
