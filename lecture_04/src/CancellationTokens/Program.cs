@@ -12,7 +12,7 @@ class Program
             cts.Cancel();
             e.Cancel = true;
         };
-
+    
         Console.WriteLine("I am going to do some async work");
         try
         {
@@ -32,4 +32,33 @@ class Program
         await Task.Delay(5000, token);
         Console.WriteLine("The task is finished");
     }
+    
+    // static async Task Main(string[] args)
+    // {
+    //     var cts = new CancellationTokenSource();
+    //     
+    //     Console.CancelKeyPress += (s, e) =>
+    //     {
+    //         Console.WriteLine("Canceling...");
+    //         cts.Cancel();
+    //         e.Cancel = true;
+    //     };
+    //
+    //     Console.WriteLine("I am going to do some async work");
+    //     
+    //     await RunAsync(cts.Token);
+    //     
+    //     Console.WriteLine("I am done...");
+    // }
+    //
+    // static async Task RunAsync(CancellationToken token)
+    // {
+    //     var counter = 0;
+    //     while (!token.IsCancellationRequested)
+    //     {
+    //         Console.WriteLine(counter);
+    //         counter++;
+    //         await Task.Delay(1000);
+    //     }
+    // }
 }

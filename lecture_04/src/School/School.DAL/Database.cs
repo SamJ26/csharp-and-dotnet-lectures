@@ -2,14 +2,21 @@ using School.DAL.Entities;
 
 namespace School.DAL;
 
-public static class Database
+public class Database
 {
-    public static ICollection<AddressEntity> Addresses { get; } = new List<AddressEntity>();
-    public static ICollection<CourseEntity> Courses { get; } = new List<CourseEntity>();
-    public static ICollection<ExamEntity> Exams { get; } = new List<ExamEntity>();
-    public static ICollection<StudentEntity> Students { get; } = new List<StudentEntity>();
+    private static readonly Lazy<Database> LazyDatabase = new Lazy<Database>(() => new Database());
+    public static Database Instance => LazyDatabase.Value;
 
-    public static void ShowData()
+    private Database()
+    {
+    }
+    
+    public ICollection<AddressEntity> Addresses { get; } = new List<AddressEntity>();
+    public ICollection<CourseEntity> Courses { get; } = new List<CourseEntity>();
+    public ICollection<ExamEntity> Exams { get; } = new List<ExamEntity>();
+    public ICollection<StudentEntity> Students { get; } = new List<StudentEntity>();
+
+    public void ShowData()
     {
         Console.WriteLine("--------------------------");
         

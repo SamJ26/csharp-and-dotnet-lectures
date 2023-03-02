@@ -17,8 +17,8 @@ public class StudentRepository : IRepository<StudentEntity>
         entity.Id = Guid.NewGuid();
         entity.Address.Id = Guid.NewGuid();
         
-        Database.Addresses.Add(entity.Address);
-        Database.Students.Add(entity);
+        Database.Instance.Addresses.Add(entity.Address);
+        Database.Instance.Students.Add(entity);
 
         return entity.Id;
     }
@@ -28,7 +28,7 @@ public class StudentRepository : IRepository<StudentEntity>
     /// </summary>
     public StudentEntity GetById(Guid id)
     {
-        return Database.Students.Single(s => s.Id == id);
+        return Database.Instance.Students.Single(s => s.Id == id);
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class StudentRepository : IRepository<StudentEntity>
         {
             throw new ArgumentNullException(nameof(entity));
         }
-        var existingStudent = Database.Students.Single(s => s.Id == entity.Id);
+        var existingStudent = Database.Instance.Students.Single(s => s.Id == entity.Id);
         existingStudent.Name = entity.Name;
         return existingStudent;
     }
@@ -52,8 +52,8 @@ public class StudentRepository : IRepository<StudentEntity>
     /// </summary>
     public void Delete(Guid id)
     {
-        var student = Database.Students.Single(s => s.Id == id);
-        Database.Addresses.Remove(student.Address);
-        Database.Students.Remove(student);
+        var student = Database.Instance.Students.Single(s => s.Id == id);
+        Database.Instance.Addresses.Remove(student.Address);
+        Database.Instance.Students.Remove(student);
     }
 }

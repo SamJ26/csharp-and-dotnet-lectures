@@ -66,6 +66,11 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 334
     }
 	```
 
+<!--
+SPEAKER NOTES:
+- IEnumerator predstavuje implementáciu Iterator patternu
+-->
+
 ---
 
 ##### `IEnumerable<T>`
@@ -903,13 +908,14 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 - Compiler does most of the heavy lifting
 - Async programming with `async` and `await` follows the
     [Task-based Asynchronous Pattern (TAP)](https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap)
+- **Async != parallel**
 
 ---
 
 #### Tasks
 
 - The core of async programming
-- Represent an async operation that **might or might not be backed by a thread**
+- Represent an async operation that **might or might not be backed by a new thread**
 - The **task scheduler** orchestrates task execution
 - Higher-level abstraction compared to a threads
 - `Task` - represents an async operation that **does not return a value**
@@ -1090,7 +1096,6 @@ SPEAKER NOTES:
 - Do not create async methods without `await` in its body
 - Prefer `async Task` methods over `async void` methods
 - Async all the way - don’t mix blocking and async code
-- Configure synchronization context - use `ConfigureAwait(false)` when you can
 - Do not use `Task.Wait` or `Task.Result` - await the task instead
 - Use `Task.Delay` instead of `Thread.Sleep` method
 - You can find more tips here: [David Fowler - Async Guidance](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md)

@@ -7,6 +7,6 @@ public class GetStudentsByAddressFilterQuery : IQuery<StudentEntity, AddressFilt
 {
     public IEnumerable<StudentEntity> Execute(AddressFilter filter)
     {
-        return Database.Students.Where(s => s.Address.City == filter.City && s.Address.State == filter.State);
+        return Database.Instance.Students.Where(s => s.Address.City == filter.City && s.Address.State == filter.State);
     }
 }

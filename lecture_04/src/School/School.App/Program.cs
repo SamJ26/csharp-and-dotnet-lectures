@@ -44,7 +44,7 @@ class Program
             }
         });
         
-        Database.ShowData();
+        Database.Instance.ShowData();
         
         // Get student by Id
         Console.WriteLine("\nOPERATION: studentRepository.GetById(id1)");
@@ -68,6 +68,6 @@ class Program
         Console.WriteLine("\nOPERATION: studentRepository.Delete(id2)");
         studentRepository.Delete(id2);
         
-        Database.ShowData();
+        Database.Instance.ShowData();
     }
 }
