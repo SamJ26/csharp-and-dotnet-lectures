@@ -7,6 +7,7 @@ public class GetStudentsByStudentDataFilterQuery : IQuery<StudentEntity, Student
 {
     public IEnumerable<StudentEntity> Execute(StudentDataFilter filter)
     {
-        return Database.Instance.Students.Where(s => s.Name.Contains(filter.Name) && s.Program == filter.Program);
+        return Database.Instance.Students
+            .Where(s => s.Name.Contains(filter.Name) && s.Program == filter.Program);
     }
 }

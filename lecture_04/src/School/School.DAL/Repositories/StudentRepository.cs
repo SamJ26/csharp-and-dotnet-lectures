@@ -43,6 +43,7 @@ public class StudentRepository : IRepository<StudentEntity>
         }
         var existingStudent = Database.Instance.Students.Single(s => s.Id == entity.Id);
         existingStudent.Name = entity.Name;
+        existingStudent.Program = entity.Program;
         return existingStudent;
     }
 

@@ -4,7 +4,9 @@ namespace School.DAL;
 
 public class Database
 {
-    private static readonly Lazy<Database> LazyDatabase = new Lazy<Database>(() => new Database());
+    private static readonly Lazy<Database> LazyDatabase =
+        new Lazy<Database>(() => new Database());
+    
     public static Database Instance => LazyDatabase.Value;
 
     private Database()

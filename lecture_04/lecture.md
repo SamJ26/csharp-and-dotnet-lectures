@@ -644,7 +644,7 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
 - **Deffered execution**
 
     ```csharp
-    int[] numbers = new[] { 0, 1, 2, 3, 4 };
+    int[] numbers = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
             
     var query = numbers.Where(n => n > 5);
 
@@ -865,11 +865,11 @@ Image from [C# in Nutshell](https://www.albahari.com/nutshell/) page 399
     ```csharp
     string[] words = { "car", "do", "monitor", "auto", "begin" };
 
-    string longestWord = words.Aggregate("car", (longest, text) =>
+    string longestWord = words.Aggregate("car", (acc, current) =>
     {
-        if (longest.Length < text.Length)
-            return text;
-        return longest;
+        if (acc.Length < current.Length)
+            return current;
+        return acc;
     });
 
     Console.WriteLine(longestWord);     // Output: monitor
