@@ -154,6 +154,133 @@ IEnumerable<TService> vs TService
 
 ---
 
+## Motivation
+
+- Why do we need it?
+	- Logging configuration
+	- Secret data (e.g. connection strings)
+	- Environment variables
+	- Different bahavior in dev and production
+	- And many more...
+- **Allows us to change the behavior of the app wihtout directly changing the code**
+
+<!--
+SPEAKER NOTES:
+- Cielom konfiguracie je nemat premenne (konfiguracne) data hardcoded v kode ale mimo v specializovanych suboroch ktore sa daju lahko menit bez nutnosti rekompilacie aplikacie
+- V kode nikdy nechceme mat napisane nejake tajne data lebo samotny kod je vacsinou volne dostupny napr. na githube. Preto sa taketo data ukladaju do zvlast suborov ku ktorym sa potom pristupuje cez nejakeho configuration providera.
+-->
+
+---
+
+## Configuration providers
+
+- As a _configuration_ can be understood any file that
+    **changes the behavior of the program**
+- Configuration files are read by **configuration providers**:
+	- File config provider (`.json`, `.xml`, `.init` files)
+	- Environment variable config provider
+	- Command-line config provider
+	- Memory config provider
+- **Configuration is loaded during runtime**
+
+<!--
+SPEAKER NOTES:
+- V zavisloti od toho odkial konfiguracne data pochadzaju rozlisujeme roznych providerov
+- Cele to je navrhnute tak aby sme si mohli napisat aj vlastneho config providera kt. bude napr. pracovat s DB
+- Pri nastavovani providerov potom zalezi v akom poradi ich pridame
+-->
+
+---
+
+## Config file example - `appsettings.json`
+
+```json
+{
+  "ConnectionStrings": {
+    "DB_CONNECTION_STRING": ""
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+```
+
+---
+
+## Configuration in .NET
+
+- Namespace `Microsoft.Extensions.Configuration`
+- Configuration utilities are distributed via _NuGet packages_
+	- Console apps - utilities **need to be installed**
+	- Class libraries - utilities **need to be installed**
+	- Web apps - utilities are **available via _generic host_**
+- **_Configuration pattern_ isn't designed to be programmatically writable**
+
+<!--
+SPEAKER NOTES:
+- Nie vzdy su utitilities na pracu s konfiguraciou v aplikacii dostupne (niekde ich treba manualne doinstalovat)
+- Praca s konfiguraciou v console app sa mierne lisi od web apps (vo web apps s konfiguraciou pracujeme cez generic hosta)
+-->
+
+---
+
+## Configuration in console app
+
+1. Install following nuget packages:
+    - `Microsoft.Extensions.Configuration`
+    - `Microsoft.Extensions.Configuration.Binder`
+2. According to config files select proper configuration providers
+    - `Microsoft.Extensions.Configuration.Json`
+3. Make sure that config files are included to the output of the build process
+3. Configure providers and build the configuration
+4. Use the configuration 👏 
+
+<!--
+SPEAKER NOTES:
+- Ukazat tento proces na predpripravenej console app
+-->
+
+---
+
+## Abstractions
+
+- **Agnostic to their underlying configuration provider**
+- `IConfiguration`
+    - Represents a set of key/value app config properties
+- `IConfigurationRoot`
+    - Represents the root of a configuration hierarchy
+    - `ConfigurationBuilder.Build` method returns `IConfigurationRoot`
+- `IConfigurationSection`
+    - Represents a section of app config values
+    - `GetSection` method returns `IConfigurationSection`
+
+---
+
+## Options pattern
+
+TODO
+
+---
+
+## Remarks
+
+- Make sure that config files are included to the output of the build process
+- Use **options pattern** when using dependency injection
+- **Prefer records over classes** when binding configuration to strongly typed objects
+- **Be careful about what you put in config files**
+
+<!--
+SPEAKER NOTES:
+- Samozrejme nie vzdy je ten options pattern treba ale pri akejkolvek vacsej aplikacii uz sa velmi hodi
+-->
+
+---
+
 # Logging
 
 ---
@@ -172,4 +299,3 @@ IEnumerable<TService> vs TService
 - [C# in Nutshell](https://www.amazon.com/gp/product/1098121953?ie=UTF8&tag=cinanu-20&linkCode=as2&camp=1789&creative=9325&creativeASIN=1098121953)
 - [VUT FIT IW5 lecture 02 - Michal Mrnuštík](https://github.com/nesfit/IW5/tree/main/Lectures/Lecture_02)
 - [Dependency Injection vs Dependency Inversion vs IoC](https://medium.com/ssense-tech/dependency-injection-vs-dependency-inversion-vs-inversion-of-control-lets-set-the-record-straight-5dc818dc32d1)
-- [DotNetConfig](https://dotnetconfig.org/)

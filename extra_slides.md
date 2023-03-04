@@ -109,3 +109,25 @@ dotnet format       # Formats code to match editorconfig settings
 - Blogs:
     - [Andrew Lock](https://andrewlock.net/)
     - [Jeremy Likness](https://blog.jeremylikness.com/blog)
+
+---
+
+## Config file example - `appsettings.json`
+
+- Copied to output (`/bin` folder) during the build process
+    (**only when using generic host**)
+- Different types:
+	- `appsettings.json`
+	- `appsettings.{Environment}.json`
+- What **should not be** in this file:
+	- Secret data (e.g. connection string to database)
+	- External API keys
+	- URLs of cooperating servers
+
+<!--
+SPEAKER NOTES:
+- appsettings.json je typicky predstavitel config files s ktorym budete vsetci pracovat v ramci projektu
+- Pri zalozeni noveho asp.net core projektu ho mate automaticky nachystany
+-->
+
+---
