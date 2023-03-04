@@ -174,8 +174,8 @@ SPEAKER NOTES:
 
 ## Configuration providers
 
-- As a _configuration_ can be understood any file that
-    **changes the behavior of the program**
+- As a _configuration_ can be understood any external file and data that
+    **change the behavior of the program**
 - Configuration files are read by **configuration providers**:
 	- File config provider (`.json`, `.xml`, `.init` files)
 	- Environment variable config provider
@@ -263,11 +263,96 @@ SPEAKER NOTES:
 
 ## Options pattern
 
-TODO
+- Provides **strongly-typed** access to groups of related settings
+- Used in combination with **Dependency Injection**
+- Provides a mechanism to validate configuration data
+- Possible through following interfaces:
+    - `IOptions<TOptions>`
+    - `IOptionsSnapshot<TOptions>`
+    - `IOptionsMonitor<TOptions>`
+
+<!--
+SPEAKER NOTES:
+- Rozdiel medzi klasickym pouzivanim konfiguracie a options patternom:
+    - Na options pattern potrebujeme mat DI
+    - Ku konfiguracii v pripade options patternu pristupujeme cez IoC container (constructor injection)
+    - Options pattern je strongly-typed
+-->
 
 ---
 
-## Remarks
+### Options pattern and Dependency Injection
+
+**Configure options**
+
+```csharp
+services.Configure<LoggerOptions>(configuration.GetSection(nameof(LoggerOptions)));
+```
+
+**Use configured options**
+
+```csharp
+public class Service
+{
+    private readonly IOptions<LoggerOptions> _options;
+
+    public Service(IOptions<LoggerOptions> options)
+    {
+        _options = options;
+    }
+
+    public void Foo() => Console.WriteLine(_options.Value);
+}
+```
+
+---
+
+#### `IOptions<TOptions>`
+
+- Registered as **singleton**
+- **Does not support reloading** of configuration after app startup
+
+#### `IOptionsSnapshot<TOptions>`
+
+- Registered as **scoped**
+- **Supports reloading** of configuration values during runtime - **options are computed once per scope (e.g. request in ASP.NET Core)**
+- Designed for use with transient and scoped dependencies
+
+---
+
+#### `IOptionsMonitor<TOptions>`
+
+- Registered as **singleton**
+- **Supports reloading** of configuration values during runtime - **retrieves the latest option values at any time**
+- Has a cache
+- Supports change notifications and selective options invalidation
+- Especially useful in singleton dependencies
+
+---
+
+#### Summary table
+
+| **Interface**                | **Lifetime** | **Reloading**        |
+|------------------------------|--------------|----------------------|
+| `IOptions<TOptions>`         | Singleton    | NO                   |
+| `IOptionsSnapshot<TOptions>` | Scoped       | YES - per scope      |
+| `IOptionsMonitor<TOptions>`  | Singleton    | YES - on file change |
+
+---
+
+### Options pattern demo
+
+---
+
+### Options pattern benefits
+
+- Decouples the lifetime of the underlying option from the DI container
+- Enables us to create generic constrians using `Options<T>` interface
+- The evaluation of the `T` configuration instance is deferred to the accessing of `IOptions<TOptions>.Value`, rather than when it is injected
+
+---
+
+## Configuration remarks
 
 - Make sure that config files are included to the output of the build process
 - Use **options pattern** when using dependency injection
@@ -283,9 +368,13 @@ SPEAKER NOTES:
 
 # Logging
 
+TODO
+
 ---
 
 # Generic Host
+
+TODO
 
 ---
 
