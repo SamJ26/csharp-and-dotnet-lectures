@@ -43,7 +43,7 @@ class BookFacade
 - `BookFacade` is responsible for creation of its dependencies
 - `BookFacade` must configure and create additional dependencies required by its dependencies (e.g. create `MapperConfig` for `Mapper`)
 - To replace mapper with different implementation, `BookFacade` must be modified
-- Change to constructor signature of some dependency leads to modification of every place in a code, where given dependency is used
+- Change to constructor signature of some dependency leads to modification of every place in a code, where given service is used
 - It's difficult to unit test because dependencies cannot be mocked
 - We have to manually handle lifetimes of dependencies
 
@@ -70,7 +70,7 @@ class BookFacade
 SPEAKER NOTES:
 - IoC:
     - In traditional procedural programming, the code that controls the execution of the program — the main function — instantiates objects, calls methods and even asks the user for input so that the execution can continue and the program can achieve its task
-    - With IoC, it is a framework that does the instantiation, method calls and triggers user actions, having full control of the flow and removing this responsibility from the main function, and by consequence the application
+    - With IoC, it is a framework that does the instantiation, method calls and triggers user actions, having full control of the flow and removing this responsibility from the main function
 - Dependency Inversion Principle:
     - High-level modules should not depend on low-level modules. Both should depend on abstractions
     - Abstractions should not depend on details. Details should depend on abstractions
@@ -78,7 +78,7 @@ SPEAKER NOTES:
 
 ---
 
-## `BookFacade` example using DI
+## `BookFacade` example using DI 👏
 
 ```csharp
 class BookFacade
@@ -99,12 +99,14 @@ class BookFacade
 }
 ```
 
----
-
-TODO - DI internals (jednotlive triedy)
-
-ServiceProvider
-ServiceDescriptor
+<!--
+SPEAKER NOTES:
+- Namiesto priameho vytvárania dependencies v BookFacade len pomocou ctoru povieme že ich potrebujeme pre svoju prácu
+- DI framework sa potom postará o všetko to, čo sme doteraz museli robiť manuálne v ctore a len nám poskytne vytvorené inštancie
+- Čo musíme ale my spraviť, je povedať DI frameworku ako má dané inštancie vyrobiť:
+    - Čo všetko do neho chceme zaregistrovať
+    - Aké lifetimes chceme použiť
+-->
 
 ---
 
@@ -116,26 +118,100 @@ ServiceDescriptor
 - **Scoped**
     - It's creation depends on the scope (e.g. per request in ASP.NET Core)
 - **Singleton**
-    - One instance for whole application
+    - One instance for whole application lifetime
     - Singleton services **must be thread safe**
     - Services are disposed when the `ServiceProvider` is disposed
 
 ---
 
-## Service registration
+## Service registration methods
 
-TODO
+- Standard methods:
+    - `services.AddSingleton<Dep>();`
+    - `services.AddSingleton<IDep, Dep>();`
+    - `services.AddSingleton<IDep>(sp => new Dep());`
+    - `services.AddSingleton<IDep>(new Dep());`
+- Other methods:
+    - `TryAddSingleton`
+    - `TryAddEnumerable`
 
-- AddXXX vs TryAddXXX vs TryAddEnumerable
-- Zaregistrovanie viac krat jedneho servicu vyresolvuje ten posledny
-- Pozor na miesanie lifetimes
+**Note**: instead of "_Singleton_" can be anything from set { _Singleton_, _Transient_, _Scoped_ }
 
-## Service resolving
+<!--
+- Ak zaregistrujeme service viac krát a resolvujeme ho bez IEnumerable tak sa vyresovluje ten posledný registrovaný
+- TryAddXXX vs TryAddEnumerable:
+    - TryAddXXX - registeres service iff there isn't already implementation for `IDep` registered
+    - TryAddEnumerable - registeres service iff there isn't already implementation of the same type for `IDep` registered
+-->
 
-TODO
+---
 
-Resolving nezaregistrovaneho servicu
-IEnumerable<TService> vs TService
+## DI in .NET
+
+- Namespace `Microsoft.Extensions.DependencyInjection`
+- Dependency Injection utilities are distributed via _NuGet packages_
+	- Console apps - utilities **need to be installed**
+	- Class libraries - utilities **need to be installed**
+	- Web apps - utilities are **available via _generic host_**
+
+---
+
+## MS DI internals
+
+- `ServiceDescriptor`
+    - Describes a service with its service type, implementation, and lifetime
+- `ServiceCollection`
+    - Collection of `ServiceDescritor` objects
+    - You can add services to this collection e.g. using `AddSingleton` method
+- `ServiceProvider`
+    - Defines a mechanism for retrieving a service object
+    - Created by calling `BuildServiceProvider` on `ServiceCollection`
+
+---
+
+## DI in console app - DEMO
+
+1. Install `Microsoft.Extensions.DependencyInjection` nuget package
+2. Create `ServiceCollection` and configure services
+3. Build `ServiceProvider`
+4. Create scope
+5. Use resolved services 👏
+
+---
+
+## Lifetime mixing
+
+- Not every service can use every type of dependency
+
+    |    Service \ Dependency  | Transient | Scoped | Singleton |
+    |:------------------------:|:---------:|:------:|:---------:|
+    |         Transient        |    ✅    |   ✅   |    ✅    |
+    |          Scoped          |    ✅    |   ✅   |    ✅    |
+    |         Singleton        |    🚫    |   🚫   |    ✅    |
+
+- **You should not**:
+    - Consume _scoped_ dependency in a _singleton_ service
+    - Consume _transient_ dependency in a _singleton_ service
+
+<!--
+SPEAKER NOTES:
+- V pripade kedy konzumujeme scoped dependency v singleton service a mame povolene scope valiadation tak nam to hodi exception pri pokuse o resolving
+- Ak konzumujeme transient dependency v singleton service, tak nam to exception nehodi ale z transient dep sa stava prakticky singleton
+- Summary: dlhsie zijuce services by nemali konzumovat dep s kratsim lifetimom (vid captive dependencies)
+-->
+
+---
+
+## DI remarks
+
+- Make services small, well-factored, and easily tested
+- Create thread-safe singleton services
+- Do not call `Dispose` method on disposable service when it is no longer needed
+    (**it is the responsibility of IoC container**)
+- Avoid using the _service locator pattern_
+- Don't register IDisposable instances with a transient lifetime
+- Be careful when mixing different lifetimes - avoid [captive dependencies](https://blog.ploeh.dk/2014/06/02/captive-dependency/)
+- Do not resolve scoped services outside of the scope - they become singletons
 
 ---
 
@@ -229,7 +305,7 @@ SPEAKER NOTES:
 
 ---
 
-## Configuration in console app
+## Configuration in console app - DEMO
 
 1. Install following nuget packages:
     - `Microsoft.Extensions.Configuration`
@@ -239,11 +315,6 @@ SPEAKER NOTES:
 3. Make sure that config files are included to the output of the build process
 3. Configure providers and build the configuration
 4. Use the configuration 👏 
-
-<!--
-SPEAKER NOTES:
-- Ukazat tento proces na predpripravenej console app
--->
 
 ---
 
