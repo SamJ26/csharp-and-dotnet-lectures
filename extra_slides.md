@@ -131,3 +131,15 @@ SPEAKER NOTES:
 -->
 
 ---
+
+<center>
+
+|         **Interface**        | **Lifetime** |     **Reloading**    |
+|:----------------------------:|:------------:|:--------------------:|
+|     `IOptions<TOptions>`     |   Singleton  |          NO          |
+| `IOptionsSnapshot<TOptions>` |    Scoped    |    YES - per scope   |
+|  `IOptionsMonitor<TOptions>` |   Singleton  | YES - on file change |
+
+</center>
+
+---

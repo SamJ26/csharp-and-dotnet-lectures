@@ -307,36 +307,28 @@ public class Service
 
 ---
 
-#### `IOptions<TOptions>`
+### `IOptions<TOptions>`
 
 - Registered as **singleton**
 - **Does not support reloading** of configuration after app startup
 
-#### `IOptionsSnapshot<TOptions>`
+### `IOptionsSnapshot<TOptions>`
 
 - Registered as **scoped**
-- **Supports reloading** of configuration values during runtime - **options are computed once per scope (e.g. request in ASP.NET Core)**
+- **Supports reloading** of configuration values during runtime
+    (**options are computed once per scope/request**)
 - Designed for use with transient and scoped dependencies
 
 ---
 
-#### `IOptionsMonitor<TOptions>`
+### `IOptionsMonitor<TOptions>`
 
 - Registered as **singleton**
-- **Supports reloading** of configuration values during runtime - **retrieves the latest option values at any time**
+- **Supports reloading** of configuration values during runtime
+    (**retrieves the latest option values at any time**)
 - Has a cache
 - Supports change notifications and selective options invalidation
 - Especially useful in singleton dependencies
-
----
-
-#### Summary table
-
-| **Interface**                | **Lifetime** | **Reloading**        |
-|------------------------------|--------------|----------------------|
-| `IOptions<TOptions>`         | Singleton    | NO                   |
-| `IOptionsSnapshot<TOptions>` | Scoped       | YES - per scope      |
-| `IOptionsMonitor<TOptions>`  | Singleton    | YES - on file change |
 
 ---
 
@@ -347,7 +339,7 @@ public class Service
 ### Options pattern benefits
 
 - Decouples the lifetime of the underlying option from the DI container
-- Enables us to create generic constrians using `Options<T>` interface
+- Enables us to create generic constrians using `IOptions<T>` interface
 - The evaluation of the `T` configuration instance is deferred to the accessing of `IOptions<TOptions>.Value`, rather than when it is injected
 
 ---
@@ -356,12 +348,13 @@ public class Service
 
 - Make sure that config files are included to the output of the build process
 - Use **options pattern** when using dependency injection
-- **Prefer records over classes** when binding configuration to strongly typed objects
+- Use **init-only** properties in strongly-typed configuration classes
 - **Be careful about what you put in config files**
 
 <!--
 SPEAKER NOTES:
 - Samozrejme nie vzdy je ten options pattern treba ale pri akejkolvek vacsej aplikacii uz sa velmi hodi
+- Niekedy je nutné načítanú konfiguráciu pozmeniť a v takých prípadoch sa init-only props nepoužívajú
 -->
 
 ---
