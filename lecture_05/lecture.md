@@ -432,7 +432,164 @@ SPEAKER NOTES:
 
 # Logging
 
+---
+
+## Motivation
+
+- Why do we need it?
+    - Debugging informations
+    - Application flow tracking
+    - Performance infromations
+    - Unification of console outputs
+
+---
+
+## Example
+
+```csharp
+public class Service
+{
+    private readonly ILogger<Service> _logger;
+
+    public Service(ILogger<Service> logger)
+    {
+        _logger = logger;
+    }
+
+    public void Foo()
+    {
+        _logger.LogInformation("Information");
+    }
+}
+```
+
+---
+
+## Logging in .NET
+
+- Namespace `Microsoft.Extensions.Logging`
+- Logging utilities are distributed via _NuGet packages_
+	- Console apps - utilities **need to be installed**
+	- Class libraries - utilities **need to be installed**
+	- Web apps - utilities are **available via _generic host_** 
+
+---
+
+## Logging providers
+
+- Available via separate _NuGet packages_
+- Built-in providers:
+    - Console
+    - Debug
+    - EventSource
+    - EventLog (Windows only)
+- Third-party providers:
+    - [elmah](https://elmah.io/)
+    - [Serilog](https://serilog.net/)
+    - [And many more...](https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers#third-party-logging-providers)
+
+---
+
+## Abstractions
+
 TODO
+
+ILogger<TCategoryName>
+    A generic interface for logging where the category name is derived from the specified TCategoryName type name.
+    Generally used to enable activation of a named ILogger from dependency injection
+    The category string is arbitrary, but the convention is to use the class name (identifikuje odkial prichadzaju logy)
+ILoggerFactory
+    Represents a type used to configure the logging system and create instances of ILogger from the registered ILoggerProviders
+
+---
+
+## Log levels
+
+- `LogLevel` enum defines logging severity levels:
+    - (0) `Trace` - detailed messages with sensitive info
+    - (1) `Debug` - for debugging purposes
+    - (2) `Information` - ordinary message
+    - (3) `Warning` - abnormal or unexpected events
+    - (4) `Error`- errors and exceptions that cannot be handled
+    - (5) `Critical` - failures that require immediate attention
+    - (6) `None` - no messages should be written
+
+**Note**: 0 is the lowest priority
+
+---
+
+## Logging in console app - DEMO
+
+1. Install `Microsoft.Extensions.Logging` nuget package
+2. Select provider and install specific nuget package
+    - `Microsoft.Extensions.Logging.Console`
+3. Create and configure logger factory
+4. Create logger
+4. Use the logger 👏 
+
+
+---
+
+## Logging configuration
+
+- config v appsetting.json file
+- If the default log level is not set, the default log level value is Information
+- The Logging API doesn't include a scenario to change log levels while an app is running
+
+<!--
+SPEAKER NOTES:
+- Some configuration providers are capable of reloading configuration, which takes immediate effect on logging configuration
+-->
+
+---
+
+## Logging and Dependency Injection
+
+```csharp
+TODO
+```
+
+---
+
+## Log message formats
+
+❌ **String interpolation** 
+
+```csharp
+_logger.LogInformation($"Getting item {id} at {DateTime.Now}");
+```
+
+❌ **Structured logging** - using numbers for placeholders
+
+```csharp
+_logger.LogInformation("Getting item {0} at {1}", id, DateTime.Now);
+```
+
+✅ **Structured logging** - using names for placeholders
+
+```csharp
+_logger.LogInformation("Getting item {Id} at {Time}", id, DateTime.Now);
+```
+
+<!--
+SPEAKER NOTES:
+- In case of proper structured logging:
+    - The arguments themselves are passed to the logging system, not just the formatted message template
+    - This enables logging providers to store the parameter values as fields for further processing and analysis
+-->
+
+---
+
+## Logging remarks
+
+- Logging at the `Trace` or `Debug` levels produces a high-volume of detailed log messages
+- If a logging datastore is slow, don't write to it directly
+
+<!--
+SPEAKER NOTES:
+- To control costs and not exceed data storage limits, log Trace and Debug level messages to a high-volume, low-cost data store
+- Consider writing the log messages to a fast store initially, then moving them to the slow store later. For example, when logging to SQL Server, don't do so directly in a Log method, since the Log methods are synchronous. Instead, synchronously add log messages to an in-memory queue and have a background worker pull the messages out of the queue to do the asynchronous work of pushing data to SQL Server
+-->
 
 ---
 
