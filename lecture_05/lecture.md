@@ -492,14 +492,15 @@ public class Service
 
 ## Abstractions
 
-TODO
-
-ILogger<TCategoryName>
-    A generic interface for logging where the category name is derived from the specified TCategoryName type name.
-    Generally used to enable activation of a named ILogger from dependency injection
-    The category string is arbitrary, but the convention is to use the class name (identifikuje odkial prichadzaju logy)
-ILoggerFactory
-    Represents a type used to configure the logging system and create instances of ILogger from the registered ILoggerProviders
+- `ILogger<TCategoryName>`
+    - Used to enable activation of a named `ILogger` from dependency injection
+    - `TCategoryName`:
+        - The type whose name is used for the logger category name 
+        - **The convention is to use the class name** where the logger is used
+        - Used to identify the place from which logs are comming
+- `ILoggerFactory`
+    - Represents a type used to configure and create instances of `ILogger`
+    - Knows about all registered logging providers
 
 ---
 
@@ -516,6 +517,11 @@ ILoggerFactory
 
 **Note**: 0 is the lowest priority
 
+<!--
+SPEAKER NOTES:
+- Napr. ak máme min log level na Information, tak sa nám bude logovat všetko od Infromation vyššie (levely 2,3,4,5,6)
+-->
+
 ---
 
 ## Logging in console app - DEMO
@@ -525,29 +531,34 @@ ILoggerFactory
     - `Microsoft.Extensions.Logging.Console`
 3. Create and configure logger factory
 4. Create logger
-4. Use the logger 👏 
-
+5. Use the logger 👏 
 
 ---
 
 ## Logging configuration
 
-- config v appsetting.json file
-- If the default log level is not set, the default log level value is Information
-- The Logging API doesn't include a scenario to change log levels while an app is running
+- Usually done via `appsettings.json` file
+- The logger API does not support configuration reloading during runtime
+
+    ```json
+    "Logging": {                         // Root of logger configuration
+        "LogLevel": {                    // Default log levels for all providers according to category
+            "Default": "Information",    // Log level for ILogger<??> loggers (any provider)
+            "Microsoft": "Warning"       // Log level for ILogger<Microsoft> loggers (any provider)
+        },
+        "Debug": {                       // Specific config for Debug logging provider
+            "LogLevel": {                // Overrides LogLevel section above for this provider
+                "Default": "Warning",    // Log level for ILogger<??> loggers (Debug provider)
+                "Microsoft": "Trace"     // Log level for ILogger<Microsoft> loggers (Debug provider)
+            }
+        }
+    }
+    ```
 
 <!--
 SPEAKER NOTES:
 - Some configuration providers are capable of reloading configuration, which takes immediate effect on logging configuration
 -->
-
----
-
-## Logging and Dependency Injection
-
-```csharp
-TODO
-```
 
 ---
 
@@ -582,8 +593,11 @@ SPEAKER NOTES:
 
 ## Logging remarks
 
-- Logging at the `Trace` or `Debug` levels produces a high-volume of detailed log messages
+- Logging at the `Trace` or `Debug` levels:
+    - Produces a high-volume of detailed log messages
+    - Can contain sensitive informations
 - If a logging datastore is slow, don't write to it directly
+- Use structured logging with named placeholders
 
 <!--
 SPEAKER NOTES:
@@ -594,6 +608,10 @@ SPEAKER NOTES:
 ---
 
 # Generic Host
+
+---
+
+## Introduction
 
 TODO
 

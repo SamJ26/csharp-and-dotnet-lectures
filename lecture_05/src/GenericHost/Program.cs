@@ -7,7 +7,7 @@ namespace GenericHost;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static void Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
             .ConfigureLogging(builder =>
@@ -20,8 +20,7 @@ class Program
                 // serviceCollection.AddHostedService<>();
             })
             .Build();
-
-
-        await host.RunAsync();
+        
+        host.Run();
     }
 }
