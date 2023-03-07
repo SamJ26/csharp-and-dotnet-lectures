@@ -1,4 +1,4 @@
-﻿using System.Runtime.Serialization;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,6 +10,15 @@ class Program
     static void Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
+            .ConfigureHostConfiguration(configBuilder =>
+            {
+                configBuilder.AddJsonFile("host-config.json");
+            })
+            .ConfigureAppConfiguration(configBuilder =>
+            {
+                configBuilder.AddJsonFile("app-config.json");
+
+            })
             .ConfigureLogging(builder =>
             {
                 builder.ClearProviders();
@@ -17,7 +26,10 @@ class Program
             })
             .ConfigureServices(serviceCollection =>
             {
-                // serviceCollection.AddHostedService<>();
+                // These services will be running in the background
+                serviceCollection.AddHostedService<ServiceA>();
+                serviceCollection.AddHostedService<ServiceB>();
+                
             })
             .Build();
         

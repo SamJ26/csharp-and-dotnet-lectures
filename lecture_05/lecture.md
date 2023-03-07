@@ -613,7 +613,106 @@ SPEAKER NOTES:
 
 ## Introduction
 
+- Program initialization utility
+- Namespace `Microsoft.Extensions.Hosting`
+- A **host** is an object that:
+    - Controls app startup and graceful shutdown
+    - Encapsulates an app's resources:
+        - Dependency Injection
+        - Configuration
+        - Logging
+        - `IHostedService` implementations
+
+---
+
+## Example usage
+
+```csharp
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureLogging(builder => { })
+    .ConfigureServices(services => 
+    {
+        services.AddHostedService<Worker>();
+    })
+    .ConfigureHostConfiguration(builder => { })
+    .ConfigureAppConfiguration(builder => { })
+    .Build();
+
+host.Run();
+```
+
+---
+
+### `Host.CreateDefaultBuilder()`
+
+- **Sets the content root** to the path returned by `GetCurrentDirectory()`
+- **Loads host configuration** from env variables and command-line args
+- **Loads app configuration** from:
+    - `appsettings.json` and `appsettings.{Environment}.json`
+    - Secret Manager when the app runs in the `Development` env
+    - Environment variables and command-line args
+- **Adds logging providers**: Console, Debug, EventSource, EventLog (Windows only)
+- **Enables scope validation and dependency validation** when the env is `Development`
+
+<!--
+SPEAKER NOTES:
+- The IHostEnvironment.ContentRootPath property represents the default directory where appsettings.json and other content files are loaded in a hosted application
+-->
+
+---
+
+### `ConfigureHostConfiguration`
+
+- Used to initialize the `IHostEnvironment` for use later in the build process
+
+### `ConfigureAppConfiguration`
+
+- Sets up the configuration for the remainder of the build process and application
+- The configuration passed in is the host's configuration built from calls to `ConfigureHostConfiguration`
+
+**Note**: Both methods can be called multiple times and the results will be additive
+
 TODO
+
+---
+
+## `BackgroundService`
+
+- Implements `IHostedService` interface
+- Base class for implementing a long running background tasks
+- Easier to use than creating your own implementation of `IHostedService`
+- Provides better exception logging
+- Example of the [Template Method Pattern](https://refactoring.guru/design-patterns/template-method)
+
+---
+
+## Generic host in console app - DEMO
+
+- `dotnet new worker -n <project_name> --use-program-main`
+- Command creates console app with:
+    - Configured generic host
+    - `appsettings.json` and `appsettings.Development.json` config files
+
+---
+
+## Generic host remarks
+
+- Avoid performing long, blocking initialization work in `ExecuteAsync` method - no further services are started until `ExecuteAsync` becomes asynchronous
+- By default, no scope is created for a hosted service - if you need to use scoped services, you need to create scope manually
+- **By default, unhandled exception in some hosted services will stop the Host**
+- `AddHostedService<Worker>()` adds a **singleton instance** of `Worker`
+- Services are:
+    - Started serially in order they are registered
+    - Stopped serially in the reverse order of how they were registered
+
+<!--
+SPEAKER NOTES:
+- ExecuteAsync method sa vykonava synchronne pokym nenarazi na await a teda ak je ta synchronna cast dlha/pomala, tak to bude blokovat spustenie ostatnych hosted services
+- Exceptions v hosted services:
+    - Console apps a workers sa typicky deployuju samostatne a teda ich zastavenie kvoli exception az tak nevadi
+    - V pripade ASP.NET Core app ale hosted services bezia na pozadi nejakej webovej sluzby a exception by zhodila celu appku
+    - To ci sa ma zastavit cely Host kvoli jednej exception sa da nakonfigurovat cez BackgroundServiceExceptionBehavior
+-->
 
 ---
 
