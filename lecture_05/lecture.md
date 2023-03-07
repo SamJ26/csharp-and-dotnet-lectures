@@ -670,9 +670,9 @@ SPEAKER NOTES:
 - Sets up the configuration for the remainder of the build process and application
 - The configuration passed in is the host's configuration built from calls to `ConfigureHostConfiguration`
 
-**Note**: Both methods can be called multiple times and the results will be additive
-
-TODO
+**Notes**:
+- Both methods can be called multiple times and the results will be additive
+- **Main difference is where methods search for configuration files**
 
 ---
 

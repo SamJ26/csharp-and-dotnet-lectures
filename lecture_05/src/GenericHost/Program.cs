@@ -10,15 +10,6 @@ class Program
     static void Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
-            .ConfigureHostConfiguration(configBuilder =>
-            {
-                configBuilder.AddJsonFile("host-config.json");
-            })
-            .ConfigureAppConfiguration(configBuilder =>
-            {
-                configBuilder.AddJsonFile("app-config.json");
-
-            })
             .ConfigureLogging(builder =>
             {
                 builder.ClearProviders();
