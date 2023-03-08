@@ -11,6 +11,9 @@ class Program
             .AddJsonFile("config.json")
             .Build();
 
+        // Generates a human-readable view of the configuration showing where each value came from
+        Console.WriteLine(configuration.GetDebugView());
+
         // Loading configuration as a string
         var number = configuration["number"];
         var text = configuration["text"];

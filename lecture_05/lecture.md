@@ -119,6 +119,7 @@ SPEAKER NOTES:
     - It's creation depends on the scope (e.g. per request in ASP.NET Core)
 - **Singleton**
     - One instance for whole application lifetime
+    - An instance is created on the first request
     - Singleton services **must be thread safe**
     - Services are disposed when the `ServiceProvider` is disposed
 
@@ -149,10 +150,9 @@ SPEAKER NOTES:
 ## DI in .NET
 
 - Namespace `Microsoft.Extensions.DependencyInjection`
-- Dependency Injection utilities are distributed via _NuGet packages_
-	- Console apps - utilities **need to be installed**
-	- Class libraries - utilities **need to be installed**
-	- Web apps - utilities are **available via _generic host_**
+- Depending on project type:
+	- Console apps - some _NuGet packages_ **need to be installed**
+	- Web apps - **available via _generic host_**
 
 ---
 
@@ -291,11 +291,10 @@ SPEAKER NOTES:
 ## Configuration in .NET
 
 - Namespace `Microsoft.Extensions.Configuration`
-- Configuration utilities are distributed via _NuGet packages_
-	- Console apps - utilities **need to be installed**
-	- Class libraries - utilities **need to be installed**
-	- Web apps - utilities are **available via _generic host_**
-- **_Configuration pattern_ isn't designed to be programmatically writable**
+- Depending on project type:
+	- Console apps - some _NuGet packages_ **need to be installed**
+	- Web apps - **available via _generic host_**
+- **_Configuration pattern_: an abstraction that enables composition and creation of readonly access to different configuration sources**
 
 <!--
 SPEAKER NOTES:
@@ -310,11 +309,16 @@ SPEAKER NOTES:
 1. Install following nuget packages:
     - `Microsoft.Extensions.Configuration`
     - `Microsoft.Extensions.Configuration.Binder`
-2. According to config files select proper configuration providers
+2. According to config files, select proper configuration providers
     - `Microsoft.Extensions.Configuration.Json`
 3. Make sure that config files are included to the output of the build process
 3. Configure providers and build the configuration
 4. Use the configuration 👏 
+
+<!--
+SPEAKER NOTES:
+- Takto nasetupovana configuration by napr. nepracovala s env variables (museli by sme pridať ďaľšieho providera)
+-->
 
 ---
 
@@ -418,12 +422,14 @@ public class Service
 ## Configuration remarks
 
 - Make sure that config files are included to the output of the build process
+    (relevant only to some files)
 - Use **options pattern** when using dependency injection
 - Use **init-only** properties in strongly-typed configuration classes
 - **Be careful about what you put in config files**
 
 <!--
 SPEAKER NOTES:
+- Napr. také .netconfig files, env variables, cmd args atd sa nemusia nikam includovat
 - Samozrejme nie vzdy je ten options pattern treba ale pri akejkolvek vacsej aplikacii uz sa velmi hodi
 - Niekedy je nutné načítanú konfiguráciu pozmeniť a v takých prípadoch sa init-only props nepoužívajú
 -->
@@ -468,10 +474,9 @@ public class Service
 ## Logging in .NET
 
 - Namespace `Microsoft.Extensions.Logging`
-- Logging utilities are distributed via _NuGet packages_
-	- Console apps - utilities **need to be installed**
-	- Class libraries - utilities **need to be installed**
-	- Web apps - utilities are **available via _generic host_** 
+- Depending on project type:
+	- Console apps - some _NuGet packages_ **need to be installed**
+	- Web apps - **available via _generic host_**
 
 ---
 
