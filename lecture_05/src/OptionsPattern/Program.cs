@@ -27,22 +27,23 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.MapGet("/data", (
-            IOptions<DataOptions> options,
-            IOptionsSnapshot<DataOptions> optionsSnapshot,
-            IOptionsMonitor<DataOptions> optionsMonitor) =>
-        {
-            // Create anonymous object - its properties are readonly
-            var response = new
-            {
-                IOptions = options.Value,
-                IOptionsSnapshot = optionsSnapshot.Value, 
-                IOptionsMonitor = optionsMonitor.CurrentValue
-            };
-
-            return response;
-        });
+        app.MapGet("/data", DoOnGet);
 
         app.Run();
+    }
+
+    static dynamic DoOnGet(
+        IOptions<DataOptions> options,
+        IOptionsSnapshot<DataOptions> optionsSnapshot,
+        IOptionsMonitor<DataOptions> optionsMonitor)
+    {
+        var response = new
+        {
+            IOptions = options.Value,
+            IOptionsSnapshot = optionsSnapshot.Value,
+            IOptionsMonitor = optionsMonitor.CurrentValue
+        };
+
+        return response;
     }
 }

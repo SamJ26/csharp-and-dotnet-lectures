@@ -8,8 +8,8 @@ class Program
     {
         var services = new ServiceCollection();
 
-        services.AddTransient<Dependency>();
-        services.AddTransient<Service>();
+        services.AddSingleton<Dependency>();
+        services.AddSingleton<Service>();
         
         // Build ServiceProvider - any registrations after this line will not take effect 
         var serviceProvider = services.BuildServiceProvider();

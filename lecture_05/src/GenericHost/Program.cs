@@ -10,11 +10,6 @@ class Program
     static void Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
-            .ConfigureLogging(builder =>
-            {
-                builder.ClearProviders();
-                builder.AddConsole();
-            })
             .ConfigureServices(serviceCollection =>
             {
                 // These services will be running in the background
